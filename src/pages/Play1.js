@@ -1,7 +1,7 @@
 import React from "react";
-import { Container } from "@mui/material";
+// import { Container } from "@mui/material";
 // import HomeButton from "../components/HomeButton";
-import NavBar from "../components/NavBar";
+// import NavBar from "../components/NavBar";
 import HomeButton from "../components/HomeButton"; // Import Home Icon
 
 function Play1() {

@@ -154,29 +154,50 @@ function Game1() {
     ctx.stroke();
   };
 
-  // Start painting
-  const startDrawing = (e) => {
-    if (!challengeStarted) return;
-    isDrawing.current = true;
-    draw(e);
+  // Get coordinates from event (mouse or touch)
+  const getCoordinates = (event) => {
+    const canvas = canvasRef.current;
+    const rect = canvas.getBoundingClientRect();
+    let x, y;
+
+    if (event.type.startsWith("touch")) {
+      // Handle touch events
+      const touch = event.touches[0] || event.changedTouches[0];
+      x = touch.clientX - rect.left;
+      y = touch.clientY - rect.top;
+    } else {
+      // Handle mouse events
+      x = event.clientX - rect.left;
+      y = event.clientY - rect.top;
+    }
+
+    return { x, y };
   };
 
-  // Stop painting
-  const stopDrawing = () => {
+  // Start drawing (mouse or touch)
+  const startDrawing = (event) => {
+    if (!challengeStarted) return;
+    event.preventDefault(); // Prevent scrolling on touch
+    isDrawing.current = true;
+    draw(event);
+  };
+
+  // Stop drawing (mouse or touch)
+  const stopDrawing = (event) => {
+    event.preventDefault(); // Prevent scrolling on touch
     isDrawing.current = false;
     const ctx = canvasRef.current.getContext("2d");
-    ctx.beginPath();
+    ctx.beginPath(); // Reset the path to start a new drawing segment
   };
 
-  // Draw on canvas
-  const draw = (e) => {
+  // Draw on canvas (mouse or touch)
+  const draw = (event) => {
     if (!isDrawing.current || !challengeStarted) return;
+    event.preventDefault(); // Prevent scrolling on touch
 
+    const { x, y } = getCoordinates(event);
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
-    const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
 
     ctx.fillStyle = "red";
     ctx.beginPath();
@@ -215,8 +236,15 @@ function Game1() {
     setChallengeStarted(false);
   };
 
-  // Start camera
+  // Start camera with compatibility check
   const startCamera = async () => {
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      alert(
+        "Camera access is not supported in this browser. Please ensure you're using HTTPS or localhost, or try a different browser."
+      );
+      return;
+    }
+
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
         video: { facingMode: "user" },
@@ -224,10 +252,19 @@ function Game1() {
       setCameraStream(stream);
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
+        videoRef.current.play();
       }
     } catch (err) {
       console.error("Error accessing camera:", err);
-      alert("Unable to access camera. Please ensure permissions are granted.");
+      if (err.name === "NotAllowedError") {
+        alert(
+          "Camera access was denied. Please enable camera access in Settings > Privacy & Security > Camera for this app or browser."
+        );
+      } else if (err.name === "NotFoundError") {
+        alert("No camera found on this device.");
+      } else {
+        alert("An error occurred while accessing the camera: " + err.message);
+      }
     }
   };
 
@@ -284,13 +321,14 @@ function Game1() {
   useEffect(() => {
     if (openModal && currentQuest?.type === "challenge") {
       initializeCanvas();
-    } else if (openModal && currentQuest?.type === "photo") {
-      startCamera();
     }
     return () => {
       if (cameraStream) {
         cameraStream.getTracks().forEach((track) => track.stop());
         setCameraStream(null);
+        if (videoRef.current) {
+          videoRef.current.srcObject = null;
+        }
       }
     };
   }, [openModal, currentQuest]);
@@ -412,11 +450,15 @@ function Game1() {
                             ref={canvasRef}
                             width={300}
                             height={300}
-                            style={{ border: "1px solid black", marginTop: "10px" }}
+                            style={{ border: "1px solid black", marginTop: "10px", touchAction: "none" }}
                             onMouseDown={startDrawing}
                             onMouseMove={draw}
                             onMouseUp={stopDrawing}
                             onMouseOut={stopDrawing}
+                            onTouchStart={startDrawing}
+                            onTouchMove={draw}
+                            onTouchEnd={stopDrawing}
+                            onTouchCancel={stopDrawing}
                           />
                         </>
                       ) : (
@@ -433,18 +475,30 @@ function Game1() {
                     <Box sx={{ mt: 2 }}>
                       <Typography>{currentQuest.description}</Typography>
                       <Typography>Difficulty: {currentQuest.difficulty}</Typography>
-                      <video
-                        ref={videoRef}
-                        autoPlay
-                        style={{ width: "100%", marginTop: "10px" }}
-                      />
-                      <Button
-                        variant="contained"
-                        onClick={takePhoto}
-                        sx={{ mt: 2 }}
-                      >
-                        Take Photo
-                      </Button>
+                      {cameraStream ? (
+                        <>
+                          <video
+                            ref={videoRef}
+                            autoPlay
+                            style={{ width: "100%", marginTop: "10px" }}
+                          />
+                          <Button
+                            variant="contained"
+                            onClick={takePhoto}
+                            sx={{ mt: 2 }}
+                          >
+                            Take Photo
+                          </Button>
+                        </>
+                      ) : (
+                        <Button
+                          variant="contained"
+                          onClick={startCamera}
+                          sx={{ mt: 2 }}
+                        >
+                          Start Camera
+                        </Button>
+                      )}
                       <canvas ref={photoCanvasRef} style={{ display: "none" }} />
                     </Box>
                   ) : null}
