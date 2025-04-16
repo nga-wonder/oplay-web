@@ -12,7 +12,7 @@ import NavBar from "../components/NavBar";
 import questCards from "../data/QuestCard.json";
 import styled from "@emotion/styled";
 
-// Styled component for the Potato Mine
+// Styled component for the Potato Mine (unchanged)
 const PotatoMine = styled.div`
   width: 120px;
   height: 80px;
@@ -100,10 +100,48 @@ function Game1() {
   const [cameraStream, setCameraStream] = useState(null);
   const [photoTaken, setPhotoTaken] = useState(false);
   const [photoData, setPhotoData] = useState(null);
+  const [arduinoInteger, setArduinoInteger] = useState(null); // New state for Arduino integer
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const photoCanvasRef = useRef(null);
   const isDrawing = useRef(false);
+  const wsRef = useRef(null); // Ref for WebSocket connection
+
+  // WebSocket connection setup
+  useEffect(() => {
+    const wsUrl = "ws://172.16.32.106:8765/integer"; // Updated path
+    wsRef.current = new WebSocket(wsUrl);
+  
+    wsRef.current.onopen = () => {
+      console.log("WebSocket connected");
+    };
+  
+    wsRef.current.onmessage = (event) => {
+      console.log("WebSocket message:", event.data);
+      try {
+        const data = JSON.parse(event.data);
+        if (data.integer !== undefined) {
+          setArduinoInteger(data.integer);
+        }
+      } catch (error) {
+        console.error("Error parsing WebSocket message:", error);
+      }
+    };
+  
+    wsRef.current.onclose = (event) => {
+      console.log("WebSocket closed:", event.code, event.reason);
+    };
+  
+    wsRef.current.onerror = (error) => {
+      console.error("WebSocket error:", error);
+    };
+  
+    return () => {
+      if (wsRef.current) {
+        wsRef.current.close();
+      }
+    };
+  }, []);
 
   const generateRandomNumbers = () => {
     const numbers = new Set();
@@ -123,7 +161,7 @@ function Game1() {
     return map;
   };
 
-  // Initialize canvas for challenge
+  // Initialize canvas for challenge (unchanged)
   const initializeCanvas = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -154,19 +192,17 @@ function Game1() {
     ctx.stroke();
   };
 
-  // Get coordinates from event (mouse or touch)
+  // Get coordinates from event (unchanged)
   const getCoordinates = (event) => {
     const canvas = canvasRef.current;
     const rect = canvas.getBoundingClientRect();
     let x, y;
 
     if (event.type.startsWith("touch")) {
-      // Handle touch events
       const touch = event.touches[0] || event.changedTouches[0];
       x = touch.clientX - rect.left;
       y = touch.clientY - rect.top;
     } else {
-      // Handle mouse events
       x = event.clientX - rect.left;
       y = event.clientY - rect.top;
     }
@@ -174,26 +210,26 @@ function Game1() {
     return { x, y };
   };
 
-  // Start drawing (mouse or touch)
+  // Start drawing (unchanged)
   const startDrawing = (event) => {
     if (!challengeStarted) return;
-    event.preventDefault(); // Prevent scrolling on touch
+    event.preventDefault();
     isDrawing.current = true;
     draw(event);
   };
 
-  // Stop drawing (mouse or touch)
+  // Stop drawing (unchanged)
   const stopDrawing = (event) => {
-    event.preventDefault(); // Prevent scrolling on touch
+    event.preventDefault();
     isDrawing.current = false;
     const ctx = canvasRef.current.getContext("2d");
-    ctx.beginPath(); // Reset the path to start a new drawing segment
+    ctx.beginPath();
   };
 
-  // Draw on canvas (mouse or touch)
+  // Draw on canvas (unchanged)
   const draw = (event) => {
     if (!isDrawing.current || !challengeStarted) return;
-    event.preventDefault(); // Prevent scrolling on touch
+    event.preventDefault();
 
     const { x, y } = getCoordinates(event);
     const canvas = canvasRef.current;
@@ -205,7 +241,7 @@ function Game1() {
     ctx.fill();
   };
 
-  // Evaluate fill percentage
+  // Evaluate fill percentage (unchanged)
   const evaluateFill = () => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
@@ -236,7 +272,7 @@ function Game1() {
     setChallengeStarted(false);
   };
 
-  // Start camera with compatibility check
+  // Start camera (unchanged)
   const startCamera = async () => {
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
       alert(
@@ -268,7 +304,7 @@ function Game1() {
     }
   };
 
-  // Take photo
+  // Take photo (unchanged)
   const takePhoto = () => {
     const video = videoRef.current;
     const canvas = photoCanvasRef.current;
@@ -282,7 +318,6 @@ function Game1() {
     setPhotoData(dataUrl);
     setPhotoTaken(true);
 
-    // Stop camera
     if (cameraStream) {
       cameraStream.getTracks().forEach((track) => track.stop());
       setCameraStream(null);
@@ -399,6 +434,10 @@ function Game1() {
         <div>
           <h2>Game has started!</h2>
           <p>Generated numbers: {randomNumbers.join(", ")}</p>
+          {/* Display the Arduino integer */}
+          <Typography sx={{ marginTop: 2 }}>
+            Arduino Input: {arduinoInteger !== null ? arduinoInteger : "Waiting for data..."}
+          </Typography>
 
           <TextField
             label="Enter a number (1-48)"
