@@ -1,0 +1,49 @@
+.quest-card-modal {
+background-image: url("../assets/WEB_quest1.png");
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+/* background-color: transparent;  */
+padding: 20px;
+border-radius: 8px;
+}
+
+.quest-card-content {
+padding: 20px;
+color: #000;
+display: flex;
+align-items: center;
+justify-content: center;
+background: rgba(255, 255, 255, 0.8); /* Semi-transparent to show WEB_quest1.png */
+border-radius: 4px;
+margin: 10px 0;
+max-width: 80%; /* Reduce width to show more of the background */
+margin-left: auto;
+margin-right: auto;
+}
+
+.quest-card-content .MuiTypography-root,
+.quest-card-content .MuiButton-root {
+background: rgba(234, 255, 128, 0.8);
+padding: 8px;
+border-radius: 4px;
+}
+
+
+.quest-card-title {
+    background: rgba(255, 255, 255, 0); /* Semi-transparent to show WEB_quest1.png */
+    padding: 10px;
+    border-radius: 4px;
+    text-align: center;
+    color: red;
+    font-weight: bold;
+    max-width: 80%; /* Reduce width to show more of the background */
+    margin: 0 auto; /* Center the title */
+  }
+
+.quest-card-actions {
+    background: transparent;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end;
+  }

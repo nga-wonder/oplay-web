@@ -10,12 +10,11 @@ import {
   LinearProgress,
 } from "@mui/material";
 import { styled, keyframes } from "@mui/material/styles";
-import NavBar from "../components/NavBar";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import BackButton from "../components/BackButton";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import CloseIcon from "@mui/icons-material/Close";
+import "../css/Games.css";
 
-// Keyframes for animations
 const glow = keyframes`
   0% { box-shadow: 0 0 5px rgba(255, 140, 0, 0.5); }
   50% { box-shadow: 0 0 20px rgba(255, 140, 0, 0.8); }
@@ -39,25 +38,6 @@ const gradientAnimation = keyframes`
   100% { background-position: 0% 50%; }
 `;
 
-// Styled Back Button
-const BackButton = styled(IconButton)(({ theme }) => ({
-  position: "absolute",
-  left: "20px",
-  top: "20px",
-  color: "#FF8C00",
-  backgroundColor: "rgba(255, 255, 255, 0.1)",
-  backdropFilter: "blur(5px)",
-  borderRadius: "50%",
-  padding: "10px",
-  animation: `${glow} 2s infinite`,
-  transition: "transform 0.3s ease",
-  "&:hover": {
-    backgroundColor: "rgba(255, 140, 0, 0.3)",
-    transform: "rotate(360deg) scale(1.2)",
-  },
-}));
-
-// Styled Rank Button
 const RankButton = styled(IconButton)(({ theme }) => ({
   position: "absolute",
   right: "20px",
@@ -75,7 +55,6 @@ const RankButton = styled(IconButton)(({ theme }) => ({
   },
 }));
 
-// Styled Series Name
 const SeriesName = styled(Typography)(({ theme }) => ({
   fontSize: "3rem",
   fontWeight: "bold",
@@ -91,7 +70,6 @@ const SeriesName = styled(Typography)(({ theme }) => ({
   marginTop: "20px",
 }));
 
-// Styled Game Button
 const GameButton = styled(Button)(({ theme }) => ({
   width: "100%",
   height: "200px",
@@ -126,7 +104,6 @@ const GameButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-// Styled Leaderboard Box
 const LeaderboardBox = styled(Box)(({ theme }) => ({
   background: "rgba(255, 255, 255, 0.1)",
   backdropFilter: "blur(10px)",
@@ -141,7 +118,6 @@ const LeaderboardBox = styled(Box)(({ theme }) => ({
   position: "relative",
 }));
 
-// Styled Close Button
 const CloseButton = styled(IconButton)(({ theme }) => ({
   position: "absolute",
   top: "10px",
@@ -154,7 +130,6 @@ const CloseButton = styled(IconButton)(({ theme }) => ({
   transition: "transform 0.3s ease",
 }));
 
-// Styled Leaderboard Item
 const LeaderboardItem = styled(Box)(({ theme, rank }) => ({
   display: "flex",
   alignItems: "center",
@@ -164,7 +139,6 @@ const LeaderboardItem = styled(Box)(({ theme, rank }) => ({
   animationFillMode: "both",
 }));
 
-// Styled Rank Circle
 const RankCircle = styled(Box)(({ theme }) => ({
   width: "40px",
   height: "40px",
@@ -180,7 +154,6 @@ const RankCircle = styled(Box)(({ theme }) => ({
   boxShadow: "0 2px 5px rgba(0, 0, 0, 0.2)",
 }));
 
-// Styled Progress Bar
 const StyledLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: "10px",
   borderRadius: "5px",
@@ -200,111 +173,89 @@ function Games() {
     setView(view === "gameChoose" ? "leaderboard" : "gameChoose");
   };
 
-  const handleBack = () => {
-    navigate("/"); // Adjust path as needed
-  };
-
   return (
-    <Container
-      sx={{
-        minHeight: "100vh",
-        width: "100vw",
-        maxWidth: "100%",
-        padding: 0,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        background: "linear-gradient(135deg, #1a1a1a, #2c2c2c)",
-        position: "relative",
-        overflow: "hidden",
-      }}
-    >
-      <NavBar />
-
-      {/* Back Button */}
-      <BackButton onClick={handleBack}>
-        <ArrowBackIcon fontSize="large" />
-      </BackButton>
-
-      {/* Rank Button */}
-      <RankButton onClick={handleViewChange}>
-        <EmojiEventsIcon fontSize="large" />
-      </RankButton>
-
-      {/* Series Name */}
-      <SeriesName>Game Series</SeriesName>
-
-      {/* GameChoose Section */}
-      {view === "gameChoose" && (
-        <Grid container spacing={4} sx={{ maxWidth: "800px", width: "90%" }}>
-          {[
-            { name: "Cờ cá ngựa", path: "/game1" },
-            { name: "Ô ăn quan", path: "/game2" },
-            { name: "Cờ vây", path: "/game3" },
-            { name: "Cờ gánh", path: "/game4" },
-          ].map((game, index) => (
-            <Grid item xs={6} key={index}>
-              <GameButton onClick={() => navigate(game.path)}>
-                {game.name}
-              </GameButton>
-            </Grid>
-          ))}
-        </Grid>
-      )}
-
-      {/* Leaderboard Section */}
-      {view === "leaderboard" && (
-        <LeaderboardBox>
-          {/* Close Button */}
-          <CloseButton onClick={handleViewChange}>
-            <CloseIcon />
-          </CloseButton>
-
-          {/* Leaderboard Title */}
-          <Typography
-            variant="h5"
-            sx={{
-              fontWeight: "bold",
-              marginBottom: "20px",
-              color: "#FFD700",
-              textAlign: "center",
-              textShadow: "1px 1px 5px rgba(0, 0, 0, 0.3)",
-              fontFamily: "'Dancing Script', cursive",
-            }}
-          >
-            Leaderboard
-          </Typography>
-
-          {/* Leaderboard Entries */}
-          {[
-            { name: "Nguyen Van A", streak: 15 },
-            { name: "Tran Thi B", streak: 12 },
-            { name: "Le Hoang C", streak: 10 },
-            { name: "Pham Dinh D", streak: 8 },
-          ].map((player, index) => {
-            const maxStreak = 15; // Assuming 15 is the max streak for scaling the progress bar
-            const progress = (player.streak / maxStreak) * 100;
-            return (
-              <LeaderboardItem key={index} rank={index + 1}>
-                <RankCircle>{index + 1}</RankCircle>
-                <StyledLinearProgress variant="determinate" value={progress} />
-                <Typography
-                  sx={{
-                    color: "white",
-                    fontSize: "1.2rem",
-                    minWidth: "150px",
-                    textAlign: "right",
-                  }}
-                >
-                  {player.name} - {player.streak} days
-                </Typography>
-              </LeaderboardItem>
-            );
-          })}
-        </LeaderboardBox>
-      )}
-    </Container>
+    <div className="games-background">
+      <Container
+        sx={{
+          minHeight: "100vh",
+          width: "100vw",
+          maxWidth: "100%",
+          padding: 0,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          position: "relative",
+        }}
+      >
+        <BackButton />
+        <RankButton onClick={handleViewChange}>
+          <EmojiEventsIcon fontSize="large" />
+        </RankButton>
+        <SeriesName>Game Series</SeriesName>
+        {view === "gameChoose" && (
+          <Grid container spacing={4} sx={{ maxWidth: "800px", width: "90%" }}>
+            {[
+              { name: "Cờ cá ngựa", path: "/play1" },
+              { name: "Ô ăn quan", path: "/game2" },
+              { name: "Cờ vây", path: "/game3" },
+              { name: "Cờ gánh", path: "/game4" },
+            ].map((game, index) => (
+              <Grid item xs={6} key={index}>
+                <GameButton onClick={() => navigate(game.path)}>
+                  {game.name}
+                </GameButton>
+              </Grid>
+            ))}
+          </Grid>
+        )}
+        {view === "leaderboard" && (
+          <LeaderboardBox>
+            <CloseButton onClick={handleViewChange}>
+              <CloseIcon />
+            </CloseButton>
+            <Typography
+              variant="h5"
+              sx={{
+                fontWeight: "bold",
+                marginBottom: "20px",
+                color: "#FFD700",
+                textAlign: "center",
+                textShadow: "1px 1px 5px rgba(0, 0, 0, 0.3)",
+                fontFamily: "'Dancing Script', cursive",
+              }}
+            >
+              Leaderboard
+            </Typography>
+            {[
+              { name: "Nguyen Van A", streak: 15 },
+              { name: "Tran Thi B", streak: 12 },
+              { name: "Le Hoang C", streak: 10 },
+              { name: "Pham Dinh D", streak: 8 },
+            ].map((player, index) => {
+              const maxStreak = 15;
+              const progress = (player.streak / maxStreak) * 100;
+              return (
+                <LeaderboardItem key={index} rank={index + 1}>
+                  <RankCircle>{index + 1}</RankCircle>
+                  <StyledLinearProgress variant="determinate" value={progress} />
+                  <Typography
+                    sx={{
+                      color: "white",
+                      fontSize: "1.2rem",
+                      minWidth: "150px",
+                      textAlign: "right",
+                    }}
+                  >
+                    {player.name} - {player.streak} days
+                  </Typography>
+                </LeaderboardItem>
+              );
+            })}
+          </LeaderboardBox>
+        )}
+      </Container>
+    </div>
   );
 }
 

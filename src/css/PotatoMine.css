@@ -1,0 +1,71 @@
+.potato-mine {
+    width: 120px;
+    height: 80px;
+    background-color: #d2b48c;
+    border-radius: 40% 40% 20% 20%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    animation: blob 1.5s infinite ease-in-out;
+  }
+  
+  .potato-mine::before {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 20px;
+    background-color: #228b22;
+    top: -15px;
+    left: 30px;
+    border-radius: 5px;
+  }
+  
+  .potato-mine::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 15px;
+    background-color: #228b22;
+    top: -10px;
+    left: 80px;
+    border-radius: 5px;
+  }
+  
+  .potato-mine .eye1 {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: white;
+    border-radius: 50%;
+    top: 25px;
+    left: 35px;
+  }
+  
+  .potato-mine .eye2 {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: white;
+    border-radius: 50%;
+    top: 25px;
+    left: 70px;
+  }
+  
+  @keyframes blob {
+    0% {
+      transform: translate(-50%, -50%) scale(1, 1);
+    }
+    25% {
+      transform: translate(-50%, -50%) scale(1.1, 0.9);
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(0.9, 1.2);
+    }
+    75% {
+      transform: translate(-50%, -50%) scale(1.05, 0.95);
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(1, 1);
+    }
+  }
