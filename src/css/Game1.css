@@ -129,7 +129,7 @@
   background-size: contain;
   background-repeat: no-repeat;
   z-index: 0;
-  animation: floatAcrossOpposite 15s linear infinite;
+  animation: floatAcrossOpposite 30s linear infinite;
   animation-delay: 7.5s;
 }
 

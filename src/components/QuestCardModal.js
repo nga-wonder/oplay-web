@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react"; // Add useEffect import
 import { Button, Typography, Box } from "@mui/material";
 import "../css/QuestCardModal.css";
 
@@ -24,11 +24,18 @@ function QuestCardModal({
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [isCorrect, setIsCorrect] = useState(null);
 
+  // Reset state when the quest changes or modal closes
+  useEffect(() => {
+    if (!open || quest) {
+      setSelectedAnswer(null);
+      setIsCorrect(null);
+    }
+  }, [open, quest]);
+
   if (!open) return null;
 
   const handleAnswerClick = (answer) => {
     setSelectedAnswer(answer.text);
-  
     if (quest.validator) {
       try {
         const validate = new Function("number", `return (${quest.validator})(number);`);
@@ -37,11 +44,10 @@ function QuestCardModal({
         setIsCorrect(answer.text === expectedAnswer);
       } catch (error) {
         console.error("Validator execution error:", error);
-        setIsCorrect(false); // fallback behavior
+        setIsCorrect(false);
       }
     }
   };
-  
 
   return (
     <Box className="quest-card-modal" role="dialog" aria-labelledby="quest-card-title">
@@ -66,7 +72,14 @@ function QuestCardModal({
                       variant="contained"
                       className="action-button"
                       onClick={() => handleAnswerClick(answer)}
-                      sx={{ margin: "5px", backgroundColor: selectedAnswer === answer.text ? (isCorrect ? "#4caf50" : "#f44336") : "#1976d2" }}
+                      sx={{
+                        margin: "5px",
+                        backgroundColor: selectedAnswer === answer.text ? (isCorrect ? "#4caf50" : "#f44336") : "#1976d2",
+                        color: selectedAnswer === answer.text && isCorrect ? "#000000" : "#ffffff",
+                        "&:hover": {
+                          backgroundColor: selectedAnswer === answer.text ? (isCorrect ? "#45a049" : "#d32f2f") : "#1565c0",
+                        },
+                      }}
                       disabled={selectedAnswer !== null}
                     >
                       {answer.text}
