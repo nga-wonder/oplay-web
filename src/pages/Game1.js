@@ -9,13 +9,13 @@ import {
   List,
   ListItem,
   ListItemText,
-  Box,
   IconButton,
   Dialog,
   DialogTitle,
   DialogContent,
   DialogActions,
   Slider,
+  Container
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import HomeButton from "../components/HomeButton";

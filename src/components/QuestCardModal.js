@@ -1,14 +1,5 @@
 import React from "react";
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Button,
-  Typography,
-  Box,
-} from "@mui/material";
-// import questCardImage from "../assets/WEB_quest1.png";
+import { Button, Typography, Box } from "@mui/material";
 import "../css/QuestCardModal.css";
 
 function QuestCardModal({
@@ -30,75 +21,87 @@ function QuestCardModal({
   videoRef,
   photoCanvasRef,
 }) {
+  if (!open) return null;
+
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth className="quest-card-modal">
-      <DialogTitle className='quest-card-title'> Quest Card for Number {inputNumber}</DialogTitle>
-      <DialogContent className="quest-card-content">
-        {quest ? (
-          <Box>
-            <Typography variant="h6">{quest.title}</Typography>
-            <Typography>{quest.description}</Typography>
-            {!challengeStarted && !showResult && (
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={onStartChallenge}
-                sx={{ marginTop: 2 }}
-              >
-                Start Challenge
-              </Button>
-            )}
-            {challengeStarted && (
-              <Box>
-                <Typography>Time Left: {timeLeft} seconds</Typography>
-                <canvas ref={canvasRef} width={300} height={300} />
-              </Box>
-            )}
-            {showResult && (
-              <Typography>
-                Fill Percentage: {fillPercentage ? fillPercentage.toFixed(2) : 0}%
+    <Box className="quest-card-modal" role="dialog" aria-labelledby="quest-card-title">
+      <Box className="centered-content">
+        <Typography variant="h5" id="quest-card-title" className="quest-card-title">
+          Quest Card for Number {inputNumber}
+        </Typography>
+        <Box className="quest-card-content">
+          {quest ? (
+            <Box>
+              <Typography variant="h6" className="quest-title">
+                {quest.title}
               </Typography>
-            )}
-            {!photoTaken && !photoData && (
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={onStartCamera}
-                sx={{ marginTop: 2 }}
-              >
-                Start Camera
-              </Button>
-            )}
-            {cameraStream && !photoTaken && (
-              <Box>
-                <video ref={videoRef} autoPlay style={{ width: "100%" }} />
+              <Typography className="quest-description">
+                {quest.description}
+              </Typography>
+              {!challengeStarted && !showResult && (
                 <Button
                   variant="contained"
-                  color="primary"
-                  onClick={onTakePhoto}
+                  className="action-button"
+                  onClick={onStartChallenge}
                   sx={{ marginTop: 2 }}
                 >
-                  Take Photo
+                  Start Challenge
                 </Button>
-              </Box>
-            )}
-            {photoData && (
-              <Box>
-                <img src={photoData} alt="Captured" style={{ width: "100%" }} />
-                <canvas ref={photoCanvasRef} style={{ display: "none" }} />
-              </Box>
-            )}
-          </Box>
-        ) : (
-          <Typography>No quest available</Typography>
-        )}
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose} color="primary">
-          Close
-        </Button>
-      </DialogActions>
-    </Dialog>
+              )}
+              {challengeStarted && (
+                <Box>
+                  <Typography className="quest-description">
+                    Time Left: {timeLeft} seconds
+                  </Typography>
+                  <canvas ref={canvasRef} width={300} height={300} />
+                </Box>
+              )}
+              {showResult && (
+                <Typography className="quest-description">
+                  Fill Percentage: {fillPercentage ? fillPercentage.toFixed(2) : 0}%
+                </Typography>
+              )}
+              {!photoTaken && !photoData && (
+                <Button
+                  variant="contained"
+                  className="action-button"
+                  onClick={onStartCamera}
+                  sx={{ marginTop: 2 }}
+                >
+                  Start Camera
+                </Button>
+              )}
+              {cameraStream && !photoTaken && (
+                <Box>
+                  <video ref={videoRef} autoPlay style={{ width: "100%" }} />
+                  <Button
+                    variant="contained"
+                    className="action-button"
+                    onClick={onTakePhoto}
+                    sx={{ marginTop: 2 }}
+                  >
+                    Take Photo
+                  </Button>
+                </Box>
+              )}
+              {photoData && (
+                <Box>
+                  <img src={photoData} alt="Captured" style={{ width: "100%" }} />
+                  <canvas ref={photoCanvasRef} style={{ display: "none" }} />
+                </Box>
+              )}
+            </Box>
+          ) : (
+            <Typography className="quest-description">No quest available</Typography>
+          )}
+        </Box>
+        <Box className="quest-card-actions">
+          <Button onClick={onClose} className="close-button">
+            Close
+          </Button>
+        </Box>
+      </Box>
+    </Box>
   );
 }
 
