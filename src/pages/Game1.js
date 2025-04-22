@@ -15,7 +15,7 @@ import {
   DialogContent,
   DialogActions,
   Slider,
-  Container
+  Container,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import HomeButton from "../components/HomeButton";
@@ -269,6 +269,24 @@ function Game1() {
     }
   };
 
+  const handleAnswer = (answerId) => {
+    const number = parseInt(inputNumber);
+    let isCorrect = false;
+
+    if (currentQuest && currentQuest.validator) {
+      try {
+        const validatorFunc = new Function('number', `return (${currentQuest.validator})(number);`);
+        isCorrect = validatorFunc(number) && answerId === 1;
+      } catch (error) {
+        console.error("Error executing validator:", error);
+        isCorrect = false;
+      }
+    }
+
+    setFillPercentage(isCorrect ? 100 : 0);
+    setShowResult(true);
+  };
+
   useEffect(() => {
     if (countdown > 0) {
       const timer = setInterval(() => {
@@ -320,6 +338,16 @@ function Game1() {
       const randomQuest =
         questsForNumber[Math.floor(Math.random() * questsForNumber.length)];
       setCurrentQuest(randomQuest);
+      setChallengeStarted(false);
+      setTimeLeft(20);
+      setFillPercentage(null);
+      setShowResult(false);
+      setPhotoTaken(false);
+      setPhotoData(null);
+      if (cameraStream) {
+        cameraStream.getTracks().forEach((track) => track.stop());
+        setCameraStream(null);
+      }
       setOpenModal(true);
     }
   };
@@ -458,6 +486,7 @@ function Game1() {
               cameraStream={cameraStream}
               onStartCamera={startCamera}
               onTakePhoto={takePhoto}
+              onAnswer={handleAnswer}
               videoRef={videoRef}
               photoCanvasRef={photoCanvasRef}
             />

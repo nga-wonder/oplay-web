@@ -1,32 +1,376 @@
 [
-    {"id": 1, "type": "questionnaire", "title": "Triple Threat", "description": "Is this number divisible by 3?", "difficulty": "Easy"},
-    {"id": 2, "type": "questionnaire", "title": "Even Steven", "description": "Is this an even number?", "difficulty": "Easy"},
-    {"id": 3, "type": "questionnaire", "title": "Prime Time", "description": "Is this a prime number?", "difficulty": "Medium"},
-    {"id": 4, "type": "questionnaire", "title": "Lucky Seven", "description": "Does this number contain a 7?", "difficulty": "Medium"},
-    {"id": 5, "type": "questionnaire", "title": "Square Deal", "description": "Is this a perfect square?", "difficulty": "Hard"},
-    {"id": 6, "type": "questionnaire", "title": "Odd One Out", "description": "Is this an odd number?", "difficulty": "Easy"},
-    {"id": 7, "type": "questionnaire", "title": "Five Alive", "description": "Is this number divisible by 5?", "difficulty": "Easy"},
-    {"id": 8, "type": "photo", "title": "Selfie Star", "description": "Take a quick selfie to shine!", "difficulty": "Easy"},
-    {"id": 9, "type": "questionnaire", "title": "Nine Lives", "description": "Is this divisible by 9?", "difficulty": "Medium"},
-    {"id": 10, "type": "questionnaire", "title": "Teen Scene", "description": "Is this between 10 and 19?", "difficulty": "Easy"},
-    {"id": 11, "type": "challenge", "title": "Squiggle Fill", "description": "Fill the shape as fast as you can!", "difficulty": "Medium", "timeLimit": 20, "passThreshold": 90},
-    {"id": 12, "type": "questionnaire", "title": "High Roller", "description": "Is this greater than 40?", "difficulty": "Easy"},
-    {"id": 13, "type": "questionnaire", "title": "Low Blow", "description": "Is this less than 10?", "difficulty": "Easy"},
-    {"id": 14, "type": "questionnaire", "title": "Mid Range", "description": "Is this between 20 and 30?", "difficulty": "Medium"},
-    {"id": 15, "type": "questionnaire", "title": "Cube Quest", "description": "Is this a perfect cube?", "difficulty": "Hard"},
-    {"id": 16, "type": "challenge", "title": "Wobbly Shape", "description": "Color the entire shape before time runs out!", "difficulty": "Hard", "timeLimit": 20, "passThreshold": 90},
-    {"id": 17, "type": "questionnaire", "title": "Two Too", "description": "Does this contain a 2?", "difficulty": "Easy"},
-    {"id": 18, "type": "questionnaire", "title": "Eight Gate", "description": "Is this divisible by 8?", "difficulty": "Medium"},
-    {"id": 19, "type": "photo", "title": "Smile Snap", "description": "Capture a happy moment!", "difficulty": "Easy"},
-    {"id": 20, "type": "questionnaire", "title": "Forty Fort", "description": "Is this in the 40s?", "difficulty": "Medium"},
-    {"id": 21, "type": "challenge", "title": "Twist and Fill", "description": "Fill the twisty shape quickly!", "difficulty": "Medium", "timeLimit": 20, "passThreshold": 90},
-    {"id": 22, "type": "questionnaire", "title": "Ten Zen", "description": "Is this divisible by 10?", "difficulty": "Easy"},
-    {"id": 23, "type": "questionnaire", "title": "Fibonacci Find", "description": "Is this a Fibonacci number?", "difficulty": "Hard"},
-    {"id": 24, "type": "questionnaire", "title": "Four More", "description": "Does this contain a 4?", "difficulty": "Easy"},
-    {"id": 25, "type": "questionnaire", "title": "Thirty Flirty", "description": "Is this in the 30s?", "difficulty": "Medium"},
-    {"id": 26, "type": "challenge", "title": "Blob Painter", "description": "Paint the blob shape in time!", "difficulty": "Medium", "timeLimit": 20, "passThreshold": 90},
-    {"id": 27, "type": "questionnaire", "title": "Six Mix", "description": "Does this contain a 6?", "difficulty": "Easy"},
-    {"id": 28, "type": "photo", "title": "Game Face", "description": "Show us your best game face!", "difficulty": "Medium"},
-    {"id": 29, "type": "questionnaire", "title": "Eight Straight", "description": "Does this contain an 8?", "difficulty": "Easy"},
-    {"id": 30, "type": "challenge", "title": "Crazy Outline", "description": "Fill the crazy shape before time's up!", "difficulty": "Hard", "timeLimit": 20, "passThreshold": 90}
-  ]
+  {
+    "id": 1,
+    "type": "questionnaire",
+    "title": "Triple Threat",
+    "description": "Is this number divisible by 3?",
+    "difficulty": "Easy",
+    "answers": [
+      {"id": 1, "text": "Yes"},
+      {"id": 2, "text": "No"},
+      {"id": 3, "text": "Maybe"},
+      {"id": 4, "text": "Not sure"}
+    ],
+    "validator": "function(number) { return number % 3 === 0; }"
+  },
+  {
+    "id": 2,
+    "type": "questionnaire",
+    "title": "Even Steven",
+    "description": "Is this an even number?",
+    "difficulty": "Easy",
+    "answers": [
+      {"id": 1, "text": "Yes"},
+      {"id": 2, "text": "No"},
+      {"id": 3, "text": "Sometimes"},
+      {"id": 4, "text": "Uncertain"}
+    ],
+    "validator": "function(number) { return number % 2 === 0; }"
+  },
+  {
+    "id": 3,
+    "type": "questionnaire",
+    "title": "Prime Time",
+    "description": "Is this a prime number?",
+    "difficulty": "Medium",
+    "answers": [
+      {"id": 1, "text": "Yes"},
+      {"id": 2, "text": "No"},
+      {"id": 3, "text": "Maybe"},
+      {"id": 4, "text": "Not sure"}
+    ],
+    "validator": "function(number) { if (number < 2) return false; for (let i = 2; i <= Math.sqrt(number); i++) { if (number % i === 0) return false; } return true; }"
+  },
+  {
+    "id": 4,
+    "type": "questionnaire",
+    "title": "Lucky Seven",
+    "description": "Does this number contain a 7?",
+    "difficulty": "Medium",
+    "answers": [
+      {"id": 1, "text": "Yes"},
+      {"id": 2, "text": "No"},
+      {"id": 3, "text": "Possibly"},
+      {"id": 4, "text": "Uncertain"}
+    ],
+    "validator": "function(number) { return number.toString().includes('7'); }"
+  },
+  {
+    "id": 5,
+    "type": "questionnaire",
+    "title": "Square Deal",
+    "description": "Is this a perfect square?",
+    "difficulty": "Hard",
+    "answers": [
+      {"id": 1, "text": "Yes"},
+      {"id": 2, "text": "No"},
+      {"id": 3, "text": "Maybe"},
+      {"id": 4, "text": "Not sure"}
+    ],
+    "validator": "function(number) { return Number.isInteger(Math.sqrt(number)); }"
+  },
+  {
+    "id": 6,
+    "type": "questionnaire",
+    "title": "Odd One Out",
+    "description": "Is this an odd number?",
+    "difficulty": "Easy",
+    "answers": [
+      {"id": 1, "text": "Yes"},
+      {"id": 2, "text": "No"},
+      {"id": 3, "text": "Sometimes"},
+      {"id": 4, "text": "Uncertain"}
+    ],
+    "validator": "function(number) { return number % 2 !== 0; }"
+  },
+  {
+    "id": 7,
+    "type": "questionnaire",
+    "title": "Five Alive",
+    "description": "Is this number divisible by 5?",
+    "difficulty": "Easy",
+    "answers": [
+      {"id": 1, "text": "Yes"},
+      {"id": 2, "text": "No"},
+      {"id": 3, "text": "Maybe"},
+      {"id": 4, "text": "Not sure"}
+    ],
+    "validator": "function(number) { return number % 5 === 0; }"
+  },
+  {
+    "id": 8,
+    "type": "photo",
+    "title": "Selfie Star",
+    "description": "Take a quick selfie to shine!",
+    "difficulty": "Easy"
+  },
+  {
+    "id": 9,
+    "type": "questionnaire",
+    "title": "Nine Lives",
+    "description": "Is this divisible by 9?",
+    "difficulty": "Medium",
+    "answers": [
+      {"id": 1, "text": "Yes"},
+      {"id": 2, "text": "No"},
+      {"id": 3, "text": "Maybe"},
+      {"id": 4, "text": "Not sure"}
+    ],
+    "validator": "function(number) { return number % 9 === 0; }"
+  },
+  {
+    "id": 10,
+    "type": "questionnaire",
+    "title": "Teen Scene",
+    "description": "Is this between 10 and 19?",
+    "difficulty": "Easy",
+    "answers": [
+      {"id": 1, "text": "Yes"},
+      {"id": 2, "text": "No"},
+      {"id": 3, "text": "Above 19"},
+      {"id": 4, "text": "Below 10"}
+    ],
+    "validator": "function(number) { return number >= 10 && number <= 19; }"
+  },
+  {
+    "id": 11,
+    "type": "challenge",
+    "title": "Squiggle Fill",
+    "description": "Fill the shape as fast as you can!",
+    "difficulty": "Medium",
+    "timeLimit": 20,
+    "passThreshold": 90
+  },
+  {
+    "id": 12,
+    "type": "questionnaire",
+    "title": "High Roller",
+    "description": "Is this greater than 40?",
+    "difficulty": "Easy",
+    "answers": [
+      {"id": 1, "text": "Yes"},
+      {"id": 2, "text": "No"},
+      {"id": 3, "text": "Equal to 40"},
+      {"id": 4, "text": "Not sure"}
+    ],
+    "validator": "function(number) { return number > 40; }"
+  },
+  {
+    "id": 13,
+    "type": "questionnaire",
+    "title": "Low Blow",
+    "description": "Is this less than 10?",
+    "difficulty": "Easy",
+    "answers": [
+      {"id": 1, "text": "Yes"},
+      {"id": 2, "text": "No"},
+      {"id": 3, "text": "Equal to 10"},
+      {"id": 4, "text": "Not sure"}
+    ],
+    "validator": "function(number) { return number < 10; }"
+  },
+  {
+    "id": 14,
+    "type": "questionnaire",
+    "title": "Mid Range",
+    "description": "Is this between 20 and 30?",
+    "difficulty": "Medium",
+    "answers": [
+      {"id": 1, "text": "Yes"},
+      {"id": 2, "text": "No"},
+      {"id": 3, "text": "Above 30"},
+      {"id": 4, "text": "Below 20"}
+    ],
+    "validator": "function(number) { return number >= 20 && number <= 30; }"
+  },
+  {
+    "id": 15,
+    "type": "questionnaire",
+    "title": "Cube Quest",
+    "description": "Is this a perfect cube?",
+    "difficulty": "Hard",
+    "answers": [
+      {"id": 1, "text": "Yes"},
+      {"id": 2, "text": "No"},
+      {"id": 3, "text": "Maybe"},
+      {"id": 4, "text": "Not sure"}
+    ],
+    "validator": "function(number) { return Number.isInteger(Math.cbrt(number)); }"
+  },
+  {
+    "id": 16,
+    "type": "challenge",
+    "title": "Wobbly Shape",
+    "description": "Color the entire shape before time runs out!",
+    "difficulty": "Hard",
+    "timeLimit": 20,
+    "passThreshold": 90
+  },
+  {
+    "id": 17,
+    "type": "questionnaire",
+    "title": "Two Too",
+    "description": "Does this contain a 2?",
+    "difficulty": "Easy",
+    "answers": [
+      {"id": 1, "text": "Yes"},
+      {"id": 2, "text": "No"},
+      {"id": 3, "text": "Possibly"},
+      {"id": 4, "text": "Uncertain"}
+    ],
+    "validator": "function(number) { return number.toString().includes('2'); }"
+  },
+  {
+    "id": 18,
+    "type": "questionnaire",
+    "title": "Eight Gate",
+    "description": "Is this divisible by 8?",
+    "difficulty": "Medium",
+    "answers": [
+      {"id": 1, "text": "Yes"},
+      {"id": 2, "text": "No"},
+      {"id": 3, "text": "Maybe"},
+      {"id": 4, "text": "Not sure"}
+    ],
+    "validator": "function(number) { return number % 8 === 0; }"
+  },
+  {
+    "id": 19,
+    "type": "photo",
+    "title": "Smile Snap",
+    "description": "Capture a happy moment!",
+    "difficulty": "Easy"
+  },
+  {
+    "id": 20,
+    "type": "questionnaire",
+    "title": "Forty Fort",
+    "description": "Is this in the 40s?",
+    "difficulty": "Medium",
+    "answers": [
+      {"id": 1, "text": "Yes"},
+      {"id": 2, "text": "No"},
+      {"id": 3, "text": "Above 49"},
+      {"id": 4, "text": "Below 40"}
+    ],
+    "validator": "function(number) { return number >= 40 && number <= 49; }"
+  },
+  {
+    "id": 21,
+    "type": "challenge",
+    "title": "Twist and Fill",
+    "description": "Fill the twisty shape quickly!",
+    "difficulty": "Medium",
+    "timeLimit": 20,
+    "passThreshold": 90
+  },
+  {
+    "id": 22,
+    "type": "questionnaire",
+    "title": "Ten Zen",
+    "description": "Is this divisible by 10?",
+    "difficulty": "Easy",
+    "answers": [
+      {"id": 1, "text": "Yes"},
+      {"id": 2, "text": "No"},
+      {"id": 3, "text": "Maybe"},
+      {"id": 4, "text": "Not sure"}
+    ],
+    "validator": "function(number) { return number % 10 === 0; }"
+  },
+  {
+    "id": 23,
+    "type": "questionnaire",
+    "title": "Fibonacci Find",
+    "description": "Is this a Fibonacci number?",
+    "difficulty": "Hard",
+    "answers": [
+      {"id": 1, "text": "Yes"},
+      {"id": 2, "text": "No"},
+      {"id": 3, "text": "Maybe"},
+      {"id": 4, "text": "Not sure"}
+    ],
+    "validator": "function(number) { const isPerfectSquare = (x) => Number.isInteger(Math.sqrt(x)); return isPerfectSquare(5 * number * number + 4) || isPerfectSquare(5 * number * number - 4); }"
+  },
+  {
+    "id": 24,
+    "type": "questionnaire",
+    "title": "Four More",
+    "description": "Does this contain a 4?",
+    "difficulty": "Easy",
+    "answers": [
+      {"id": 1, "text": "Yes"},
+      {"id": 2, "text": "No"},
+      {"id": 3, "text": "Possibly"},
+      {"id": 4, "text": "Uncertain"}
+    ],
+    "validator": "function(number) { return number.toString().includes('4'); }"
+  },
+  {
+    "id": 25,
+    "type": "questionnaire",
+    "title": "Thirty Flirty",
+    "description": "Is this in the 30s?",
+    "difficulty": "Medium",
+    "answers": [
+      {"id": 1, "text": "Yes"},
+      {"id": 2, "text": "No"},
+      {"id": 3, "text": "Above 39"},
+      {"id": 4, "text": "Below 30"}
+    ],
+    "validator": "function(number) { return number >= 30 && number <= 39; }"
+  },
+  {
+    "id": 26,
+    "type": "challenge",
+    "title": "Blob Painter",
+    "description": "Paint the blob shape in time!",
+    "difficulty": "Medium",
+    "timeLimit": 20,
+    "passThreshold": 90
+  },
+  {
+    "id": 27,
+    "type": "questionnaire",
+    "title": "Six Mix",
+    "description": "Does this contain a 6?",
+    "difficulty": "Easy",
+    "answers": [
+      {"id": 1, "text": "Yes"},
+      {"id": 2, "text": "No"},
+      {"id": 3, "text": "Possibly"},
+      {"id": 4, "text": "Uncertain"}
+    ],
+    "validator": "function(number) { return number.toString().includes('6'); }"
+  },
+  {
+    "id": 28,
+    "type": "photo",
+    "title": "Game Face",
+    "description": "Show us your best game face!",
+    "difficulty": "Medium"
+  },
+  {
+    "id": 29,
+    "type": "questionnaire",
+    "title": "Eight Straight",
+    "description": "Does this contain an 8?",
+    "difficulty": "Easy",
+    "answers": [
+      {"id": 1, "text": "Yes"},
+      {"id": 2, "text": "No"},
+      {"id": 3, "text": "Possibly"},
+      {"id": 4, "text": "Uncertain"}
+    ],
+    "validator": "function(number) { return number.toString().includes('8'); }"
+  },
+  {
+    "id": 30,
+    "type": "challenge",
+    "title": "Crazy Outline",
+    "description": "Fill the crazy shape before time's up!",
+    "difficulty": "Hard",
+    "timeLimit": 20,
+    "passThreshold": 90
+  }
+]
