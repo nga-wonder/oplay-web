@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Button, Typography, Box } from "@mui/material";
 import "../css/QuestCardModal.css";
 
@@ -20,10 +20,14 @@ function QuestCardModal({
   onTakePhoto,
   videoRef,
   photoCanvasRef,
-  cameraError,
+  onStartDrawing,
+  onDraw,
+  onStopDrawing,
+  initializeHeartCanvas,
 }) {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [isCorrect, setIsCorrect] = useState(null);
+  const hasInitializedCanvas = useRef(false);
 
   // Reset state when the quest changes or modal closes
   useEffect(() => {
@@ -39,10 +43,24 @@ function QuestCardModal({
       videoRef.current.srcObject = cameraStream;
       videoRef.current.play().catch((err) => {
         console.error("Error playing video in QuestCardModal:", err);
-        // The error is already handled in startCamera, so no need to set cameraError here
       });
     }
   }, [cameraStream, videoRef]);
+
+  // Initialize canvas when challenge starts
+  useEffect(() => {
+    if (challengeStarted && canvasRef.current && (quest?.type === "challenge" || quest?.type === "heart_challenge")) {
+      if (!hasInitializedCanvas.current) {
+        console.log("Initializing canvas for quest:", quest);
+        initializeHeartCanvas(canvasRef.current);
+        hasInitializedCanvas.current = true;
+      }
+    }
+    // Reset initialization flag when challenge ends or modal closes
+    if (!challengeStarted || !open) {
+      hasInitializedCanvas.current = false;
+    }
+  }, [challengeStarted, open, quest, canvasRef, initializeHeartCanvas]);
 
   if (!open) return null;
 
@@ -96,7 +114,7 @@ function QuestCardModal({
                       onClick={() => handleAnswerClick(answer)}
                       sx={{
                         margin: "5px",
-                        backgroundColor: selectedAnswer === answer.text ? (isCorrect ? "#4caf50" : "#f44336") : "#1976d2",
+                        backgroundColor: selectedAnswer === answer.text ? (isCorrect ? "#4caf50" : "#1f44336") : "#1976d2",
                         color: selectedAnswer === answer.text && isCorrect ? "#000000" : "#ffffff",
                         "&:hover": {
                           backgroundColor: selectedAnswer === answer.text ? (isCorrect ? "#45a049" : "#d32f2f") : "#1565c0",
@@ -114,7 +132,7 @@ function QuestCardModal({
                   )}
                 </Box>
               )}
-              {quest.type === "challenge" && !challengeStarted && !showResult && (
+              {(quest.type === "challenge" || quest.type === "heart_challenge") && !challengeStarted && !showResult && (
                 <Button
                   variant="contained"
                   className="action-button"
@@ -124,18 +142,37 @@ function QuestCardModal({
                   Start Challenge
                 </Button>
               )}
-              {quest.type === "challenge" && challengeStarted && (
+              {(quest.type === "challenge" || quest.type === "heart_challenge") && challengeStarted && (
                 <Box>
                   <Typography className="quest-description">
                     Time Left: {timeLeft} seconds
                   </Typography>
-                  <canvas ref={canvasRef} width={300} height={300} />
+                  <canvas
+                    ref={canvasRef}
+                    width={300}
+                    height={300}
+                    style={{ border: "1px solid black", marginTop: "10px" }}
+                    onMouseDown={onStartDrawing}
+                    onMouseMove={onDraw}
+                    onMouseUp={onStopDrawing}
+                    onMouseOut={onStopDrawing}
+                  />
                 </Box>
               )}
-              {quest.type === "challenge" && showResult && (
-                <Typography className="quest-description">
-                  Fill Percentage: {fillPercentage ? fillPercentage.toFixed(2) : 0}%
-                </Typography>
+              {(quest.type === "challenge" || quest.type === "heart_challenge") && showResult && (
+                <Box>
+                  <Typography variant="h6" className="quest-title">
+                    Challenge Result
+                  </Typography>
+                  <Typography className="quest-description">
+                    Outline Accuracy: {fillPercentage ? fillPercentage.toFixed(2) : 0}%
+                  </Typography>
+                  <Typography className="quest-description" sx={{ marginTop: 1 }}>
+                    {fillPercentage >= quest.passThreshold
+                      ? "Congratulations! You passed!"
+                      : "Sorry, you didn't trace enough. Try again!"}
+                  </Typography>
+                </Box>
               )}
               {quest.type === "photo" && !photoTaken && !photoData && (
                 <Box>
@@ -144,15 +181,9 @@ function QuestCardModal({
                     className="action-button"
                     onClick={onStartCamera}
                     sx={{ marginTop: 2 }}
-                    disabled={!!cameraError}
                   >
                     Start Camera
                   </Button>
-                  {cameraError && (
-                    <Typography sx={{ marginTop: 2, color: "red" }}>
-                      {cameraError}
-                    </Typography>
-                  )}
                 </Box>
               )}
               {quest.type === "photo" && cameraStream && !photoTaken && (

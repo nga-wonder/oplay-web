@@ -99,6 +99,8 @@ function Game1() {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const photoCanvasRef = useRef(null);
+  const isDrawing = useRef(false);
+  const lastPoint = useRef(null);
   const wsRef = useRef(null);
   const reconnectAttempts = useRef(0);
   const maxReconnectAttempts = 5;
@@ -186,37 +188,139 @@ function Game1() {
       const startIdx = index * 6;
       map[number] = shuffledQuests.slice(startIdx, startIdx + 6);
     });
+    console.log("Number of quests:", questCards.length);
+    console.log("Number quest map:", map);
     return map;
   };
 
-  const evaluateFill = () => {
+  const initializeHeartCanvas = (canvas) => {
+    if (!canvas) {
+      console.error("Canvas is not available for initializeHeartCanvas");
+      return;
+    }
+    const ctx = canvas.getContext("2d");
+
+    // Clear canvas
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    console.log("Canvas cleared and initialized with heart outline");
+
+    // Draw heart shape
+    ctx.beginPath();
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const scale = 15; // Increased scale for better visibility
+    for (let t = 0; t <= 2 * Math.PI; t += 0.01) {
+      const x = centerX + scale * 16 * Math.pow(Math.sin(t), 3);
+      const y = centerY - scale * (13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
+      if (t === 0) {
+        ctx.moveTo(x, y);
+      } else {
+        ctx.lineTo(x, y);
+      }
+    }
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  };
+
+  const startDrawing = (e) => {
+    if (!challengeStarted) return;
+    isDrawing.current = true;
     const canvas = canvasRef.current;
+    if (!canvas) return;
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    lastPoint.current = { x, y };
+    console.log("Started drawing at:", { x, y });
+  };
+
+  const stopDrawing = () => {
+    isDrawing.current = false;
+    lastPoint.current = null;
+    const ctx = canvasRef.current?.getContext("2d");
+    if (ctx) {
+      ctx.beginPath();
+    }
+    console.log("Stopped drawing");
+  };
+
+  const draw = (e) => {
+    if (!isDrawing.current || !challengeStarted) return;
+
+    const canvas = canvasRef.current;
+    if (!canvas) {
+      console.error("Canvas not available in draw function");
+      return;
+    }
+    const ctx = canvas.getContext("2d");
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    ctx.strokeStyle = "red";
+    ctx.lineWidth = 5;
+    ctx.lineCap = "round";
+    ctx.beginPath();
+    if (lastPoint.current) {
+      ctx.moveTo(lastPoint.current.x, lastPoint.current.y);
+      ctx.lineTo(x, y);
+      ctx.stroke();
+      console.log("Drew line from:", lastPoint.current, "to:", { x, y });
+    }
+    lastPoint.current = { x, y };
+  };
+
+  const evaluateHeartOutline = () => {
+    const canvas = canvasRef.current;
+    if (!canvas) {
+      console.error("Canvas not available for evaluation");
+      return;
+    }
     const ctx = canvas.getContext("2d");
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
-    let totalPixels = 0;
-    let filledPixels = 0;
+    let totalOutlinePixels = 0;
+    let drawnOutlinePixels = 0;
 
     const centerX = canvas.width / 2;
     const centerY = canvas.height / 2;
-    const radius = 100;
-    for (let x = 50; x < canvas.width - 50; x++) {
-      for (let y = 50; y < canvas.height - 50; y++) {
-        const dx = x - centerX;
-        const dy = y - centerY;
-        if (dx * dx + dy * dy <= radius * radius) {
-          const index = (y * canvas.width + x) * 4;
-          totalPixels++;
-          if (imageData[index] === 255 && imageData[index + 1] === 0) {
-            filledPixels++;
+    const scale = 15; // Match scale from initializeHeartCanvas
+    const tolerance = 5; // Pixel tolerance for outline tracing
+
+    // Sample points along the heart outline
+    for (let t = 0; t <= 2 * Math.PI; t += 0.01) {
+      const x = Math.round(centerX + scale * 16 * Math.pow(Math.sin(t), 3));
+      const y = Math.round(centerY - scale * (13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t)));
+
+      // Check a small region around the outline point
+      for (let dx = -tolerance; dx <= tolerance; dx++) {
+        for (let dy = -tolerance; dy <= tolerance; dy++) {
+          const px = x + dx;
+          const py = y + dy;
+          if (px >= 0 && px < canvas.width && py >= 0 && py < canvas.height) {
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            if (distance <= tolerance) {
+              totalOutlinePixels++;
+              const index = (py * canvas.width + px) * 4;
+              if (imageData[index] === 255 && imageData[index + 1] === 0 && imageData[index + 2] === 0) {
+                drawnOutlinePixels++;
+              }
+            }
           }
         }
       }
     }
 
-    const percentage = totalPixels > 0 ? (filledPixels / totalPixels) * 100 : 0;
+    const percentage = totalOutlinePixels > 0 ? (drawnOutlinePixels / totalOutlinePixels) * 100 : 0;
     setFillPercentage(percentage);
     setShowResult(true);
     setChallengeStarted(false);
+    console.log(`Evaluated heart outline: ${percentage.toFixed(2)}%`, {
+      totalOutlinePixels,
+      drawnOutlinePixels,
+      percentage,
+    });
   };
 
   const startCamera = async () => {
@@ -282,6 +386,7 @@ function Game1() {
       setRandomNumbers(newNumbers);
       setNumberQuestMap(assignQuestsToNumbers(newNumbers));
       setGameStarted(true);
+      console.log("Game started with numbers:", newNumbers);
     }
   }, [countdown, gameStarted]);
 
@@ -290,7 +395,7 @@ function Game1() {
       const timer = setInterval(() => {
         setTimeLeft((prev) => {
           if (prev <= 1) {
-            evaluateFill();
+            evaluateHeartOutline();
             return 0;
           }
           return prev - 1;
@@ -318,6 +423,7 @@ function Game1() {
       const questsForNumber = numberQuestMap[matchedNumber];
       const randomQuest =
         questsForNumber[Math.floor(Math.random() * questsForNumber.length)];
+      console.log("Selected quest:", randomQuest);
       setCurrentQuest(randomQuest);
       setChallengeStarted(false);
       setTimeLeft(20);
@@ -352,6 +458,7 @@ function Game1() {
   const startChallenge = () => {
     setChallengeStarted(true);
     setTimeLeft(20);
+    console.log("Challenge started for quest:", currentQuest);
   };
 
   const clearSensors = () => {
@@ -469,6 +576,10 @@ function Game1() {
               onTakePhoto={takePhoto}
               videoRef={videoRef}
               photoCanvasRef={photoCanvasRef}
+              onStartDrawing={startDrawing}
+              onDraw={draw}
+              onStopDrawing={stopDrawing}
+              initializeHeartCanvas={initializeHeartCanvas}
             />
           </div>
         )}

@@ -285,30 +285,30 @@
   },
   {
     "id": 26,
-    "type": "challenge",
-    "title": "Squiggle Fill",
-    "description": "Tô đầy ô vuông này nhanh nhất có thể!",
+    "type": "heart_challenge",
+    "title": "Trace the Heart",
+    "description": "Viền theo đường nét của hình trái tim dưới đây bằng con trỏ của bạn.",
     "difficulty": "Medium",
     "timeLimit": 20,
-    "passThreshold": 90
+    "passThreshold": 80
   },
   {
     "id": 27,
-    "type": "challenge",
-    "title": "Blob Painter",
-    "description": "Viền theo hình vẽ dưới đây.",
+    "type": "heart_challenge",
+    "title": "Heart Outline Challenge",
+    "description": "Theo nét vẽ hình trái tim dưới đây một cách chính xác nhất có thể.",
     "difficulty": "Medium",
     "timeLimit": 20,
-    "passThreshold": 90
+    "passThreshold": 80
   },
   {
     "id": 28,
-    "type": "challenge",
-    "title": "Twist and Fill",
-    "description": "Viền theo hình vẽ dưới đây.",
+    "type": "heart_challenge",
+    "title": "Love Line",
+    "description": "Vẽ theo đường viền trái tim được hiển thị dưới đây.",
     "difficulty": "Medium",
     "timeLimit": 20,
-    "passThreshold": 90
+    "passThreshold": 80
   },
   {
     "id": 29,
