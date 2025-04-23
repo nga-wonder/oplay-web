@@ -8,7 +8,7 @@
   background-position: center;
   background-repeat: no-repeat;
   padding: 20px;
-  border-radius: 70px;
+  border-radius: 20px;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -20,24 +20,7 @@
   display: flex;
   flex-direction: column;
   font-family: "Plus Jakarta Sans", sans-serif;
-}
-
-/* Styles for the modal header */
-.modal-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  background: none;
-}
-
-/* Styles for the modal title */
-.quest-card-title {
-  color: #d32f2f;
-  font-weight: bold;
-  font-size: 1.5rem;
-  text-align: center;
-  font-family: "Plus Jakarta Sans", sans-serif;
+  box-sizing: border-box;
 }
 
 /* Styles for the modal content */
@@ -56,13 +39,15 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: center; /* Center content horizontally */
+  justify-content: flex-start; /* Start content from top */
   padding: 20px;
   overflow-y: auto;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.9);
   border-radius: 8px;
   margin-right: 10px;
+  align-items: center; /* Center content horizontally */
+  justify-content: center; /* Center content vertically */
 }
 
 /* Styles for the right panel */
@@ -70,11 +55,11 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: center; /* Center content horizontally */
+  justify-content: center; /* Center content vertically */
   padding: 20px;
   overflow-y: auto;
-  background: rgba(91, 14, 14, 0.907);
+  background: rgba(255, 255, 255, 0.9);
   border-radius: 8px;
   margin-left: 10px;
 }
@@ -92,10 +77,12 @@
 /* Styles for the quest description */
 .quest-description {
   font-size: 1rem;
+  display: flex;
   color: #000;
   text-align: center;
   padding: 8px;
   font-family: "Plus Jakarta Sans", sans-serif;
+  align-items: center;
 }
 
 /* Styles for choices container */
@@ -103,7 +90,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; /* Center content horizontally */
   justify-content: center;
 }
 
@@ -113,7 +100,7 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
   width: 100%;
-  max-width: 400px;
+  max-width: 300px; /* Limit width for better centering */
 }
 
 /* Styles for drawing container */
@@ -121,46 +108,50 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; /* Center content horizontally */
   justify-content: center;
 }
 
 /* Styles for camera container */
 .camera-container {
-  width: 80%;
+  width: 70%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; /* Center content horizontally */
   justify-content: center;
 }
 
 /* Styles for photo container */
 .photo-container {
-  width: 100%;
+  width: 70%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; /* Center content horizontally */
   justify-content: center;
 }
 
-/* Styles for action buttons */
+/* Styles for action buttons (non-questionnaire) */
 .MuiButton-root.action-button {
-  background-color: #0080ff;
-  color: #ff0000;
-  padding: 8px 16px;
+  background-color: #1976d2;
+  color: #ff0000; /* Changed to white for better contrast */
+  padding: 10px 20px; /* Slightly larger padding for non-questionnaire buttons */
   border-radius: 4px;
   text-transform: uppercase;
   font-weight: bold;
   font-family: "Plus Jakarta Sans", sans-serif;
+  width: auto; /* Allow button to size based on content */
+  min-width: 150px; /* Minimum width for consistency */
+  height: 40px; /* Fixed height for non-questionnaire buttons */
 }
 
-/* Specific styles for action buttons in the answer grid */
+/* Specific styles for action buttons in the answer grid (questionnaire) */
 .answer-grid .MuiButton-root.action-button {
-  width: 100%;
-  height: 18vh; /* Fixed height for uniform button size */
-  padding: 8px; /* Reduced padding for tighter fit */
-  font-size: 0.9rem; /* Smaller font size for better fit */
-  line-height: 1.2; /* Adjust line height for text alignment */
+  padding: 8px; /* Smaller padding for questionnaire buttons */
+  font-size: 0.9rem;
+  line-height: 1.2;
+  width: 100%; /* Full width within grid cell */
+  height: 12vh; /* Fixed height for questionnaire buttons */
+  min-width: unset; /* Override min-width for questionnaire buttons */
 }
 
 /* Hover effect for action buttons */

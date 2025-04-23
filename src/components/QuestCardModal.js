@@ -49,7 +49,11 @@ function QuestCardModal({
 
   // Initialize canvas when challenge starts
   useEffect(() => {
-    if (challengeStarted && canvasRef.current && (quest?.type === "challenge" || quest?.type === "heart_challenge")) {
+    if (
+      challengeStarted &&
+      canvasRef.current &&
+      (quest?.type === "challenge" || quest?.type === "heart_challenge")
+    ) {
       if (!hasInitializedCanvas.current) {
         console.log("Initializing canvas for quest:", quest);
         initializeHeartCanvas(canvasRef.current);
@@ -76,22 +80,15 @@ function QuestCardModal({
 
   return (
     <Box className="quest-card-modal" role="dialog" aria-labelledby="quest-card-title">
-      {/* <Box className="modal-header">
-        <Typography variant="h5" id="quest-card-title" className="quest-card-title">
-          Quest Card for Number {inputNumber}
-        </Typography>
-      </Box> */}
       <Box className="modal-content">
         {/* Left Side: Question and Supporting Image */}
         <Box className="left-panel">
-          {quest ? (
+          {quest && (
             <>
               <Typography variant="h6" className="quest-title">
                 {quest.title}
               </Typography>
-              <Typography className="quest-description">
-                {quest.description}
-              </Typography>
+              <Typography className="quest-description">{quest.description}</Typography>
               {quest.image && (
                 <Box sx={{ textAlign: "center", marginTop: 2 }}>
                   <img
@@ -107,27 +104,47 @@ function QuestCardModal({
                   />
                 </Box>
               )}
+            </>
+          )}
+        </Box>
+
+        {/* Right Side: Choices, Camera, or Drawing Frame */}
+        <Box className="right-panel">
+          {quest && (
+            <>
               {quest.type === "questionnaire" && (
-                <Box sx={{ marginTop: 2 }}>
-                  {quest.answers.map((answer, index) => (
-                    <Button
-                      key={index}
-                      variant="contained"
-                      className="action-button"
-                      onClick={() => handleAnswerClick(answer)}
-                      sx={{
-                        margin: "5px",
-                        backgroundColor: selectedAnswer === answer.text ? (isCorrect ? "#4caf50" : "#1f44336") : "#1976d2",
-                        color: selectedAnswer === answer.text && isCorrect ? "#000000" : "#ffffff",
-                        "&:hover": {
-                          backgroundColor: selectedAnswer === answer.text ? (isCorrect ? "#45a049" : "#d32f2f") : "#1565c0",
-                        },
-                      }}
-                      disabled={selectedAnswer !== null}
-                    >
-                      {answer.text}
-                    </Button>
-                  ))}
+                <Box className="choices-container">
+                  <Box className="answer-grid">
+                    {quest.answers.map((answer, index) => (
+                      <Button
+                        key={index}
+                        variant="contained"
+                        className="action-button"
+                        onClick={() => handleAnswerClick(answer)}
+                        sx={{
+                          backgroundColor:
+                            selectedAnswer === answer.text
+                              ? isCorrect
+                                ? "#4caf50"
+                                : "#f44336"
+                              : "#1976d2",
+                          color:
+                            selectedAnswer === answer.text && isCorrect ? "#000000" : "#ffffff",
+                          "&:hover": {
+                            backgroundColor:
+                              selectedAnswer === answer.text
+                                ? isCorrect
+                                  ? "#45a049"
+                                  : "#d32f2f"
+                                : "#1565c0",
+                          },
+                        }}
+                        disabled={selectedAnswer !== null}
+                      >
+                        {answer.text}
+                      </Button>
+                    ))}
+                  </Box>
                   {selectedAnswer && (
                     <Typography className="quest-description" sx={{ marginTop: 2 }}>
                       {isCorrect ? "Correct!" : "Incorrect, try another quest!"}
@@ -135,63 +152,65 @@ function QuestCardModal({
                   )}
                 </Box>
               )}
-              {(quest.type === "challenge" || quest.type === "heart_challenge") && !challengeStarted && !showResult && (
-                <Button
-                  variant="contained"
-                  className="action-button"
-                  onClick={onStartChallenge}
-                  sx={{ marginTop: 2 }}
-                >
-                  Start Challenge
-                </Button>
-              )}
-              {(quest.type === "challenge" || quest.type === "heart_challenge") && challengeStarted && (
-                <Box>
-                  <Typography className="quest-description">
-                    Time Left: {timeLeft} seconds
-                  </Typography>
-                  <canvas
-                    ref={canvasRef}
-                    width={300}
-                    height={300}
-                    style={{ border: "1px solid black", marginTop: "10px" }}
-                    onMouseDown={onStartDrawing}
-                    onMouseMove={onDraw}
-                    onMouseUp={onStopDrawing}
-                    onMouseOut={onStopDrawing}
-                  />
-                </Box>
-              )}
-              {(quest.type === "challenge" || quest.type === "heart_challenge") && showResult && (
-                <Box>
-                  <Typography variant="h6" className="quest-title">
-                    Challenge Result
-                  </Typography>
-                  <Typography className="quest-description">
-                    Outline Accuracy: {fillPercentage ? fillPercentage.toFixed(2) : 0}%
-                  </Typography>
-                  <Typography className="quest-description" sx={{ marginTop: 1 }}>
-                    {fillPercentage >= quest.passThreshold
-                      ? "Congratulations! You passed!"
-                      : "Sorry, you didn't trace enough. Try again!"}
-                  </Typography>
-                </Box>
-              )}
+              {(quest.type === "challenge" || quest.type === "heart_challenge") &&
+                !challengeStarted &&
+                !showResult && (
+                  <Button
+                    variant="contained"
+                    className="action-button"
+                    onClick={onStartChallenge}
+                  >
+                    Start Challenge
+                  </Button>
+                )}
+              {(quest.type === "challenge" || quest.type === "heart_challenge") &&
+                challengeStarted && (
+                  <Box className="drawing-container">
+                    <Typography className="quest-description">
+                      Time Left: {timeLeft} seconds
+                    </Typography>
+                    <canvas
+                      ref={canvasRef}
+                      width={300}
+                      height={300}
+                      style={{ border: "1px solid black", marginTop: "10px" }}
+                      onMouseDown={onStartDrawing}
+                      onMouseMove={onDraw}
+                      onMouseUp={onStopDrawing}
+                      onMouseOut={onStopDrawing}
+                    />
+                  </Box>
+                )}
+              {(quest.type === "challenge" || quest.type === "heart_challenge") &&
+                showResult && (
+                  <Box>
+                    <Typography variant="h6" className="quest-title">
+                      Challenge Result
+                    </Typography>
+                    <Typography className="quest-description">
+                      Outline Accuracy: {fillPercentage ? fillPercentage.toFixed(2) : 0}%
+                    </Typography>
+                    <Typography className="quest-description" sx={{ marginTop: 1 }}>
+                      {fillPercentage >= quest.passThreshold
+                        ? "Congratulations! You passed!"
+                        : "Sorry, you didn't trace enough. Try again!"}
+                    </Typography>
+                  </Box>
+                )}
               {quest.type === "photo" && !photoTaken && !photoData && (
-                <Box>
+                <Box className="camera-container">
                   <Button
                     variant="contained"
                     className="action-button"
                     onClick={onStartCamera}
-                    sx={{ marginTop: 2 }}
                   >
                     Start Camera
                   </Button>
                 </Box>
               )}
               {quest.type === "photo" && cameraStream && !photoTaken && (
-                <Box>
-                  <video ref={videoRef} style={{ width: "100%", maxHeight: "400px" }} />
+                <Box className="camera-container">
+                  <video ref={videoRef} style={{ width: "100%", maxHeight: "300px" }} />
                   <Button
                     variant="contained"
                     className="action-button"
@@ -203,12 +222,16 @@ function QuestCardModal({
                 </Box>
               )}
               {quest.type === "photo" && photoData && (
-                <Box>
-                  <img src={photoData} alt="Captured" style={{ width: "100%", maxHeight: "400px" }} />
+                <Box className="photo-container">
+                  <img
+                    src={photoData}
+                    alt="Captured"
+                    style={{ width: "100%", maxHeight: "300px" }}
+                  />
                   <canvas ref={photoCanvasRef} style={{ display: "none" }} />
                 </Box>
               )}
-            </Box>
+            </>
           )}
         </Box>
       </Box>
