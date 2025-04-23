@@ -91,6 +91,7 @@ function Game1() {
   const [cameraStream, setCameraStream] = useState(null);
   const [photoTaken, setPhotoTaken] = useState(false);
   const [photoData, setPhotoData] = useState(null);
+  const [cameraError, setCameraError] = useState(null);
   const [sensorIds, setSensorIds] = useState([]);
   const [receivedInteger, setReceivedInteger] = useState(null);
   const [openSettings, setOpenSettings] = useState(false);
@@ -221,31 +222,60 @@ function Game1() {
 
   const startCamera = async () => {
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-      alert(
+      setCameraError(
         "Camera access is not supported in this browser. Please ensure you're using HTTPS or localhost, or try a different browser."
       );
       return;
     }
 
+    const hasCamera = async () => {
+      const devices = await navigator.mediaDevices.enumerateDevices();
+      return devices.some((device) => device.kind === "videoinput");
+    };
+
+    if (!(await hasCamera())) {
+      setCameraError("No camera found on this device.");
+      return;
+    }
+
+    const checkCameraPermission = async () => {
+      if (navigator.permissions && navigator.permissions.query) {
+        try {
+          const permissionStatus = await navigator.permissions.query({ name: "camera" });
+          if (permissionStatus.state === "denied") {
+            return "Camera access denied. Please enable camera permissions in your browser settings.";
+          }
+          return null;
+        } catch (error) {
+          console.warn("Permission query not supported:", error);
+          return null;
+        }
+      }
+      return null;
+    };
+
+    const permissionError = await checkCameraPermission();
+    if (permissionError) {
+      setCameraError(permissionError);
+      return;
+    }
+
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: "user" },
+        video: { facingMode: "user", width: { ideal: 640 }, height: { ideal: 480 } },
       });
       setCameraStream(stream);
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-        videoRef.current.play();
-      }
+      setCameraError(null);
     } catch (err) {
       console.error("Error accessing camera:", err);
       if (err.name === "NotAllowedError") {
-        alert(
-          "Camera access was denied. Please enable camera access in Settings > Privacy & Security > Camera for this app or browser."
+        setCameraError(
+          "Camera access was denied. Please enable camera access in your browser settings."
         );
       } else if (err.name === "NotFoundError") {
-        alert("No camera found on this device.");
+        setCameraError("No camera found on this device.");
       } else {
-        alert("An error occurred while accessing the camera: " + err.message);
+        setCameraError("An error occurred while accessing the camera: " + err.message);
       }
     }
   };
@@ -277,7 +307,7 @@ function Game1() {
       try {
         const validatorFunc = new Function('number', `return (${currentQuest.validator})(number);`);
         isCorrect = validatorFunc(number) && answerId === 1;
-      } catch (error) { 
+      } catch (error) {
         console.error("Error executing validator:", error);
         isCorrect = false;
       }
@@ -317,12 +347,13 @@ function Game1() {
   }, [challengeStarted, timeLeft]);
 
   useEffect(() => {
+    const videoElement = videoRef.current;
     return () => {
       if (cameraStream) {
         cameraStream.getTracks().forEach((track) => track.stop());
         setCameraStream(null);
-        if (videoRef.current) {
-          videoRef.current.srcObject = null;
+        if (videoElement) {
+          videoElement.srcObject = null;
         }
       }
     };
@@ -488,6 +519,7 @@ function Game1() {
               onTakePhoto={takePhoto}
               videoRef={videoRef}
               photoCanvasRef={photoCanvasRef}
+              cameraError={cameraError}
             />
           </div>
         )}

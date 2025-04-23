@@ -20,6 +20,7 @@ function QuestCardModal({
   onTakePhoto,
   videoRef,
   photoCanvasRef,
+  cameraError,
 }) {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [isCorrect, setIsCorrect] = useState(null);
@@ -31,6 +32,17 @@ function QuestCardModal({
       setIsCorrect(null);
     }
   }, [open, quest]);
+
+  // Play video when cameraStream changes
+  useEffect(() => {
+    if (cameraStream && videoRef.current) {
+      videoRef.current.srcObject = cameraStream;
+      videoRef.current.play().catch((err) => {
+        console.error("Error playing video in QuestCardModal:", err);
+        // The error is already handled in startCamera, so no need to set cameraError here
+      });
+    }
+  }, [cameraStream, videoRef]);
 
   if (!open) return null;
 
@@ -126,18 +138,26 @@ function QuestCardModal({
                 </Typography>
               )}
               {quest.type === "photo" && !photoTaken && !photoData && (
-                <Button
-                  variant="contained"
-                  className="action-button"
-                  onClick={onStartCamera}
-                  sx={{ marginTop: 2 }}
-                >
-                  Start Camera
-                </Button>
+                <Box>
+                  <Button
+                    variant="contained"
+                    className="action-button"
+                    onClick={onStartCamera}
+                    sx={{ marginTop: 2 }}
+                    disabled={!!cameraError}
+                  >
+                    Start Camera
+                  </Button>
+                  {cameraError && (
+                    <Typography sx={{ marginTop: 2, color: "red" }}>
+                      {cameraError}
+                    </Typography>
+                  )}
+                </Box>
               )}
               {quest.type === "photo" && cameraStream && !photoTaken && (
                 <Box>
-                  <video ref={videoRef} autoPlay style={{ width: "100%" }} />
+                  <video ref={videoRef} style={{ width: "100%", maxHeight: "400px" }} />
                   <Button
                     variant="contained"
                     className="action-button"
@@ -150,7 +170,7 @@ function QuestCardModal({
               )}
               {quest.type === "photo" && photoData && (
                 <Box>
-                  <img src={photoData} alt="Captured" style={{ width: "100%" }} />
+                  <img src={photoData} alt="Captured" style={{ width: "100%", maxHeight: "400px" }} />
                   <canvas ref={photoCanvasRef} style={{ display: "none" }} />
                 </Box>
               )}
