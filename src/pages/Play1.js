@@ -41,6 +41,8 @@ function Play1() {
 
   return (
     <div className="play1-background">
+      <BackButton />
+      <HomeButton />
       <Container
         sx={{
           position: "relative",
@@ -52,8 +54,7 @@ function Play1() {
           justifyContent: "center",
         }}
       >
-        <BackButton />
-        <HomeButton />
+        <div className="game-title"></div>
         <PlayButton onClick={() => navigate("/game1")}>PLAY</PlayButton>
       </Container>
     </div>

@@ -1,25 +1,37 @@
 .play1-background {
-    background-image: url("/public/assets/WEB_game1_bg.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    min-height: 100vh;
-    width: 100vw;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -1;
-  }
-  
-  .play1-background .MuiContainer-root {
-    position: relative;
-    z-index: 1;
-  }
-  
-  .play1-background .MuiButton-root,
-  .play1-background .home-button {
-    background: rgba(255, 255, 255, 0.8);
-    padding: 8px;
-    border-radius: 4px;
-    z-index: 1;
-  }
+  background-image: url("/public/assets/WEB_game1_bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.play1-background .MuiContainer-root {
+  position: relative;
+  z-index: 1;
+}
+
+.play1-background .MuiButton-root,
+.play1-background .home-button {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 8px;
+  border-radius: 4px;
+  z-index: 1;
+}
+
+/* Styles for the game title image */
+.game-title {
+  width: 50%; /* Matches max-width from previous img approach */
+  height: 50%; /* Matches max-height from previous img approach */
+  background-image: url("/public/assets/lettering.png"); /* Path to your PNG file */
+  background-size: contain; /* Ensures image fits within bounds without distortion */
+  background-position: center; /* Centers the image within the div */
+  background-repeat: no-repeat; /* Prevents tiling */
+  margin-bottom: 5vh;
+  max-width: 600px; /* Optional: caps the width for large screens */
+}

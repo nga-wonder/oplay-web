@@ -14,8 +14,8 @@ const glow = keyframes`
 // Styled Back Button
 const StyledBackButton = styled(IconButton)(({ theme, disabled }) => ({
   position: "absolute",
-  left: "20px",
-  top: "20px",
+  right: "1.5vw",
+  top: "3vh",
   color: disabled ? "rgba(255, 140, 0, 0.3)" : "#FF8C00",
   backgroundColor: "rgba(255, 255, 255, 0.1)",
   backdropFilter: "blur(5px)",
