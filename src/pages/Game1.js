@@ -277,7 +277,7 @@ function Game1() {
       try {
         const validatorFunc = new Function('number', `return (${currentQuest.validator})(number);`);
         isCorrect = validatorFunc(number) && answerId === 1;
-      } catch (error) {
+      } catch (error) { 
         console.error("Error executing validator:", error);
         isCorrect = false;
       }
@@ -486,43 +486,42 @@ function Game1() {
               cameraStream={cameraStream}
               onStartCamera={startCamera}
               onTakePhoto={takePhoto}
-              onAnswer={handleAnswer}
               videoRef={videoRef}
               photoCanvasRef={photoCanvasRef}
             />
-
-            <Dialog open={openSettings} onClose={handleCloseSettings}>
-              <DialogTitle>Settings</DialogTitle>
-              <DialogContent>
-                <Typography gutterBottom>Adjust game settings here.</Typography>
-                <Typography gutterBottom>Volume</Typography>
-                <VolumeSlider
-                  value={volume}
-                  onChange={handleVolumeChange}
-                  aria-labelledby="volume-slider"
-                  min={0}
-                  max={100}
-                  sx={{ width: "200px" }}
-                />
-                <Typography>Volume: {volume}%</Typography>
-                <Typography gutterBottom sx={{ marginTop: 2 }}>
-                  Theme Color
-                </Typography>
-                <ColorPicker
-                  type="color"
-                  value={color}
-                  onChange={handleColorChange}
-                />
-                <Typography>Selected Color: {color}</Typography>
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={handleCloseSettings} color="primary">
-                  Close
-                </Button>
-              </DialogActions>
-            </Dialog>
           </div>
         )}
+
+        <Dialog open={openSettings} onClose={handleCloseSettings}>
+          <DialogTitle>Settings</DialogTitle>
+          <DialogContent>
+            <Typography gutterBottom>Adjust game settings here.</Typography>
+            <Typography gutterBottom>Volume</Typography>
+            <VolumeSlider
+              value={volume}
+              onChange={handleVolumeChange}
+              aria-labelledby="volume-slider"
+              min={0}
+              max={100}
+              sx={{ width: "200px" }}
+            />
+            <Typography>Volume: {volume}%</Typography>
+            <Typography gutterBottom sx={{ marginTop: 2 }}>
+              Theme Color
+            </Typography>
+            <ColorPicker
+              type="color"
+              value={color}
+              onChange={handleColorChange}
+            />
+            <Typography>Selected Color: {color}</Typography>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseSettings} color="primary">
+              Close
+            </Button>
+          </DialogActions>
+        </Dialog>
       </Container>
     </div>
   );

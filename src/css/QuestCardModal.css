@@ -1,5 +1,5 @@
 /* Import Plus Jakarta Sans from Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap");
 
 /* Styles for the quest card modal */
 .quest-card-modal {
@@ -8,19 +8,19 @@
   background-position: center;
   background-repeat: no-repeat;
   padding: 20px;
-  border-radius: 50px;
+  border-radius: 70px;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 900px; /* Set to the exact width of WEB_quest1.png */
-  height: 600px; /* Set to the exact height of WEB_quest1.png */
+  width: 900px;
+  height: 600px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 1000;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  font-family: 'Plus Jakarta Sans', sans-serif; /* Apply font to modal and descendants */
+  font-family: "Plus Jakarta Sans", sans-serif;
 }
 
 /* Styles for centered content */
@@ -32,8 +32,8 @@
   height: 100%;
   padding: 20px;
   box-sizing: border-box;
-  margin-top: 10vh;
-  font-family: 'Plus Jakarta Sans', sans-serif; /* Ensure font consistency */
+  margin-top: 20vh;
+  font-family: "Plus Jakarta Sans", sans-serif;
 }
 
 /* Styles for the modal title */
@@ -44,7 +44,7 @@
   font-weight: bold;
   font-size: 1.5rem;
   background: none;
-  font-family: 'Plus Jakarta Sans', sans-serif; /* Explicitly set font */
+  font-family: "Plus Jakarta Sans", sans-serif;
 }
 
 /* Styles for the modal content */
@@ -55,7 +55,7 @@
   flex-direction: column;
   align-items: center;
   background: none;
-  font-family: 'Plus Jakarta Sans', sans-serif; /* Explicitly set font */
+  font-family: "Plus Jakarta Sans", sans-serif;
 }
 
 /* Styles for the quest title */
@@ -66,7 +66,7 @@
   text-align: center;
   background: none;
   padding: 8px;
-  font-family: 'Plus Jakarta Sans', sans-serif; /* Explicitly set font */
+  font-family: "Plus Jakarta Sans", sans-serif;
 }
 
 /* Styles for the quest description */
@@ -76,22 +76,22 @@
   text-align: center;
   background: none;
   padding: 8px;
-  font-family: 'Plus Jakarta Sans', sans-serif; /* Explicitly set font */
+  font-family: "Plus Jakarta Sans", sans-serif;
 }
 
 /* Styles for action buttons */
-.action-button {
+.MuiButton-root.action-button {
   background-color: #1976d2;
-  color: #827a7a;
+  color: #ff0000;
   padding: 8px 16px;
   border-radius: 4px;
   text-transform: uppercase;
   font-weight: bold;
-  font-family: 'Plus Jakarta Sans', sans-serif; /* Explicitly set font */
+  font-family: "Plus Jakarta Sans", sans-serif;
 }
 
 /* Hover effect for action buttons */
-.action-button:hover {
+.MuiButton-root.action-button:hover {
   background-color: #1565c0;
 }
 
@@ -99,7 +99,7 @@
 .quest-card-actions {
   padding: 10px;
   background: none;
-  font-family: 'Plus Jakarta Sans', sans-serif; /* Explicitly set font */
+  font-family: "Plus Jakarta Sans", sans-serif;
 }
 
 /* Styles for the close button */
@@ -111,7 +111,7 @@
   border-radius: 4px;
   text-transform: uppercase;
   font-weight: bold;
-  font-family: 'Plus Jakarta Sans', sans-serif; /* Explicitly set font */
+  font-family: "Plus Jakarta Sans", sans-serif;
 }
 
 /* Hover effect for the close button */
