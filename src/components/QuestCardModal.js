@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"; // Add useEffect import
+import React, { useState, useEffect } from "react";
 import { Button, Typography, Box } from "@mui/material";
 import "../css/QuestCardModal.css";
 
@@ -36,16 +36,11 @@ function QuestCardModal({
 
   const handleAnswerClick = (answer) => {
     setSelectedAnswer(answer.text);
-    if (quest.validator) {
-      try {
-        const validate = new Function("number", `return (${quest.validator})(number);`);
-        const result = validate(inputNumber);
-        const expectedAnswer = result ? "Yes" : "No";
-        setIsCorrect(answer.text === expectedAnswer);
-      } catch (error) {
-        console.error("Validator execution error:", error);
-        setIsCorrect(false);
-      }
+    if (quest.correctAnswerId) {
+      setIsCorrect(answer.id === quest.correctAnswerId);
+    } else {
+      console.warn("No correctAnswerId provided for this quest.");
+      setIsCorrect(false);
     }
   };
 
@@ -64,6 +59,21 @@ function QuestCardModal({
               <Typography className="quest-description">
                 {quest.description}
               </Typography>
+              {quest.image && (
+                <Box sx={{ textAlign: "center", marginTop: 2, marginBottom: 2 }}>
+                  <img
+                    src={quest.image}
+                    alt={quest.title}
+                    style={{
+                      maxWidth: "100%",
+                      maxHeight: "200px",
+                      objectFit: "contain",
+                      borderRadius: "8px",
+                    }}
+                    onError={() => console.error(`Failed to load image: ${quest.image}`)}
+                  />
+                </Box>
+              )}
               {quest.type === "questionnaire" && (
                 <Box sx={{ marginTop: 2 }}>
                   {quest.answers.map((answer, index) => (

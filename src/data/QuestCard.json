@@ -2,373 +2,328 @@
   {
     "id": 1,
     "type": "questionnaire",
-    "title": "Triple Threat",
-    "description": "Is this number divisible by 3?",
-    "difficulty": "Easy",
+    "description": "Thân em dài, trắng lại tròn. Viết bao nhiêu chữ em mòn bấy nhiêu.",
     "answers": [
-      {"id": 1, "text": "Yes"},
-      {"id": 2, "text": "No"},
-      {"id": 3, "text": "Maybe"},
-      {"id": 4, "text": "Not sure"}
+      {"id": 1, "text": "Viên phấn"},
+      {"id": 2, "text": "Bút chì"},
+      {"id": 3, "text": "Cục tẩy"},
+      {"id": 4, "text": "Cây nến"}
     ],
-    "validator": "function(number) { return number % 3 === 0; }"
+    "correctAnswerId": 1
   },
   {
     "id": 2,
     "type": "questionnaire",
-    "title": "Even Steven",
-    "description": "Is this an even number?",
-    "difficulty": "Easy",
+    "description": "Con số nào chỉ tăng lên mà không bao giờ giảm xuống?",
     "answers": [
-      {"id": 1, "text": "Yes"},
-      {"id": 2, "text": "No"},
-      {"id": 3, "text": "Sometimes"},
-      {"id": 4, "text": "Uncertain"}
+      {"id": 1, "text": "Số điện thoại"},
+      {"id": 2, "text": "Số nhà"},
+      {"id": 3, "text": "Số tiền"},
+      {"id": 4, "text": "Số tuổi"}
     ],
-    "validator": "function(number) { return number % 2 === 0; }"
+    "correctAnswerId": 4
   },
   {
     "id": 3,
     "type": "questionnaire",
-    "title": "Prime Time",
-    "description": "Is this a prime number?",
-    "difficulty": "Medium",
+    "description": "Quả gì nho nhỏ\nChín đỏ như hoa\nTươi đẹp vườn nhà\nMà cay xé lưỡi?",
     "answers": [
-      {"id": 1, "text": "Yes"},
-      {"id": 2, "text": "No"},
-      {"id": 3, "text": "Maybe"},
-      {"id": 4, "text": "Not sure"}
+      {"id": 1, "text": "Cà chua"},
+      {"id": 2, "text": "Ớt"},
+      {"id": 3, "text": "Táo"},
+      {"id": 4, "text": "Ớt chuông"}
     ],
-    "validator": "function(number) { if (number < 2) return false; for (let i = 2; i <= Math.sqrt(number); i++) { if (number % i === 0) return false; } return true; }"
+    "correctAnswerId": 2
   },
   {
     "id": 4,
     "type": "questionnaire",
-    "title": "Lucky Seven",
-    "description": "Does this number contain a 7?",
-    "difficulty": "Medium",
+    "description": "Đốt nhiều mà chẳng cháy đâu\nBao nhiêu tóc mọc trên đầu xanh tươi\nBên nhau thành lũy dưới trời\nLớn lên giúp ích cho người bấy lâu.",
     "answers": [
-      {"id": 1, "text": "Yes"},
-      {"id": 2, "text": "No"},
-      {"id": 3, "text": "Possibly"},
-      {"id": 4, "text": "Uncertain"}
+      {"id": 1, "text": "Củi"},
+      {"id": 2, "text": "Tre"},
+      {"id": 3, "text": "Mía"},
+      {"id": 4, "text": "Lúa"}
     ],
-    "validator": "function(number) { return number.toString().includes('7'); }"
+    "correctAnswerId": 2
   },
   {
     "id": 5,
     "type": "questionnaire",
-    "title": "Square Deal",
-    "description": "Is this a perfect square?",
-    "difficulty": "Hard",
+    "description": "Tuổi chưa tròn mười bảy\nTóc chưa chấm ngang vai\nMột thiếu nữ mảnh mai\nNhưng hiên ngang, bất khuất\n\nCả nước đều quen biết\nTên chị nữ anh hùng.",
     "answers": [
-      {"id": 1, "text": "Yes"},
-      {"id": 2, "text": "No"},
-      {"id": 3, "text": "Maybe"},
-      {"id": 4, "text": "Not sure"}
+      {"id": 1, "text": "Võ Thị Sáu"},
+      {"id": 2, "text": "Nguyễn Thị Minh Khai"},
+      {"id": 3, "text": "Trần Thị Lý"},
+      {"id": 4, "text": "Phan Thị Lệ"}
     ],
-    "validator": "function(number) { return Number.isInteger(Math.sqrt(number)); }"
+    "correctAnswerId": 1
   },
   {
     "id": 6,
     "type": "questionnaire",
-    "title": "Odd One Out",
-    "description": "Is this an odd number?",
-    "difficulty": "Easy",
+    "description": "Vua nào xuống chiếu dời đô\nVề Thăng Long vững cơ đồ nước nam",
     "answers": [
-      {"id": 1, "text": "Yes"},
-      {"id": 2, "text": "No"},
-      {"id": 3, "text": "Sometimes"},
-      {"id": 4, "text": "Uncertain"}
+      {"id": 1, "text": "Nguyễn Huệ"},
+      {"id": 2, "text": "Trần Hưng Đạo"},
+      {"id": 3, "text": "Lý Thái Tổ"},
+      {"id": 4, "text": "Lê Lợi"}
     ],
-    "validator": "function(number) { return number % 2 !== 0; }"
+    "correctAnswerId": 3
   },
   {
     "id": 7,
     "type": "questionnaire",
-    "title": "Five Alive",
-    "description": "Is this number divisible by 5?",
-    "difficulty": "Easy",
+    "description": "Con gì tám cẳng hai càng.\nChẳng đi mà lại bò ngang cả ngày.",
     "answers": [
-      {"id": 1, "text": "Yes"},
-      {"id": 2, "text": "No"},
-      {"id": 3, "text": "Maybe"},
-      {"id": 4, "text": "Not sure"}
+      {"id": 1, "text": "Con bọ"},
+      {"id": 2, "text": "Con cua"},
+      {"id": 3, "text": "Con rết"},
+      {"id": 4, "text": "Con gián"}
     ],
-    "validator": "function(number) { return number % 5 === 0; }"
+    "correctAnswerId": 2
   },
   {
     "id": 8,
-    "type": "photo",
-    "title": "Selfie Star",
-    "description": "Take a quick selfie to shine!",
-    "difficulty": "Easy"
+    "type": "questionnaire",
+    "description": "Con gì quang quác\nCục tác cục te\nĐẻ trứng tròn xoe\nGọi người đến lấy",
+    "answers": [
+      {"id": 1, "text": "Con gà trống"},
+      {"id": 2, "text": "Con vịt"},
+      {"id": 3, "text": "Con gà mái"},
+      {"id": 4, "text": "Con ngỗng"}
+    ],
+    "correctAnswerId": 3
   },
   {
     "id": 9,
     "type": "questionnaire",
-    "title": "Nine Lives",
-    "description": "Is this divisible by 9?",
-    "difficulty": "Medium",
+    "description": "Có công mài __, có ngày nên __",
     "answers": [
-      {"id": 1, "text": "Yes"},
-      {"id": 2, "text": "No"},
-      {"id": 3, "text": "Maybe"},
-      {"id": 4, "text": "Not sure"}
+      {"id": 1, "text": "đá / ngọc"},
+      {"id": 2, "text": "vàng / bạc"},
+      {"id": 3, "text": "gỗ / sắt"},
+      {"id": 4, "text": "sắt / kim"}
     ],
-    "validator": "function(number) { return number % 9 === 0; }"
+    "correctAnswerId": 4
   },
   {
     "id": 10,
     "type": "questionnaire",
-    "title": "Teen Scene",
-    "description": "Is this between 10 and 19?",
-    "difficulty": "Easy",
+    "description": "Đi một ngày __, học một __ khôn",
     "answers": [
-      {"id": 1, "text": "Yes"},
-      {"id": 2, "text": "No"},
-      {"id": 3, "text": "Above 19"},
-      {"id": 4, "text": "Below 10"}
+      {"id": 1, "text": "đàng / màng"},
+      {"id": 2, "text": "đàng / sàng"},
+      {"id": 3, "text": "vàng / sàng"},
+      {"id": 4, "text": "đoàn / vàng"}
     ],
-    "validator": "function(number) { return number >= 10 && number <= 19; }"
+    "correctAnswerId": 2
   },
   {
     "id": 11,
-    "type": "challenge",
-    "title": "Squiggle Fill",
-    "description": "Fill the shape as fast as you can!",
-    "difficulty": "Medium",
-    "timeLimit": 20,
-    "passThreshold": 90
+    "type": "questionnaire",
+    "description": "Tìm ra số tiếp theo của dãy số: 1,1,2,3,5, _",
+    "answers": [
+      {"id": 1, "text": "8"},
+      {"id": 2, "text": "6"},
+      {"id": 3, "text": "10"},
+      {"id": 4, "text": "5"}
+    ],
+    "correctAnswerId": 1
   },
   {
     "id": 12,
     "type": "questionnaire",
-    "title": "High Roller",
-    "description": "Is this greater than 40?",
-    "difficulty": "Easy",
+    "description": "Tí, Sửu, Dần, Mẹo, Thìn, _, Ngọ, Mùi, Thân, Dậu, Tuất. Điền con giáp còn lại vào ô trống.",
     "answers": [
-      {"id": 1, "text": "Yes"},
-      {"id": 2, "text": "No"},
-      {"id": 3, "text": "Equal to 40"},
-      {"id": 4, "text": "Not sure"}
+      {"id": 1, "text": "Tý"},
+      {"id": 2, "text": "Tỵ"},
+      {"id": 3, "text": "Hợi"},
+      {"id": 4, "text": "Mão"}
     ],
-    "validator": "function(number) { return number > 40; }"
+    "correctAnswerId": 2
   },
   {
     "id": 13,
     "type": "questionnaire",
-    "title": "Low Blow",
-    "description": "Is this less than 10?",
-    "difficulty": "Easy",
+    "description": "Mẹ có 5 quả cam. Mẹ cho bé Cà Rốt 3 quả. Hỏi mẹ còn mấy quả cam?",
     "answers": [
-      {"id": 1, "text": "Yes"},
-      {"id": 2, "text": "No"},
-      {"id": 3, "text": "Equal to 10"},
-      {"id": 4, "text": "Not sure"}
+      {"id": 1, "text": "5 quả"},
+      {"id": 2, "text": "1 quả"},
+      {"id": 3, "text": "2 quả"},
+      {"id": 4, "text": "3 quả"}
     ],
-    "validator": "function(number) { return number < 10; }"
+    "correctAnswerId": 3
   },
   {
     "id": 14,
     "type": "questionnaire",
-    "title": "Mid Range",
-    "description": "Is this between 20 and 30?",
-    "difficulty": "Medium",
+    "description": "Quả/Cây/Kẻ/Ăn/Nhớ/Trồng. Sắp xếp lại thứ tự của những chữ này để tạo thành một ca dao tục ngữ?",
     "answers": [
-      {"id": 1, "text": "Yes"},
-      {"id": 2, "text": "No"},
-      {"id": 3, "text": "Above 30"},
-      {"id": 4, "text": "Below 20"}
+      {"id": 1, "text": "Ăn Quả Nhớ Kẻ Trồng Cây"},
+      {"id": 2, "text": "Ăn Kẻ Trồng Quả Nhớ Cây"},
+      {"id": 3, "text": "Nhớ Ăn Trồng Quả Cây Kẻ"},
+      {"id": 4, "text": "Trồng Ăn Nhớ Kẻ Cây Quả"}
     ],
-    "validator": "function(number) { return number >= 20 && number <= 30; }"
+    "correctAnswerId": 1
   },
   {
     "id": 15,
     "type": "questionnaire",
-    "title": "Cube Quest",
-    "description": "Is this a perfect cube?",
-    "difficulty": "Hard",
+    "description": "Đây là tỉnh nào?",
+    "image": "../assets/id15.png",
     "answers": [
-      {"id": 1, "text": "Yes"},
-      {"id": 2, "text": "No"},
-      {"id": 3, "text": "Maybe"},
-      {"id": 4, "text": "Not sure"}
+      {"id": 1, "text": "Bạc Liêu"},
+      {"id": 2, "text": "Sóc Trăng"},
+      {"id": 3, "text": "Cần Thơ"},
+      {"id": 4, "text": "Tiền Giang"}
     ],
-    "validator": "function(number) { return Number.isInteger(Math.cbrt(number)); }"
+    "correctAnswerId": 2
   },
   {
     "id": 16,
-    "type": "challenge",
-    "title": "Wobbly Shape",
-    "description": "Color the entire shape before time runs out!",
-    "difficulty": "Hard",
-    "timeLimit": 20,
-    "passThreshold": 90
+    "type": "questionnaire",
+    "description": "Hình dưới đây có bao nhiêu hình tam giác?",
+    "answers": [
+      {"id": 1, "text": "1 triangle"},
+      {"id": 2, "text": "3 triangles"},
+      {"id": 3, "text": "5 triangles"},
+      {"id": 4, "text": "10 triangles"}
+    ],
+    "correctAnswerId": 2
   },
   {
     "id": 17,
     "type": "questionnaire",
-    "title": "Two Too",
-    "description": "Does this contain a 2?",
-    "difficulty": "Easy",
+    "description": "Đây là câu ca dao tục ngữ gì?",
+    "image": "/assets/id17.png",
     "answers": [
-      {"id": 1, "text": "Yes"},
-      {"id": 2, "text": "No"},
-      {"id": 3, "text": "Possibly"},
-      {"id": 4, "text": "Uncertain"}
+      {"id": 1, "text": "Chó ngáp phải ruồi"},
+      {"id": 2, "text": "Ăn quả nhớ kẻ trồng cây"},
+      {"id": 3, "text": "Nói không đi đôi với làm"},
+      {"id": 4, "text": "Nước chảy đá mòn"}
     ],
-    "validator": "function(number) { return number.toString().includes('2'); }"
+    "correctAnswerId": 1
   },
   {
     "id": 18,
     "type": "questionnaire",
-    "title": "Eight Gate",
-    "description": "Is this divisible by 8?",
-    "difficulty": "Medium",
+    "description": "Đây là gì?",
+    "image": "/assets/id18.png",
     "answers": [
-      {"id": 1, "text": "Yes"},
-      {"id": 2, "text": "No"},
-      {"id": 3, "text": "Maybe"},
-      {"id": 4, "text": "Not sure"}
+      {"id": 1, "text": "Sấm sét"},
+      {"id": 2, "text": "Sóng thần"},
+      {"id": 3, "text": "Mưa đá"},
+      {"id": 4, "text": "Động đất"}
     ],
-    "validator": "function(number) { return number % 8 === 0; }"
+    "correctAnswerId": 3
   },
   {
     "id": 19,
-    "type": "photo",
-    "title": "Smile Snap",
-    "description": "Capture a happy moment!",
-    "difficulty": "Easy"
+    "type": "questionnaire",
+    "description": "Đây là trò chơi dân gian gì?",
+    "image": "/assets/id19.png",
+    "answers": [
+      {"id": 1, "text": "Bịt mắt bắt dê"},
+      {"id": 2, "text": "Ô ăn quan"},
+      {"id": 3, "text": "Nhảy lò cò"},
+      {"id": 4, "text": "Rồng rắn lên mây"}
+    ],
+    "correctAnswerId": 4
   },
   {
     "id": 20,
     "type": "questionnaire",
-    "title": "Forty Fort",
-    "description": "Is this in the 40s?",
-    "difficulty": "Medium",
+    "description": "Đây là vị anh hùng nào?",
+    "image": "/assets/id20.png",
     "answers": [
-      {"id": 1, "text": "Yes"},
-      {"id": 2, "text": "No"},
-      {"id": 3, "text": "Above 49"},
-      {"id": 4, "text": "Below 40"}
+      {"id": 1, "text": "Trưng Trắc"},
+      {"id": 2, "text": "Lê Lai"},
+      {"id": 3, "text": "Nguyễn Huệ"},
+      {"id": 4, "text": "Lý Thường Kiệt"}
     ],
-    "validator": "function(number) { return number >= 40 && number <= 49; }"
+    "correctAnswerId": 2
   },
   {
     "id": 21,
-    "type": "challenge",
-    "title": "Twist and Fill",
-    "description": "Fill the twisty shape quickly!",
-    "difficulty": "Medium",
-    "timeLimit": 20,
-    "passThreshold": 90
+    "type": "photo",
+    "title": "Six Mix",
+    "description": "Cười lên để chụp hình kỷ niệm nhé",
+    "difficulty": "Easy"
   },
   {
     "id": 22,
-    "type": "questionnaire",
-    "title": "Ten Zen",
-    "description": "Is this divisible by 10?",
-    "difficulty": "Easy",
-    "answers": [
-      {"id": 1, "text": "Yes"},
-      {"id": 2, "text": "No"},
-      {"id": 3, "text": "Maybe"},
-      {"id": 4, "text": "Not sure"}
-    ],
-    "validator": "function(number) { return number % 10 === 0; }"
+    "type": "photo",
+    "title": "Eight Straight",
+    "description": "Xếp đầu của mọi người thành hàng ngang như hình mẫu để chụp hình nhé!",
+    "image": "/assets/id19.png",
+    "difficulty": "Easy"
   },
   {
     "id": 23,
-    "type": "questionnaire",
-    "title": "Fibonacci Find",
-    "description": "Is this a Fibonacci number?",
-    "difficulty": "Hard",
-    "answers": [
-      {"id": 1, "text": "Yes"},
-      {"id": 2, "text": "No"},
-      {"id": 3, "text": "Maybe"},
-      {"id": 4, "text": "Not sure"}
-    ],
-    "validator": "function(number) { const isPerfectSquare = (x) => Number.isInteger(Math.sqrt(x)); return isPerfectSquare(5 * number * number + 4) || isPerfectSquare(5 * number * number - 4); }"
+    "type": "photo",
+    "title": "Game Face",
+    "description": "Cùng nhau dùng tay tạo thành hình trái tim nhé!",
+    "image": "/assets/id19.png",
+    "difficulty": "Medium"
   },
   {
     "id": 24,
-    "type": "questionnaire",
-    "title": "Four More",
-    "description": "Does this contain a 4?",
-    "difficulty": "Easy",
-    "answers": [
-      {"id": 1, "text": "Yes"},
-      {"id": 2, "text": "No"},
-      {"id": 3, "text": "Possibly"},
-      {"id": 4, "text": "Uncertain"}
-    ],
-    "validator": "function(number) { return number.toString().includes('4'); }"
+    "type": "photo",
+    "title": "Selfie Star",
+    "description": "Ôm nhau chụp hình.",
+    "image": "/assets/id19.png",
+    "difficulty": "Easy"
   },
   {
     "id": 25,
-    "type": "questionnaire",
-    "title": "Thirty Flirty",
-    "description": "Is this in the 30s?",
-    "difficulty": "Medium",
-    "answers": [
-      {"id": 1, "text": "Yes"},
-      {"id": 2, "text": "No"},
-      {"id": 3, "text": "Above 39"},
-      {"id": 4, "text": "Below 30"}
-    ],
-    "validator": "function(number) { return number >= 30 && number <= 39; }"
+    "type": "photo",
+    "title": "Smile Snap",
+    "description": "Nối vòng tay lớn.",
+    "image": "/assets/id19.png",
+    "difficulty": "Easy"
   },
   {
     "id": 26,
     "type": "challenge",
-    "title": "Blob Painter",
-    "description": "Paint the blob shape in time!",
+    "title": "Squiggle Fill",
+    "description": "Tô đầy ô vuông này nhanh nhất có thể!",
     "difficulty": "Medium",
     "timeLimit": 20,
     "passThreshold": 90
   },
   {
     "id": 27,
-    "type": "questionnaire",
-    "title": "Six Mix",
-    "description": "Does this contain a 6?",
-    "difficulty": "Easy",
-    "answers": [
-      {"id": 1, "text": "Yes"},
-      {"id": 2, "text": "No"},
-      {"id": 3, "text": "Possibly"},
-      {"id": 4, "text": "Uncertain"}
-    ],
-    "validator": "function(number) { return number.toString().includes('6'); }"
+    "type": "challenge",
+    "title": "Blob Painter",
+    "description": "Viền theo hình vẽ dưới đây.",
+    "difficulty": "Medium",
+    "timeLimit": 20,
+    "passThreshold": 90
   },
   {
     "id": 28,
-    "type": "photo",
-    "title": "Game Face",
-    "description": "Show us your best game face!",
-    "difficulty": "Medium"
+    "type": "challenge",
+    "title": "Twist and Fill",
+    "description": "Viền theo hình vẽ dưới đây.",
+    "difficulty": "Medium",
+    "timeLimit": 20,
+    "passThreshold": 90
   },
   {
     "id": 29,
-    "type": "questionnaire",
-    "title": "Eight Straight",
-    "description": "Does this contain an 8?",
-    "difficulty": "Easy",
-    "answers": [
-      {"id": 1, "text": "Yes"},
-      {"id": 2, "text": "No"},
-      {"id": 3, "text": "Possibly"},
-      {"id": 4, "text": "Uncertain"}
-    ],
-    "validator": "function(number) { return number.toString().includes('8'); }"
+    "type": "challenge",
+    "title": "Wobbly Shape",
+    "description": "Viền theo hình vẽ dưới đây.",
+    "difficulty": "Hard",
+    "timeLimit": 20,
+    "passThreshold": 90
   },
   {
     "id": 30,
     "type": "challenge",
     "title": "Crazy Outline",
-    "description": "Fill the crazy shape before time's up!",
+    "description": "Vẽ một bức tranh gia đình trong vòng 20 giây.",
     "difficulty": "Hard",
     "timeLimit": 20,
     "passThreshold": 90
