@@ -196,7 +196,7 @@ function Games() {
         {view === "gameChoose" && (
           <Grid container spacing={4} sx={{ maxWidth: "800px", width: "90%" }}>
             {[
-              { name: "Cờ cá ngựa", path: "/play1" },
+              { name: "Khu Vườn Tuổi Thơ", path: "/play1" },
               { name: "Ô ăn quan", path: "/game2" },
               { name: "Cờ vây", path: "/game3" },
               { name: "Cờ gánh", path: "/game4" },

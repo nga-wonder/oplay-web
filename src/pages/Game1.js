@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import {
   Box,
-  Card,
-  CardContent,
   TextField,
   Typography,
   Button,
@@ -31,8 +29,8 @@ const WS_URL = "ws://10.212.13.156:8765";
 
 const SettingsButton = styled(IconButton)(({ theme }) => ({
   position: "absolute",
-  right: "20px",
-  top: "20px",
+  right: "1.5vw",
+  top: "12vh",
   color: "#FFD700",
   backgroundColor: "rgba(255, 255, 255, 0.1)",
   backdropFilter: "blur(5px)",
@@ -334,11 +332,11 @@ function Game1() {
       }
     } catch (err) {
       console.error("Error accessing camera:", err);
-      alert("Unable to access camera. 请确保已授予相机权限。");
+      alert("Unable to access camera. Please check your permissions.");
     }
   };
 
-  const takePhoto = () => {
+  const takePhoto = () => { 
     const video = videoRef.current;
     const canvas = photoCanvasRef.current;
     const ctx = canvas.getContext("2d");
@@ -483,13 +481,13 @@ function Game1() {
 
   return (
     <div className="game1-background">
+      <BackButton />
+      <SettingsButton onClick={handleOpenSettings}>
+        <SettingsIcon fontSize="large" />
+      </SettingsButton>
+      <HomeButton />
       <div className="decor-cloud" />
       <Container sx={{ position: "relative", zIndex: 1, height: "100vh" }}>
-        <BackButton />
-        <SettingsButton onClick={handleOpenSettings}>
-          <SettingsIcon fontSize="large" />
-        </SettingsButton>
-        <HomeButton />
         <h1>Game 1 Page</h1>
 
         {!gameStarted ? (

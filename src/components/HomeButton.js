@@ -31,14 +31,16 @@ function HomeButton() {
         onClick={handleHomeClick}
         sx={{
           position: "fixed",
-          top: "20px",
-          left: "20px",
+          top: "1.5vw",
+          left: "3vh",
           backgroundColor: "white",
           borderRadius: "50%",
           boxShadow: "2px 2px 5px rgba(0,0,0,0.2)",
+          width: { xs: "40px", sm: "50px", md: "60px" },  // responsive width
+          height: { xs: "40px", sm: "50px", md: "60px" }, // same height for circular shape
         }}
       >
-        <HomeIcon sx={{ color: "black" }} />
+        <HomeIcon sx={{ fontSize: { xs: 20, sm: 24, md: 30 } }} />
       </IconButton>
 
       {/* Confirmation Dialog */}

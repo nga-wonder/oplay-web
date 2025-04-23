@@ -76,13 +76,16 @@ function QuestCardModal({
 
   return (
     <Box className="quest-card-modal" role="dialog" aria-labelledby="quest-card-title">
-      <Box className="centered-content">
+      {/* <Box className="modal-header">
         <Typography variant="h5" id="quest-card-title" className="quest-card-title">
           Quest Card for Number {inputNumber}
         </Typography>
-        <Box className="quest-card-content">
+      </Box> */}
+      <Box className="modal-content">
+        {/* Left Side: Question and Supporting Image */}
+        <Box className="left-panel">
           {quest ? (
-            <Box>
+            <>
               <Typography variant="h6" className="quest-title">
                 {quest.title}
               </Typography>
@@ -90,13 +93,13 @@ function QuestCardModal({
                 {quest.description}
               </Typography>
               {quest.image && (
-                <Box sx={{ textAlign: "center", marginTop: 2, marginBottom: 2 }}>
+                <Box sx={{ textAlign: "center", marginTop: 2 }}>
                   <img
                     src={quest.image}
                     alt={quest.title}
                     style={{
                       maxWidth: "100%",
-                      maxHeight: "200px",
+                      maxHeight: "250px",
                       objectFit: "contain",
                       borderRadius: "8px",
                     }}
@@ -206,15 +209,13 @@ function QuestCardModal({
                 </Box>
               )}
             </Box>
-          ) : (
-            <Typography className="quest-description">No quest available</Typography>
           )}
         </Box>
-        <Box className="quest-card-actions">
-          <Button onClick={onClose} className="close-button">
-            Close
-          </Button>
-        </Box>
+      </Box>
+      <Box className="modal-footer">
+        <Button onClick={onClose} className="close-button">
+          Close
+        </Button>
       </Box>
     </Box>
   );
