@@ -83,6 +83,7 @@
   padding: 8px;
   font-family: "Plus Jakarta Sans", sans-serif;
   align-items: center;
+  white-space: pre-line;
 }
 
 /* Styles for choices container */

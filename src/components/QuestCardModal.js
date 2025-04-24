@@ -85,10 +85,9 @@ function QuestCardModal({
         <Box className="left-panel">
           {quest && (
             <>
-              <Typography variant="h6" className="quest-title">
-                {quest.title}
+              <Typography className="quest-description" sx={{ whiteSpace: 'pre-line' }}>
+                {quest.description}
               </Typography>
-              <Typography className="quest-description">{quest.description}</Typography>
               {quest.image && (
                 <Box sx={{ textAlign: "center", marginTop: 2 }}>
                   <img
@@ -146,8 +145,8 @@ function QuestCardModal({
                     ))}
                   </Box>
                   {selectedAnswer && (
-                    <Typography className="quest-description" sx={{ marginTop: 2 }}>
-                      {isCorrect ? "Correct!" : "Incorrect, try another quest!"}
+                    <Typography className="quest-description" sx={{ marginTop: 2, whiteSpace: 'pre-line' }}>
+                      {isCorrect ? (quest.rewards || "Correct!") : "Incorrect, try another quest!"}
                     </Typography>
                   )}
                 </Box>
@@ -184,15 +183,12 @@ function QuestCardModal({
               {(quest.type === "challenge" || quest.type === "heart_challenge") &&
                 showResult && (
                   <Box>
-                    <Typography variant="h6" className="quest-title">
-                      Challenge Result
-                    </Typography>
                     <Typography className="quest-description">
                       Outline Accuracy: {fillPercentage ? fillPercentage.toFixed(2) : 0}%
                     </Typography>
-                    <Typography className="quest-description" sx={{ marginTop: 1 }}>
+                    <Typography className="quest-description" sx={{ marginTop: 1, whiteSpace: 'pre-line' }}>
                       {fillPercentage >= quest.passThreshold
-                        ? "Congratulations! You passed!"
+                        ? quest.rewards || "Congratulations! You passed!"
                         : "Sorry, you didn't trace enough. Try again!"}
                     </Typography>
                   </Box>
