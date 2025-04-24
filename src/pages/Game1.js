@@ -487,9 +487,7 @@ function Game1() {
       </SettingsButton>
       <HomeButton />
       <div className="decor-cloud" />
-      <Container sx={{ position: "relative", zIndex: 1, height: "100vh" }}>
-        <h1>Game 1 Page</h1>
-
+      <Container sx={{ position: "relative", zIndex: 1, height: "100vh", width: "100vw", maxWidth: "100%" }}>
         {!gameStarted ? (
           <div>
             <div className="potato-mine">
@@ -510,7 +508,6 @@ function Game1() {
             <div className="floating-cloud" />
             <div className="floating-cloud-opposite" />
             <div className="floating-cloud-third" />
-            <h2>Game has started!</h2>
             <Typography sx={{ marginTop: 2 }}>
               Generated numbers: {randomNumbers.join(", ")}
             </Typography>
@@ -537,14 +534,6 @@ function Game1() {
                   No sensors active
                 </Typography>
               )}
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={clearSensors}
-                sx={{ marginTop: 1 }}
-              >
-                Clear Sensors
-              </Button>
             </Box>
 
             <TextField
