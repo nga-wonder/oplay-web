@@ -21,7 +21,9 @@
       {"id": 3, "text": "Số tiền"},
       {"id": 4, "text": "Số tuổi"}
     ],
-    "correctAnswerId": 4
+    "correctAnswerId": 4,
+    "rewards": "Chọn một người chơi để cùng tiến 3 bước! Mỗi người chỉ di chuyển một bé cây.",
+    "punish": "Hụt hơi nên bạn và một người chơi nữa cùng lùi lại 3 bước để thở. Mỗi người chỉ di chuyển một bé cây."
   },
   {
     "id": 3,
@@ -33,7 +35,9 @@
       {"id": 3, "text": "Táo"},
       {"id": 4, "text": "Ớt chuông"}
     ],
-    "correctAnswerId": 2
+    "correctAnswerId": 2,
+    "rewards": "Bạn được đổi vị trí một bé cây bất kỳ của mình với một bé cây của người khác!",
+    "punish": "Cây của bạn đã bị chặt. Mình trồng lại cây mới sau nhé!"
   },
   {
     "id": 4,
@@ -45,7 +49,9 @@
       {"id": 3, "text": "Mía"},
       {"id": 4, "text": "Lúa"}
     ],
-    "correctAnswerId": 2
+    "correctAnswerId": 2,
+    "rewards": "Bạn được chặt bé cây gần nhất của một người chơi khác!",
+    "punish": "Tiếc quá. Bạn phải chặt một bé cây của mình."
   },
   {
     "id": 5,
@@ -57,7 +63,9 @@
       {"id": 3, "text": "Trần Thị Lý"},
       {"id": 4, "text": "Phan Thị Lệ"}
     ],
-    "correctAnswerId": 1
+    "correctAnswerId": 1,
+    "rewards": "Bạn làm tốt lắm! Lắc xúc xắc một lần nữa nha!",
+    "punish": "Thôi bạn nghỉ ngơi uống nước một lượt nữa rồi mình chơi tiếp nha!"
   },
   {
     "id": 6,
@@ -69,7 +77,9 @@
       {"id": 3, "text": "Lý Thái Tổ"},
       {"id": 4, "text": "Lê Lợi"}
     ],
-    "correctAnswerId": 3
+    "correctAnswerId": 3,
+    "rewards": "Bạn có thêm 1 mầm non!",
+    "punish": "Bạn bị lạc đường nên lùi 1 bước."
   },
   {
     "id": 7,
@@ -93,7 +103,9 @@
       {"id": 3, "text": "Con gà mái"},
       {"id": 4, "text": "Con ngỗng"}
     ],
-    "correctAnswerId": 3
+    "correctAnswerId": 3,
+    "rewards": "Chúc mừng! Tất cả bé cây còn trên bàn cờ của bạn tiến 1 bước",
+    "punish": "Bạn bị mất lượt. Chúc bạn may mắn lần sau!"
   },
   {
     "id": 9,
@@ -105,7 +117,9 @@
       {"id": 3, "text": "gỗ / sắt"},
       {"id": 4, "text": "sắt / kim"}
     ],
-    "correctAnswerId": 4
+    "correctAnswerId": 4,
+    "rewards": "Bạn được tặng “đôi dép thần tốc” – lắc xúc xắc liền 2 lượt nữa!",
+    "punish": "Dép bị đứt quai – bạn nghỉ đi 1 lượt để sửa dép."
   },
   {
     "id": 10,
@@ -129,7 +143,9 @@
       {"id": 3, "text": "10"},
       {"id": 4, "text": "5"}
     ],
-    "correctAnswerId": 1
+    "correctAnswerId": 1,
+    "rewards": "Bạn làm tốt lắm! Lắc xúc xắc một lần nữa nha!",
+    "punish": "Thôi bạn nghỉ ngơi xíu, lượt sau rồi mình chơi tiếp nha!"
   },
   {
     "id": 12,
@@ -141,7 +157,9 @@
       {"id": 3, "text": "Hợi"},
       {"id": 4, "text": "Mão"}
     ],
-    "correctAnswerId": 2
+    "correctAnswerId": 2,
+    "rewards": "Chúc mừng! Tất cả bé cây còn trên bàn cờ của bạn tiến 1 bước",
+    "punish": "Bạn bị mất lượt. Chúc bạn may mắn lần sau!" 
   },
   {
     "id": 13,
@@ -153,7 +171,9 @@
       {"id": 3, "text": "2 quả"},
       {"id": 4, "text": "3 quả"}
     ],
-    "correctAnswerId": 3
+    "correctAnswerId": 3,
+    "rewards": "Chọn một người chơi để cùng tiến 2 bước! Mỗi người chỉ di chuyển một bé cây.",
+    "punish": "Hụt hơi nên bạn và một người chơi nữa cùng lùi lại 2 bước để thở. Mỗi người chỉ di chuyển một bé cây."
   },
   {
     "id": 14,
@@ -165,7 +185,9 @@
       {"id": 3, "text": "Nhớ Ăn Trồng Quả Cây Kẻ"},
       {"id": 4, "text": "Trồng Ăn Nhớ Kẻ Cây Quả"}
     ],
-    "correctAnswerId": 1
+    "correctAnswerId": 1,
+    "rewards": "Bạn làm tốt lắm! Lắc xúc xắc một lần nữa nha!",
+    "punish": "Thôi bạn nghỉ ngơi xíu, lượt sau rồi mình chơi tiếp nha!"
   },
   {
     "id": 15,
@@ -178,17 +200,20 @@
       {"id": 3, "text": "Cần Thơ"},
       {"id": 4, "text": "Tiền Giang"}
     ],
-    "correctAnswerId": 2
+    "correctAnswerId": 2,
+    "rewards": "Bạn có thêm 2 mầm non!",
+    "punish": "Bạn bị lạc đường nên lùi 2 bước."
   },
   {
     "id": 16,
+    "image": "/assets/id16_triangle.png",
     "type": "questionnaire",
     "description": "Hình dưới đây có bao nhiêu hình tam giác?",
     "answers": [
-      {"id": 1, "text": "1 triangle"},
-      {"id": 2, "text": "3 triangles"},
-      {"id": 3, "text": "5 triangles"},
-      {"id": 4, "text": "10 triangles"}
+      {"id": 1, "text": "1 tam giác"},
+      {"id": 2, "text": "3 tam giác"},
+      {"id": 3, "text": "5 tam giác"},
+      {"id": 4, "text": "10 tam giác"}
     ],
     "correctAnswerId": 2
   },
@@ -203,7 +228,9 @@
       {"id": 3, "text": "Nói không đi đôi với làm"},
       {"id": 4, "text": "Nước chảy đá mòn"}
     ],
-    "correctAnswerId": 1
+    "correctAnswerId": 1,
+    "rewards": "Chọn một người chơi để cùng tiến 2 bước! Mỗi người chỉ di chuyển một bé cây.",
+    "punish": "Hụt hơi nên bạn và một người chơi nữa cùng lùi lại 2 bước để thở. Mỗi người chỉ di chuyển một bé cây."
   },
   {
     "id": 18,
@@ -216,7 +243,9 @@
       {"id": 3, "text": "Mưa đá"},
       {"id": 4, "text": "Động đất"}
     ],
-    "correctAnswerId": 3
+    "correctAnswerId": 3,
+    "rewards": "Bạn có thêm 1 mầm non!",
+    "punish": "Bạn bị lạc đường nên lùi 2 bước."
   },
   {
     "id": 19,
@@ -247,41 +276,41 @@
   {
     "id": 21,
     "type": "photo",
-    "title": "Six Mix",
-    "description": "Cười lên để chụp hình kỷ niệm nhé",
-    "difficulty": "Easy"
+    "description": "Cười lên để chụp hình kỷ niệm nhé!",
+    "rewards": "Bạn có thêm 2 mầm non!",
+    "punish": "Bạn bị lạc đường nên lùi 1 bước."
   },
   {
     "id": 22,
     "type": "photo",
-    "title": "Eight Straight",
+    "image": "id22.png",
     "description": "Xếp đầu của mọi người thành hàng ngang như hình mẫu để chụp hình nhé!",
-    "image": "/assets/id19.png",
-    "difficulty": "Easy"
+    "rewards": "Hay quá! Không ai có thể cản đường bạn tiến thêm 3 bước!",
+    "punish": "Ui da! Bị vấp rồi, lùi lại 3 bước để đi cẩn thận hơn nha"
   },
   {
     "id": 23,
     "type": "photo",
-    "title": "Game Face",
-    "description": "Cùng nhau dùng tay tạo thành hình trái tim nhé!",
+    "description": "Tất cả người chơi cùng nhau dùng tay tạo thành hình trái tim nhé!",
     "image": "/assets/id19.png",
-    "difficulty": "Medium"
+    "rewards": "Yayyy! Các bạn đều được tiến 1 bước vì giỏi quá nè!",
+    "punish": "Ui da! Bị vấp rồi, lùi lại 3 bước để đi cẩn thận hơn nha"
   },
   {
     "id": 24,
     "type": "photo",
-    "title": "Selfie Star",
-    "description": "Ôm nhau chụp hình.",
-    "image": "/assets/id19.png",
-    "difficulty": "Easy"
+    "description": "Hãy chụp hình với biểu cảm gương mặt dưới đây!",
+    "image": "/assets/id24.png",
+    "rewards": "Chọn một người chơi để cùng tiến 4 bước! Mỗi người chỉ di chuyển một cây.",
+    "punish": "Hụt hơi nên bạn và một người chơi nữa cùng lùi lại 4 bước để thở. Mỗi người chỉ di chuyển một cây."
   },
   {
     "id": 25,
     "type": "photo",
-    "title": "Smile Snap",
-    "description": "Nối vòng tay lớn.",
-    "image": "/assets/id19.png",
-    "difficulty": "Easy"
+    "description": "Hãy chụp hình với biểu cảm gương mặt dưới đây!",
+    "image": "/assets/id25.png",
+    "rewards": "Bạn có thêm 1 mầm non!",
+    "punish": "Bạn bị lạc đường nên lùi 1 bước."
   },
   {
     "id": 26,
@@ -290,114 +319,44 @@
     "description": "Viền theo đường nét của hình trái tim dưới đây bằng con trỏ của bạn.",
     "difficulty": "Medium",
     "timeLimit": 20,
-    "passThreshold": 80
+    "passThreshold": 80,
+    "rewards": "Chọn một người chơi để cùng TIẾN 2 bước! Mỗi người chỉ di chuyển một cây.",
+    "punish": "Chọn một người chơi để cùng LÙI 2 bước. Mỗi người chỉ di chuyển một cây."
   },
   {
     "id": 27,
-    "type": "heart_challenge",
-    "title": "Heart Outline Challenge",
-    "description": "Theo nét vẽ hình trái tim dưới đây một cách chính xác nhất có thể.",
-    "difficulty": "Medium",
+    "type": "circle_challenge",
+    "description": "Viền theo đường nét của hình tròn dưới đây bằng con trỏ của bạn.",
     "timeLimit": 20,
-    "passThreshold": 80
+    "passThreshold": 80,
+    "rewards": "Hên quá! Được nhích lên 4 bước rồi.",
+    "punish": "Hơi đen chút xíu! Bạn nhích về 2 bước nhe."
   },
   {
     "id": 28,
-    "type": "heart_challenge",
-    "title": "Love Line",
-    "description": "Vẽ theo đường viền trái tim được hiển thị dưới đây.",
-    "difficulty": "Medium",
+    "type": "star_challenge",
+    "description": "Tô theo viền hình ngôi sao dưới đây để vượt qua thử thách.",
     "timeLimit": 20,
-    "passThreshold": 80
+    "passThreshold": 80,
+    "rewards": "Bạn có thêm 2 mầm non!",
+    "punish": "Bạn bị lạc đường nên lùi 2 bước."
   },
   {
     "id": 29,
-    "type": "challenge",
-    "title": "Wobbly Shape",
-    "description": "Viền theo hình vẽ dưới đây.",
-    "difficulty": "Hard",
+    "type": "heart_challenge",
+    "description": "Tô theo viền hình trái tim dưới đây để vượt qua thử thách.",
     "timeLimit": 20,
-    "passThreshold": 90
+    "passThreshold": 85,
+    "rewards": "Bạn làm tốt lắm! Lắc xúc xắc 1 lần nữa nha!",
+    "punish": "Thôi bạn nghỉ ngơi xíu, lượt sau rồi mình chơi tiếp nha!"
   },
   {
     "id": 30,
-    "type": "challenge",
-    "title": "Crazy Outline",
-    "description": "Vẽ một bức tranh gia đình trong vòng 20 giây.",
-    "difficulty": "Hard",
-    "timeLimit": 20,
-    "passThreshold": 90
-  },
-  {
-    "id": 31,
     "type": "circle_challenge",
-    "title": "Perfect Circle",
-    "description": "Vẽ một vòng tròn hoàn hảo nhất có thể trên canvas.",
-    "difficulty": "Medium",
+    "description": "Tô theo viền hình tròn dưới đây để vượt qua thử thách.",
     "timeLimit": 20,
-    "passThreshold": 85
-  },
-  {
-    "id": 32,
-    "type": "fill_challenge",
-    "title": "Fill the Canvas",
-    "description": "Tô màu toàn bộ canvas nhiều nhất có thể trong thời gian cho phép.",
-    "difficulty": "Medium",
-    "timeLimit": 20,
-    "passThreshold": 90
-  },
-  {
-    "id": 33,
-    "type": "circle_challenge",
-    "title": "Perfect Circle",
-    "description": "Vẽ một vòng tròn hoàn hảo nhất có thể trên canvas.",
-    "difficulty": "Medium",
-    "timeLimit": 20,
-    "passThreshold": 85
-  },
-  {
-    "id": 34,
-    "type": "circle_challenge",
-    "title": "Perfect Circle",
-    "description": "Vẽ một vòng tròn hoàn hảo nhất có thể trên canvas.",
-    "difficulty": "Medium",
-    "timeLimit": 20,
-    "passThreshold": 85
-  },
-  {
-    "id": 35,
-    "type": "circle_challenge",
-    "title": "Perfect Circle",
-    "description": "Vẽ một vòng tròn hoàn hảo nhất có thể trên canvas.",
-    "difficulty": "Medium",
-    "timeLimit": 20,
-    "passThreshold": 85
-  },
-  {
-    "id": 36,
-    "type": "circle_challenge",
-    "title": "Perfect Circle",
-    "description": "Vẽ một vòng tròn hoàn hảo nhất có thể trên canvas.",
-    "difficulty": "Medium",
-    "timeLimit": 20,
-    "passThreshold": 85
-  },
-  {
-    "id": 37,
-    "type": "circle_challenge",
-    "title": "Perfect Circle",
-    "description": "Vẽ một vòng tròn hoàn hảo nhất có thể trên canvas.",
-    "difficulty": "Medium",
-    "timeLimit": 20,
-    "passThreshold": 85
-  },
-  {
-    "id": 38,
-    "type": "circle_challenge",
-    "title": "Perfect Circle",
-    "description": "Vẽ một vòng tròn hoàn hảo nhất có thể trên canvas.",
-    "difficulty": "Medium",
-    "timeLimit": 20,
-    "passThreshold": 85
+    "passThreshold": 70,
+    "rewards": "Gió thổi căng buồm! Tiến lên 6 bước nào!",
+    "punish": "Gió thổi ngược mạnh quá nên bạn phải ngã về 3 bước nhe!"
   }
 ]
