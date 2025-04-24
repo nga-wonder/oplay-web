@@ -8,6 +8,10 @@ import {
   ListItem,
   ListItemText,
   IconButton,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
   Container,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
@@ -908,7 +912,16 @@ function Game1() {
             </div>
           )}
 
-          <Dialog open={openSettings} onClose={handleCloseSettings}>
+          <SettingsModal
+            open={openSettings}
+            onClose={handleCloseSettings}
+            pieceColor={pieceColor}
+            onColorChange={handleColorChange}
+            soundVolume={volume}
+            onVolumeChange={handleVolumeChange}
+          />
+
+          {/* <Dialog open={openSettings} onClose={handleCloseSettings}>
             <DialogTitle>Settings</DialogTitle>
             <DialogContent>
               <Typography gutterBottom>Adjust game settings here.</Typography>
@@ -937,7 +950,7 @@ function Game1() {
                 Close
               </Button>
             </DialogActions>
-          </Dialog>
+          </Dialog> */}
         </Container>
       </div>
     );
