@@ -8,17 +8,13 @@ import {
   ListItem,
   ListItemText,
   IconButton,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Slider,
   Container,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import HomeButton from "../components/HomeButton";
 import BackButton from "../components/BackButton";
 import QuestCardModal from "../components/QuestCardModal";
+import SettingsModal from "../components/SettingsModal";
 import questCards from "../data/QuestCard.json";
 import boardImage from "../assets/WEB_game1_board.png";
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -43,37 +39,6 @@ const SettingsButton = styled(IconButton)(({ theme }) => ({
   },
 }));
 
-const VolumeSlider = styled(Slider)(({ theme }) => ({
-  color: "#FF8C00",
-  "& .MuiSlider-thumb": {
-    backgroundColor: "#FFD700",
-    "&:hover": {
-      boxShadow: "0 0 0 8px rgba(255, 215, 0, 0.16)",
-    },
-  },
-  "& .MuiSlider-rail": {
-    backgroundColor: "rgba(255, 255, 255, 0.2)",
-  },
-  "& .MuiSlider-track": {
-    background: "linear-gradient(90deg, #FF8C00, #FFD700)",
-  },
-}));
-
-const ColorPicker = styled("input")(({ theme }) => ({
-  type: "color",
-  width: "60px",
-  height: "60px",
-  border: "2px solid #FF8C00",
-  borderRadius: "10px",
-  padding: "5px",
-  cursor: "pointer",
-  backgroundColor: "rgba(255, 255, 255, 0.1)",
-  "&:hover": {
-    borderColor: "#FFD700",
-    transform: "scale(1.1)",
-  },
-}));
-
 function Game1() {
   const [countdown, setCountdown] = useState(5);
   const [gameStarted, setGameStarted] = useState(false);
@@ -93,9 +58,9 @@ function Game1() {
   const [receivedInteger, setReceivedInteger] = useState(null);
   const [openSettings, setOpenSettings] = useState(false);
   const [volume, setVolume] = useState(50);
-  const [color, setColor] = useState("#FF8C00");
+  const [pieceColor, setPieceColor] = useState([255, 255, 255]); // Default: White
   const [wsConnected, setWsConnected] = useState(false);
-  const pendingQuestcardMessageRef = useRef(null); // Ref to store pending message
+  const pendingQuestcardMessageRef = useRef(null);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const photoCanvasRef = useRef(null);
@@ -107,8 +72,8 @@ function Game1() {
   const baseReconnectInterval = 3000;
 
   useEffect(() => {
-    console.log("Game state:", { countdown, gameStarted });
-  }, [countdown, gameStarted]);
+    console.log("Game state:", { countdown, gameStarted, randomNumbers });
+  }, [countdown, gameStarted, randomNumbers]);
 
   // WebSocket Connection with Retry
   useEffect(() => {
@@ -122,13 +87,12 @@ function Game1() {
         console.log("WebSocket connected");
         setWsConnected(true);
         reconnectAttempts.current = 0;
-        // Send pending questcard message if it exists
         if (pendingQuestcardMessageRef.current) {
           try {
             if (wsRef.current.readyState === WebSocket.OPEN) {
               wsRef.current.send(pendingQuestcardMessageRef.current);
               console.log("Sent pending questcard message:", pendingQuestcardMessageRef.current);
-              pendingQuestcardMessageRef.current = null; // Clear only after successful send
+              pendingQuestcardMessageRef.current = null;
             } else {
               console.log("WebSocket not fully open, will retry sending pending message");
             }
@@ -149,11 +113,11 @@ function Game1() {
               }
               return prev;
             });
+            console.log(`Received sensor ID: ${sensorId}, checking randomNumbers: ${randomNumbers}`);
             if (randomNumbers.includes(sensorId + 1)) {
-              setInputNumber((sensorId + 1).toString());
-              handleInputChange({ target: { value: (sensorId + 1).toString() } });
+              console.log(`Match found for sensorId ${sensorId} (square ${sensorId + 1})`);
+              triggerQuestModal(sensorId + 1);
             }
-            console.log(`Received sensor ID: ${sensorId}`);
           } else {
             console.warn("Received non-integer data:", event.data);
           }
@@ -175,7 +139,7 @@ function Game1() {
           console.log(`Attempting to reconnect (${reconnectAttempts.current}/${maxReconnectAttempts}) in ${delay}ms...`);
           reconnectTimeout = setTimeout(connectWebSocket, delay);
         } else {
-          console.error("Max reconnection attempts   attempts reached. Please check the server.");
+          console.error("Max reconnection attempts reached. Please check the server.");
         }
       };
     };
@@ -190,7 +154,7 @@ function Game1() {
         clearTimeout(reconnectTimeout);
       }
     };
-  }, []);
+  }, [randomNumbers]);
 
   // Send Random Numbers to WebSocket Server
   useEffect(() => {
@@ -215,7 +179,23 @@ function Game1() {
     }
   }, [randomNumbers]);
 
-  // Periodic check to send pending message
+  // Send Piece Color to WebSocket Server
+  useEffect(() => {
+    if (pieceColor && wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
+      const message = JSON.stringify({
+        type: "piece_color",
+        color: pieceColor,
+      });
+      try {
+        wsRef.current.send(message);
+        console.log("Sent piece color to WebSocket server:", pieceColor);
+      } catch (error) {
+        console.error("Error sending piece color:", error);
+      }
+    }
+  }, [pieceColor]);
+
+  // Periodic check to send pending questcard message
   useEffect(() => {
     if (!wsConnected || !wsRef.current || !pendingQuestcardMessageRef.current) return;
 
@@ -236,7 +216,7 @@ function Game1() {
 
   const generateRandomNumbers = () => {
     const numbers = new Set();
-    while (numbers.size < 6) {
+    while (numbers.size < 5) {
       numbers.add(Math.floor(Math.random() * 48) + 1);
     }
     return Array.from(numbers);
@@ -252,6 +232,34 @@ function Game1() {
     console.log("Number of quests:", questCards.length);
     console.log("Number quest map:", map);
     return map;
+  };
+
+  const triggerQuestModal = (matchedNumber) => {
+    console.log(`Triggering modal for number: ${matchedNumber}`);
+    if (!numberQuestMap[matchedNumber]) {
+      console.error(`No quests found for number ${matchedNumber} in numberQuestMap`);
+      return;
+    }
+    const questsForNumber = numberQuestMap[matchedNumber];
+    const randomQuest = questsForNumber[Math.floor(Math.random() * questsForNumber.length)];
+    if (!randomQuest) {
+      console.error("No valid quest selected");
+      return;
+    }
+    console.log("Selected quest:", randomQuest);
+    setInputNumber(matchedNumber.toString());
+    setCurrentQuest(randomQuest);
+    setChallengeStarted(false);
+    setTimeLeft(20);
+    setFillPercentage(null);
+    setShowResult(false);
+    setPhotoTaken(false);
+    setPhotoData(null);
+    if (cameraStream) {
+      cameraStream.getTracks().forEach((track) => track.stop());
+      setCameraStream(null);
+    }
+    setOpenModal(true);
   };
 
   const initializeHeartCanvas = (canvas) => {
@@ -474,25 +482,10 @@ function Game1() {
   const handleInputChange = (event) => {
     const value = event.target.value;
     setInputNumber(value);
-
+    console.log(`Input changed to: ${value}`);
     if (value && randomNumbers.includes(parseInt(value))) {
-      const matchedNumber = parseInt(value);
-      const questsForNumber = numberQuestMap[matchedNumber];
-      const randomQuest =
-        questsForNumber[Math.floor(Math.random() * questsForNumber.length)];
-      console.log("Selected quest:", randomQuest);
-      setCurrentQuest(randomQuest);
-      setChallengeStarted(false);
-      setTimeLeft(20);
-      setFillPercentage(null);
-      setShowResult(false);
-      setPhotoTaken(false);
-      setPhotoData(null);
-      if (cameraStream) {
-        cameraStream.getTracks().forEach((track) => track.stop());
-        setCameraStream(null);
-      }
-      setOpenModal(true);
+      console.log(`Input ${value} matches randomNumbers`);
+      triggerQuestModal(parseInt(value));
     }
   };
 
@@ -534,8 +527,8 @@ function Game1() {
     setVolume(newValue);
   };
 
-  const handleColorChange = (event) => {
-    setColor(event.target.value);
+  const handleColorChange = ({ rgb }) => {
+    setPieceColor(rgb);
   };
 
   return (
@@ -653,39 +646,17 @@ function Game1() {
               onStopDrawing={stopDrawing}
               initializeHeartCanvas={initializeHeartCanvas}
             />
+
+            <SettingsModal
+              open={openSettings}
+              onClose={handleCloseSettings}
+              pieceColor={pieceColor}
+              onColorChange={handleColorChange}
+              soundVolume={volume}
+              onVolumeChange={handleVolumeChange}
+            />
           </div>
         )}
-
-        <Dialog open={openSettings} onClose={handleCloseSettings}>
-          <DialogTitle>Settings</DialogTitle>
-          <DialogContent>
-            <Typography gutterBottom>Adjust game settings here.</Typography>
-            <Typography gutterBottom>Volume</Typography>
-            <VolumeSlider
-              value={volume}
-              onChange={handleVolumeChange}
-              aria-labelledby="volume-slider"
-              min={0}
-              max={100}
-              sx={{ width: "200px" }}
-            />
-            <Typography>Volume: {volume}%</Typography>
-            <Typography gutterBottom sx={{ marginTop: 2 }}>
-              Theme Color
-            </Typography>
-            <ColorPicker
-              type="color"
-              value={color}
-              onChange={handleColorChange}
-            />
-            <Typography>Selected Color: {color}</Typography>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleCloseSettings} color="primary">
-              Close
-            </Button>
-          </DialogActions>
-        </Dialog>
       </Container>
     </div>
   );
