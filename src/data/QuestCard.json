@@ -327,5 +327,77 @@
     "difficulty": "Hard",
     "timeLimit": 20,
     "passThreshold": 90
+  },
+  {
+    "id": 31,
+    "type": "circle_challenge",
+    "title": "Perfect Circle",
+    "description": "Vẽ một vòng tròn hoàn hảo nhất có thể trên canvas.",
+    "difficulty": "Medium",
+    "timeLimit": 20,
+    "passThreshold": 85
+  },
+  {
+    "id": 32,
+    "type": "fill_challenge",
+    "title": "Fill the Canvas",
+    "description": "Tô màu toàn bộ canvas nhiều nhất có thể trong thời gian cho phép.",
+    "difficulty": "Medium",
+    "timeLimit": 20,
+    "passThreshold": 90
+  },
+  {
+    "id": 33,
+    "type": "circle_challenge",
+    "title": "Perfect Circle",
+    "description": "Vẽ một vòng tròn hoàn hảo nhất có thể trên canvas.",
+    "difficulty": "Medium",
+    "timeLimit": 20,
+    "passThreshold": 85
+  },
+  {
+    "id": 34,
+    "type": "circle_challenge",
+    "title": "Perfect Circle",
+    "description": "Vẽ một vòng tròn hoàn hảo nhất có thể trên canvas.",
+    "difficulty": "Medium",
+    "timeLimit": 20,
+    "passThreshold": 85
+  },
+  {
+    "id": 35,
+    "type": "circle_challenge",
+    "title": "Perfect Circle",
+    "description": "Vẽ một vòng tròn hoàn hảo nhất có thể trên canvas.",
+    "difficulty": "Medium",
+    "timeLimit": 20,
+    "passThreshold": 85
+  },
+  {
+    "id": 36,
+    "type": "circle_challenge",
+    "title": "Perfect Circle",
+    "description": "Vẽ một vòng tròn hoàn hảo nhất có thể trên canvas.",
+    "difficulty": "Medium",
+    "timeLimit": 20,
+    "passThreshold": 85
+  },
+  {
+    "id": 37,
+    "type": "circle_challenge",
+    "title": "Perfect Circle",
+    "description": "Vẽ một vòng tròn hoàn hảo nhất có thể trên canvas.",
+    "difficulty": "Medium",
+    "timeLimit": 20,
+    "passThreshold": 85
+  },
+  {
+    "id": 38,
+    "type": "circle_challenge",
+    "title": "Perfect Circle",
+    "description": "Vẽ một vòng tròn hoàn hảo nhất có thể trên canvas.",
+    "difficulty": "Medium",
+    "timeLimit": 20,
+    "passThreshold": 85
   }
 ]
