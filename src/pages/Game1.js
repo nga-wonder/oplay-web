@@ -25,7 +25,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import "../css/PotatoMine.css";
 import "../css/Game1.css";
 
-const WS_URL = "ws://10.212.13.156:8765";
+const WS_URL = "ws://ngaraspberrypi.local:8765";
 
 const SettingsButton = styled(IconButton)(({ theme }) => ({
   position: "absolute",
@@ -94,6 +94,8 @@ function Game1() {
   const [openSettings, setOpenSettings] = useState(false);
   const [volume, setVolume] = useState(50);
   const [color, setColor] = useState("#FF8C00");
+  const [wsConnected, setWsConnected] = useState(false);
+  const pendingQuestcardMessageRef = useRef(null); // Ref to store pending message
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const photoCanvasRef = useRef(null);
@@ -102,21 +104,38 @@ function Game1() {
   const wsRef = useRef(null);
   const reconnectAttempts = useRef(0);
   const maxReconnectAttempts = 5;
-  const reconnectInterval = 3000;
+  const baseReconnectInterval = 3000;
 
   useEffect(() => {
     console.log("Game state:", { countdown, gameStarted });
   }, [countdown, gameStarted]);
 
+  // WebSocket Connection with Retry
   useEffect(() => {
     let reconnectTimeout;
 
     const connectWebSocket = () => {
+      console.log("Attempting WebSocket connection...");
       wsRef.current = new WebSocket(WS_URL);
 
       wsRef.current.onopen = () => {
         console.log("WebSocket connected");
+        setWsConnected(true);
         reconnectAttempts.current = 0;
+        // Send pending questcard message if it exists
+        if (pendingQuestcardMessageRef.current) {
+          try {
+            if (wsRef.current.readyState === WebSocket.OPEN) {
+              wsRef.current.send(pendingQuestcardMessageRef.current);
+              console.log("Sent pending questcard message:", pendingQuestcardMessageRef.current);
+              pendingQuestcardMessageRef.current = null; // Clear only after successful send
+            } else {
+              console.log("WebSocket not fully open, will retry sending pending message");
+            }
+          } catch (error) {
+            console.error("Error sending pending questcard message:", error);
+          }
+        }
       };
 
       wsRef.current.onmessage = (event) => {
@@ -149,12 +168,14 @@ function Game1() {
 
       wsRef.current.onclose = () => {
         console.log("WebSocket disconnected");
+        setWsConnected(false);
         if (reconnectAttempts.current < maxReconnectAttempts) {
           reconnectAttempts.current += 1;
-          console.log(`Attempting to reconnect (${reconnectAttempts.current}/${maxReconnectAttempts})...`);
-          reconnectTimeout = setTimeout(connectWebSocket, reconnectInterval);
+          const delay = baseReconnectInterval * Math.pow(2, reconnectAttempts.current);
+          console.log(`Attempting to reconnect (${reconnectAttempts.current}/${maxReconnectAttempts}) in ${delay}ms...`);
+          reconnectTimeout = setTimeout(connectWebSocket, delay);
         } else {
-          console.error("Max reconnection attempts reached. Please check the server.");
+          console.error("Max reconnection attempts   attempts reached. Please check the server.");
         }
       };
     };
@@ -169,11 +190,53 @@ function Game1() {
         clearTimeout(reconnectTimeout);
       }
     };
+  }, []);
+
+  // Send Random Numbers to WebSocket Server
+  useEffect(() => {
+    if (randomNumbers.length > 0) {
+      const message = JSON.stringify({
+        type: "questcard_positions",
+        positions: randomNumbers,
+      });
+      if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
+        try {
+          wsRef.current.send(message);
+          console.log("Sent questcard positions to WebSocket server:", randomNumbers);
+        } catch (error) {
+          console.error("Error sending questcard message:", error);
+          pendingQuestcardMessageRef.current = message;
+          console.log("Queued questcard message due to send error:", randomNumbers);
+        }
+      } else {
+        console.log("WebSocket not connected, queuing questcard message:", randomNumbers);
+        pendingQuestcardMessageRef.current = message;
+      }
+    }
   }, [randomNumbers]);
+
+  // Periodic check to send pending message
+  useEffect(() => {
+    if (!wsConnected || !wsRef.current || !pendingQuestcardMessageRef.current) return;
+
+    const interval = setInterval(() => {
+      if (wsRef.current.readyState === WebSocket.OPEN && pendingQuestcardMessageRef.current) {
+        try {
+          wsRef.current.send(pendingQuestcardMessageRef.current);
+          console.log("Sent queued questcard message from interval:", pendingQuestcardMessageRef.current);
+          pendingQuestcardMessageRef.current = null;
+        } catch (error) {
+          console.error("Error sending queued questcard message from interval:", error);
+        }
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [wsConnected]);
 
   const generateRandomNumbers = () => {
     const numbers = new Set();
-    while (numbers.size < 5) {
+    while (numbers.size < 6) {
       numbers.add(Math.floor(Math.random() * 48) + 1);
     }
     return Array.from(numbers);
@@ -198,16 +261,14 @@ function Game1() {
     }
     const ctx = canvas.getContext("2d");
 
-    // Clear canvas
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     console.log("Canvas cleared and initialized with heart outline");
 
-    // Draw heart shape
     ctx.beginPath();
     const centerX = canvas.width / 2;
     const centerY = canvas.height / 2;
-    const scale = 15; // Increased scale for better visibility
+    const scale = 15;
     for (let t = 0; t <= 2 * Math.PI; t += 0.01) {
       const x = centerX + scale * 16 * Math.pow(Math.sin(t), 3);
       const y = centerY - scale * (13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
@@ -283,15 +344,13 @@ function Game1() {
 
     const centerX = canvas.width / 2;
     const centerY = canvas.height / 2;
-    const scale = 15; // Match scale from initializeHeartCanvas
-    const tolerance = 5; // Pixel tolerance for outline tracing
+    const scale = 15;
+    const tolerance = 5;
 
-    // Sample points along the heart outline
     for (let t = 0; t <= 2 * Math.PI; t += 0.01) {
       const x = Math.round(centerX + scale * 16 * Math.pow(Math.sin(t), 3));
       const y = Math.round(centerY - scale * (13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t)));
 
-      // Check a small region around the outline point
       for (let dx = -tolerance; dx <= tolerance; dx++) {
         for (let dy = -tolerance; dy <= tolerance; dy++) {
           const px = x + dx;
@@ -336,7 +395,7 @@ function Game1() {
     }
   };
 
-  const takePhoto = () => { 
+  const takePhoto = () => {
     const video = videoRef.current;
     const canvas = photoCanvasRef.current;
     const ctx = canvas.getContext("2d");
@@ -361,7 +420,7 @@ function Game1() {
 
     if (currentQuest && currentQuest.validator) {
       try {
-        const validatorFunc = new Function('number', `return (${currentQuest.validator})(number);`);
+        const validatorFunc = new Function("number", `return (${currentQuest.validator})(number);`);
         isCorrect = validatorFunc(number) && answerId === 1;
       } catch (error) {
         console.error("Error executing validator:", error);
@@ -512,6 +571,9 @@ function Game1() {
               Generated numbers: {randomNumbers.join(", ")}
             </Typography>
             <Typography sx={{ marginTop: 2 }}>
+              WebSocket Status: {wsConnected ? "Connected" : "Disconnected"}
+            </Typography>
+            <Typography sx={{ marginTop: 2 }}>
               Latest Received Integer: {receivedInteger !== null ? receivedInteger : "Waiting for data..."}
             </Typography>
             <Box sx={{ marginTop: 2 }}>
@@ -544,6 +606,29 @@ function Game1() {
               inputProps={{ min: 1, max: 48 }}
               sx={{ marginTop: 2 }}
             />
+
+            <Button
+              onClick={() => {
+                if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
+                  const testMessage = JSON.stringify({
+                    type: "questcard_positions",
+                    positions: randomNumbers.length > 0 ? randomNumbers : [1, 2, 3, 4, 5],
+                  });
+                  wsRef.current.send(testMessage);
+                  console.log("Sent test questcard positions:", testMessage);
+                } else {
+                  console.log("WebSocket not open, queuing test message");
+                  pendingQuestcardMessageRef.current = JSON.stringify({
+                    type: "questcard_positions",
+                    positions: randomNumbers.length > 0 ? randomNumbers : [1, 2, 3, 4, 5],
+                  });
+                }
+              }}
+              sx={{ marginTop: 2 }}
+              variant="contained"
+            >
+              Send Questcard Positions
+            </Button>
 
             <QuestCardModal
               open={openModal}
