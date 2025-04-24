@@ -24,12 +24,13 @@ function QuestCardModal({
   onDraw,
   onStopDrawing,
   initializeHeartCanvas,
+  initializeCircleCanvas,
+  initializeStarCanvas,
 }) {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [isCorrect, setIsCorrect] = useState(null);
   const hasInitializedCanvas = useRef(false);
 
-  // Reset state when the quest changes or modal closes
   useEffect(() => {
     if (!open || quest) {
       setSelectedAnswer(null);
@@ -37,7 +38,6 @@ function QuestCardModal({
     }
   }, [open, quest]);
 
-  // Play video when cameraStream changes
   useEffect(() => {
     if (cameraStream && videoRef.current) {
       videoRef.current.srcObject = cameraStream;
@@ -47,24 +47,38 @@ function QuestCardModal({
     }
   }, [cameraStream, videoRef]);
 
-  // Initialize canvas when challenge starts
   useEffect(() => {
     if (
       challengeStarted &&
       canvasRef.current &&
-      (quest?.type === "challenge" || quest?.type === "heart_challenge")
+      (quest?.type === "heart_challenge" || quest?.type === "circle_challenge" || quest?.type === "star_challenge")
     ) {
       if (!hasInitializedCanvas.current) {
         console.log("Initializing canvas for quest:", quest);
-        initializeHeartCanvas(canvasRef.current);
+        let initializeCanvas;
+        if (quest?.type === "heart_challenge") {
+          initializeCanvas = initializeHeartCanvas;
+        } else if (quest?.type === "circle_challenge") {
+          initializeCanvas = initializeCircleCanvas;
+        } else if (quest?.type === "star_challenge") {
+          initializeCanvas = initializeStarCanvas;
+        }
+        initializeCanvas(canvasRef.current);
         hasInitializedCanvas.current = true;
       }
     }
-    // Reset initialization flag when challenge ends or modal closes
     if (!challengeStarted || !open) {
       hasInitializedCanvas.current = false;
     }
-  }, [challengeStarted, open, quest, canvasRef, initializeHeartCanvas]);
+  }, [
+    challengeStarted,
+    open,
+    quest,
+    canvasRef,
+    initializeHeartCanvas,
+    initializeCircleCanvas,
+    initializeStarCanvas,
+  ]);
 
   if (!open) return null;
 
@@ -78,10 +92,15 @@ function QuestCardModal({
     }
   };
 
+  const passThreshold = (
+    quest?.type === "heart_challenge" ||
+    quest?.type === "circle_challenge" ||
+    quest?.type === "star_challenge"
+  ) ? 70 : quest?.passThreshold || 70;
+
   return (
     <Box className="quest-card-modal" role="dialog" aria-labelledby="quest-card-title">
       <Box className="modal-content">
-        {/* Left Side: Question and Supporting Image */}
         <Box className="left-panel">
           {quest && (
             <>
@@ -107,7 +126,6 @@ function QuestCardModal({
           )}
         </Box>
 
-        {/* Right Side: Choices, Camera, or Drawing Frame */}
         <Box className="right-panel">
           {quest && (
             <>
@@ -146,12 +164,12 @@ function QuestCardModal({
                   </Box>
                   {selectedAnswer && (
                     <Typography className="quest-description" sx={{ marginTop: 2, whiteSpace: 'pre-line' }}>
-                      {isCorrect ? (quest.rewards || "Correct!") : "Incorrect, try another quest!"}
+                      {isCorrect ? (quest.rewards || "Correct!") : (quest.punish || "Incorrect, try another quest!")}
                     </Typography>
                   )}
                 </Box>
               )}
-              {(quest.type === "challenge" || quest.type === "heart_challenge") &&
+              {(quest.type === "heart_challenge" || quest.type === "circle_challenge" || quest.type === "star_challenge") &&
                 !challengeStarted &&
                 !showResult && (
                   <Button
@@ -162,11 +180,18 @@ function QuestCardModal({
                     Start Challenge
                   </Button>
                 )}
-              {(quest.type === "challenge" || quest.type === "heart_challenge") &&
+              {(quest.type === "heart_challenge" || quest.type === "circle_challenge" || quest.type === "star_challenge") &&
                 challengeStarted && (
                   <Box className="drawing-container">
                     <Typography className="quest-description">
                       Time Left: {timeLeft} seconds
+                    </Typography>
+                    <Typography className="quest-description">
+                      {quest.type === "heart_challenge"
+                        ? "Trace the heart outline with your cursor!"
+                        : quest.type === "circle_challenge"
+                        ? "Trace the circle outline with your cursor!"
+                        : "Trace the star outline with your cursor!"}
                     </Typography>
                     <canvas
                       ref={canvasRef}
@@ -180,51 +205,59 @@ function QuestCardModal({
                     />
                   </Box>
                 )}
-              {(quest.type === "challenge" || quest.type === "heart_challenge") &&
+              {(quest.type === "heart_challenge" || quest.type === "circle_challenge" || quest.type === "star_challenge") &&
                 showResult && (
                   <Box>
                     <Typography className="quest-description">
                       Outline Accuracy: {fillPercentage ? fillPercentage.toFixed(2) : 0}%
                     </Typography>
                     <Typography className="quest-description" sx={{ marginTop: 1, whiteSpace: 'pre-line' }}>
-                      {fillPercentage >= quest.passThreshold
+                      {fillPercentage >= passThreshold
                         ? quest.rewards || "Congratulations! You passed!"
-                        : "Sorry, you didn't trace enough. Try again!"}
+                        : quest.punish || "Sorry, you didn't trace enough. Try again!"}
                     </Typography>
                   </Box>
                 )}
-              {quest.type === "photo" && !photoTaken && !photoData && (
+              {quest.type === "photo" && !photoTaken && (
                 <Box className="camera-container">
                   <Button
                     variant="contained"
                     className="action-button"
                     onClick={onStartCamera}
+                    sx={{ marginBottom: 2 }}
                   >
                     Start Camera
                   </Button>
+                  {cameraStream && (
+                    <>
+                      <video
+                        ref={videoRef}
+                        autoPlay
+                        style={{ width: "100%", maxHeight: "300px" }}
+                      />
+                      <Button
+                        variant="contained"
+                        className="action-button"
+                        onClick={onTakePhoto}
+                        sx={{ marginTop: 2 }}
+                      >
+                        Take Photo
+                      </Button>
+                      <canvas ref={photoCanvasRef} style={{ display: "none" }} />
+                    </>
+                  )}
                 </Box>
               )}
-              {quest.type === "photo" && cameraStream && !photoTaken && (
-                <Box className="camera-container">
-                  <video ref={videoRef} style={{ width: "100%", maxHeight: "300px" }} />
-                  <Button
-                    variant="contained"
-                    className="action-button"
-                    onClick={onTakePhoto}
-                    sx={{ marginTop: 2 }}
-                  >
-                    Take Photo
-                  </Button>
-                </Box>
-              )}
-              {quest.type === "photo" && photoData && (
+              {quest.type === "photo" && photoTaken && photoData && (
                 <Box className="photo-container">
+                  <Typography className="quest-description">
+                    Photo Captured!
+                  </Typography>
                   <img
                     src={photoData}
                     alt="Captured"
-                    style={{ width: "100%", maxHeight: "300px" }}
+                    style={{ width: "100%", maxHeight: "300px", marginTop: "10px" }}
                   />
-                  <canvas ref={photoCanvasRef} style={{ display: "none" }} />
                 </Box>
               )}
             </>

@@ -24,8 +24,8 @@
       {"id": 4, "text": "Số tuổi"}
     ],
     "correctAnswerId": 4,
-    "rewards": "Chọn một người chơi để cùng tiến 3 bước!",
-    "punish": "Hụt hơi nên bạn và một người chơi nữa cùng lùi lại 3 bước để thở."
+    "rewards": "Chọn một người chơi để cùng tiến 3 bước! Mỗi người chỉ di chuyển một bé cây.",
+    "punish": "Hụt hơi nên bạn và một người chơi nữa cùng lùi lại 3 bước để thở. Mỗi người chỉ di chuyển một bé cây."
   },
   {
     "id": 3,
@@ -38,8 +38,8 @@
       {"id": 4, "text": "Ớt chuông"}
     ],
     "correctAnswerId": 2,
-    "rewards": "Bạn được đổi vị trí một cây xanh bất kỳ của mình với cây xanh của người khác!",
-    "punish": "Cây của bạn đã bị chặt. Cố gắng trồng lại cây mới nhé!"
+    "rewards": "Bạn được đổi vị trí một bé cây bất kỳ của mình với một bé cây của người khác!",
+    "punish": "Cây của bạn đã bị chặt. Mình trồng lại cây mới sau nhé!"
   },
   {
     "id": 4,
@@ -52,8 +52,8 @@
       {"id": 4, "text": "Lúa"}
     ],
     "correctAnswerId": 2,
-    "rewards": "Bạn được chặt cây xanh gần nhất của một người chơi khác!",
-    "punish": "Tiếc quá. Bạn phải chặt một cây xanh của mình."
+    "rewards": "Bạn được chặt bé cây gần nhất của một người chơi khác!",
+    "punish": "Tiếc quá. Bạn phải chặt một bé cây của mình."
   },
   {
     "id": 5,
@@ -67,7 +67,7 @@
     ],
     "correctAnswerId": 1,
     "rewards": "Bạn làm tốt lắm! Lắc xúc xắc một lần nữa nha!",
-    "punish": "Thôi bạn nghỉ ngơi uống nước, lượt sau rồi mình chơi tiếp nha!"
+    "punish": "Thôi bạn nghỉ ngơi uống nước một lượt nữa rồi mình chơi tiếp nha!"
   },
   {
     "id": 6,
@@ -80,7 +80,7 @@
       {"id": 4, "text": "Lê Lợi"}
     ],
     "correctAnswerId": 3,
-    "rewards": "Vòng cây của bạn được thăng 1 cấp!",
+    "rewards": "Bạn có thêm 1 mầm non!",
     "punish": "Bạn bị lạc đường nên lùi 1 bước."
   },
   {
@@ -108,7 +108,7 @@
       {"id": 4, "text": "Con ngỗng"}
     ],
     "correctAnswerId": 3,
-    "rewards": "Chúc mừng! Tất cả cây xanh còn trên bàn cờ của bạn tiến 1 bước, cây xanh của những người chơi còn lại lùi 1 bước.",
+    "rewards": "Chúc mừng! Tất cả bé cây còn trên bàn cờ của bạn tiến 1 bước",
     "punish": "Bạn bị mất lượt. Chúc bạn may mắn lần sau!"
   },
   {
@@ -122,7 +122,7 @@
       {"id": 4, "text": "sắt / kim"}
     ],
     "correctAnswerId": 4,
-    "rewards": "Bạn được tặng “đôi dép thần tốc” – đi liền 2 lượt nữa!",
+    "rewards": "Bạn được tặng “đôi dép thần tốc” – lắc xúc xắc liền 2 lượt nữa!",
     "punish": "Dép bị đứt quai – bạn nghỉ đi 1 lượt để sửa dép."
   },
   {
@@ -151,7 +151,7 @@
     ],
     "correctAnswerId": 1,
     "rewards": "Bạn làm tốt lắm! Lắc xúc xắc một lần nữa nha!",
-    "punish": "Thôi bạn nghỉ ngơi ăn bánh, lượt sau rồi mình chơi tiếp nha!"
+    "punish": "Thôi bạn nghỉ ngơi xíu, lượt sau rồi mình chơi tiếp nha!"
   },
   {
     "id": 12,
@@ -164,8 +164,8 @@
       {"id": 4, "text": "Mão"}
     ],
     "correctAnswerId": 2,
-    "rewards": "Tiến 3 bước",
-    "punish": "Người chơi trước bạn được tiến 4 bước"
+    "rewards": "Chúc mừng! Tất cả bé cây còn trên bàn cờ của bạn tiến 1 bước",
+    "punish": "Bạn bị mất lượt. Chúc bạn may mắn lần sau!" 
   },
   {
     "id": 13,
@@ -178,8 +178,8 @@
       {"id": 4, "text": "3 quả"}
     ],
     "correctAnswerId": 3,
-    "rewards": "Chọn một người chơi để cùng tiến 2 bước!",
-    "punish": "Hụt hơi nên bạn và một người chơi nữa cùng lùi lại 2 bước để thở."
+    "rewards": "Chọn một người chơi để cùng tiến 2 bước! Mỗi người chỉ di chuyển một bé cây.",
+    "punish": "Hụt hơi nên bạn và một người chơi nữa cùng lùi lại 2 bước để thở. Mỗi người chỉ di chuyển một bé cây."
   },
   {
     "id": 14,
@@ -193,7 +193,7 @@
     ],
     "correctAnswerId": 1,
     "rewards": "Bạn làm tốt lắm! Lắc xúc xắc một lần nữa nha!",
-    "punish": "Thôi bạn nghỉ ngơi uống nước lượt sau rồi mình chơi tiếp nha!"
+    "punish": "Thôi bạn nghỉ ngơi xíu, lượt sau rồi mình chơi tiếp nha!"
   },
   {
     "id": 15,
@@ -207,18 +207,19 @@
       {"id": 4, "text": "Tiền Giang"}
     ],
     "correctAnswerId": 2,
-    "rewards": "Vòng cây của bạn được thăng 2 cấp!",
-    "punish": "Bạn bị lạc đường nên lùi 1 bước."
+    "rewards": "Bạn có thêm 2 mầm non!",
+    "punish": "Bạn bị lạc đường nên lùi 2 bước."
   },
   {
     "id": 16,
+    "image": "/assets/id16_triangle.png",
     "type": "questionnaire",
     "description": "Hình dưới đây có bao nhiêu hình tam giác?",
     "answers": [
-      {"id": 1, "text": "1 triangle"},
-      {"id": 2, "text": "3 triangles"},
-      {"id": 3, "text": "5 triangles"},
-      {"id": 4, "text": "10 triangles"}
+      {"id": 1, "text": "1 tam giác"},
+      {"id": 2, "text": "3 tam giác"},
+      {"id": 3, "text": "5 tam giác"},
+      {"id": 4, "text": "10 tam giác"}
     ],
     "correctAnswerId": 2,
     "rewards": "Yayyy! Bạn được tiến 6 bước vì giỏi quá nè!",
@@ -236,8 +237,8 @@
       {"id": 4, "text": "Nước chảy đá mòn"}
     ],
     "correctAnswerId": 1,
-    "rewards": "Chọn một người chơi để cùng tiến 2 bước!",
-    "punish": "Hụt hơi nên bạn và một người chơi nữa cùng lùi lại 2 bước để thở."
+    "rewards": "Chọn một người chơi để cùng tiến 2 bước! Mỗi người chỉ di chuyển một bé cây.",
+    "punish": "Hụt hơi nên bạn và một người chơi nữa cùng lùi lại 2 bước để thở. Mỗi người chỉ di chuyển một bé cây."
   },
   {
     "id": 18,
@@ -251,7 +252,7 @@
       {"id": 4, "text": "Động đất"}
     ],
     "correctAnswerId": 3,
-    "rewards": "Vòng cây của bạn được thăng 1 cấp!",
+    "rewards": "Bạn có thêm 1 mầm non!",
     "punish": "Bạn bị lạc đường nên lùi 2 bước."
   },
   {
@@ -287,40 +288,40 @@
   {
     "id": 21,
     "type": "photo",
-    "description": "Cười lên để chụp hình kỷ niệm nhé",
-    "rewards": "Vòng cây của bạn được thăng 2 cấp!",
+    "description": "Cười lên để chụp hình kỷ niệm nhé!",
+    "rewards": "Bạn có thêm 2 mầm non!",
     "punish": "Bạn bị lạc đường nên lùi 1 bước."
   },
   {
     "id": 22,
     "type": "photo",
+    "image": "id22.png",
     "description": "Xếp đầu của mọi người thành hàng ngang như hình mẫu để chụp hình nhé!",
-    "image": "/assets/id19.png",
     "rewards": "Hay quá! Không ai có thể cản đường bạn tiến thêm 3 bước!",
     "punish": "Ui da! Bị vấp rồi, lùi lại 3 bước để đi cẩn thận hơn nha"
   },
   {
     "id": 23,
     "type": "photo",
-    "description": "Cùng nhau dùng tay tạo thành hình trái tim nhé!",
+    "description": "Tất cả người chơi cùng nhau dùng tay tạo thành hình trái tim nhé!",
     "image": "/assets/id19.png",
-    "rewards": "Yayyy! Bạn được tiến 1 bước vì giỏi quá nè!",
+    "rewards": "Yayyy! Các bạn đều được tiến 1 bước vì giỏi quá nè!",
     "punish": "Ui da! Bị vấp rồi, lùi lại 3 bước để đi cẩn thận hơn nha"
   },
   {
     "id": 24,
     "type": "photo",
-    "description": "Ôm nhau chụp hình.",
-    "image": "/assets/id19.png",
-    "rewards": "Chọn một người chơi để cùng tiến 4 bước! Chỉ được di chuyển 1 cây",
-    "punish": "Hụt hơi nên bạn và một người chơi nữa cùng lùi lại 4 bước để thở."
+    "description": "Hãy chụp hình với biểu cảm gương mặt dưới đây!",
+    "image": "/assets/id24.png",
+    "rewards": "Chọn một người chơi để cùng tiến 4 bước! Mỗi người chỉ di chuyển một cây.",
+    "punish": "Hụt hơi nên bạn và một người chơi nữa cùng lùi lại 4 bước để thở. Mỗi người chỉ di chuyển một cây."
   },
   {
     "id": 25,
     "type": "photo",
-    "description": "Nối vòng tay lớn.",
-    "image": "/assets/id19.png",
-    "rewards": "Vòng cây của bạn được thăng 1 cấp!",
+    "description": "Hãy chụp hình với biểu cảm gương mặt dưới đây!",
+    "image": "/assets/id25.png",
+    "rewards": "Bạn có thêm 1 mầm non!",
     "punish": "Bạn bị lạc đường nên lùi 1 bước."
   },
   {
@@ -329,115 +330,43 @@
     "description": "Viền theo đường nét của hình trái tim dưới đây bằng con trỏ của bạn.",
     "timeLimit": 20,
     "passThreshold": 80,
-    "rewards": "Chọn một người chơi để cùng tiến 2 bước!",
-    "punish": "Hụt hơi nên bạn và một người chơi nữa cùng lùi lại 2 bước để thở."
+    "rewards": "Chọn một người chơi để cùng TIẾN 2 bước! Mỗi người chỉ di chuyển một cây.",
+    "punish": "Chọn một người chơi để cùng LÙI 2 bước. Mỗi người chỉ di chuyển một cây."
   },
   {
     "id": 27,
-    "type": "heart_challenge",
-    "description": "Theo nét vẽ hình trái tim dưới đây một cách chính xác nhất có thể.",
+    "type": "circle_challenge",
+    "description": "Viền theo đường nét của hình ngôi sao dưới đây bằng con trỏ của bạn.",
     "timeLimit": 20,
     "passThreshold": 80,
-    "rewards": "Tiến 4 bước",
-    "punish": "Người chơi trước bạn được tiến 4 bước"
+    "rewards": "Hên quá! Được nhích lên 4 bước rồi.",
+    "punish": "Hơi đen chút xíu! Bạn nhích về 2 bước nhe."
   },
   {
     "id": 28,
-    "type": "heart_challenge",
-    "description": "Vẽ theo đường viền trái tim được hiển thị dưới đây.",
+    "type": "star_challenge",
+    "description": "Viền theo đường nét của hình tròn dưới đây bằng con trỏ của bạn.",
     "timeLimit": 20,
     "passThreshold": 80,
-    "rewards": "Vòng cây của bạn được thăng 1 cấp!",
-    "punish": "Bạn bị lạc đường nên lùi 1 bước."
+    "rewards": "Bạn có thêm 2 mầm non!",
+    "punish": "Bạn bị lạc đường nên lùi 2 bước."
   },
   {
     "id": 29,
-    "type": "challenge",
-    "description": "Viền theo hình vẽ dưới đây.",
+    "type": "heart_challenge",
+    "description": "Tô màu ít nhất 50% ô vuông dưới đây để có thể vượt qua thử thách này.",
     "timeLimit": 20,
-    "passThreshold": 90,
-    "rewards": "Tiến 4 bước",
-    "punish": "Người chơi trước bạn được tiến 4 bước"
+    "passThreshold": 85,
+    "rewards": "Bạn làm tốt lắm! Lắc xúc xắc 1 lần nữa nha!",
+    "punish": "Thôi bạn nghỉ ngơi xíu, lượt sau rồi mình chơi tiếp nha!"
   },
   {
     "id": 30,
-    "type": "challenge",
-    "description": "Vẽ một bức tranh gia đình trong vòng 20 giây.",
-    "timeLimit": 20,
-    "passThreshold": 90,
-    "rewards": "Tiến 4 bước",
-    "punish": "Người chơi trước bạn được tiến 4 bước"
-  },
-  {
-    "id": 31,
     "type": "circle_challenge",
-    "description": "Vẽ một vòng tròn hoàn hảo nhất có thể trên canvas.",
+    "description": "Tô màu toàn bộ hình tròn dưới đây nhiều nhất có thể trong thời gian cho phép.",
     "timeLimit": 20,
-    "passThreshold": 85,
-    "rewards": "Tiến 4 bước",
-    "punish": "Người chơi trước bạn được tiến 4 bước"
-  },
-  {
-    "id": 32,
-    "type": "fill_challenge",
-    "description": "Tô màu toàn bộ canvas nhiều nhất có thể trong thời gian cho phép.",
-    "timeLimit": 20,
-    "passThreshold": 90,
+    "passThreshold": 70,
     "rewards": "Gió thổi căng buồm! Tiến lên 6 bước nào!",
     "punish": "Gió thổi ngược mạnh quá nên bạn phải ngã về 3 bước nhe!"
-  },
-  {
-    "id": 33,
-    "type": "circle_challenge",
-    "description": "Vẽ một vòng tròn hoàn hảo nhất có thể trên canvas.",
-    "timeLimit": 20,
-    "passThreshold": 85,
-    "rewards": "Tiến 4 bước",
-    "punish": "Người chơi trước bạn được tiến 4 bước"
-  },
-  {
-    "id": 34,
-    "type": "circle_challenge",
-    "description": "Vẽ một vòng tròn hoàn hảo nhất có thể trên canvas.",
-    "timeLimit": 20,
-    "passThreshold": 85,
-    "rewards": "Tiến 4 bước",
-    "punish": "Người chơi trước bạn được tiến 4 bước"
-  },
-  {
-    "id": 35,
-    "type": "circle_challenge",
-    "description": "Vẽ một vòng tròn hoàn hảo nhất có thể trên canvas.",
-    "timeLimit": 20,
-    "passThreshold": 85,
-    "rewards": "Tiến 4 bước",
-    "punish": "Người chơi trước bạn được tiến 4 bước"
-  },
-  {
-    "id": 36,
-    "type": "circle_challenge",
-    "description": "Vẽ một vòng tròn hoàn hảo nhất có thể trên canvas.",
-    "timeLimit": 20,
-    "passThreshold": 85,
-    "rewards": "Tiến 4 bước",
-    "punish": "Người chơi trước bạn được tiến 4 bước"
-  },
-  {
-    "id": 37,
-    "type": "circle_challenge",
-    "description": "Vẽ một vòng tròn hoàn hảo nhất có thể trên canvas.",
-    "timeLimit": 20,
-    "passThreshold": 85,
-    "rewards": "Gió thổi căng buồm! Tiến lên 5 bước nào!",
-    "punish": "Gió thổi ngược mạnh quá nên bạn phải ngã về 2 bước nhe!"
-  },
-  {
-    "id": 38,
-    "type": "circle_challenge",
-    "description": "Vẽ một vòng tròn hoàn hảo nhất có thể trên canvas.",
-    "timeLimit": 20,
-    "passThreshold": 85,
-    "rewards": "Yayyy! Bạn được tiến 3 bước vì giỏi quá nè!",
-    "punish": "Ui da! Bị vấp rồi, lùi lại 3 bước để đi cẩn thận hơn nha"
   }
 ]
