@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap");
+
 .game1-background {
   background-image: url("/public/assets/WEB_game1_bg.png");
   background-size: cover;
@@ -48,8 +50,31 @@
   border-radius: 4px;
 }
 
-.potato-mine {
-  z-index: 1;
+.start-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
+
+
+.lettering-image {
+  display: block;
+  max-width: 600px; /* Adjust as needed */
+  width: auto;
+  height: auto;
+  margin-bottom: 20px; /* Space between image and countdown */
+}
+
+.countdown {
+  background: none !important; /* Override background */
+  padding: 0 !important; /* Remove padding */
+  border-radius: 0 !important; /* Remove border-radius */
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 3rem; /* Larger font for visibility */
+  color: #ffffff; /* White color for contrast */
 }
 
 .game1-background .home-button {

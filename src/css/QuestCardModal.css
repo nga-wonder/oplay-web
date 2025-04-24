@@ -34,20 +34,17 @@
   margin-top: 15vh;
 }
 
-/* Styles for the left panel */
 .left-panel {
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center content horizontally */
-  justify-content: flex-start; /* Start content from top */
+  align-items: center;
+  justify-content: flex-start;
   padding: 20px;
   overflow-y: auto;
   background: rgba(255, 255, 255, 0.9);
   border-radius: 8px;
   margin-right: 10px;
-  align-items: center; /* Center content horizontally */
-  justify-content: center; /* Center content vertically */
 }
 
 /* Styles for the right panel */
@@ -79,8 +76,8 @@
   font-size: 1rem;
   display: flex;
   color: #000;
-  text-align: center;
-  padding: 8px;
+  text-align: left;
+  /* padding: 8px;  */
   font-family: "Plus Jakarta Sans", sans-serif;
   align-items: center;
   white-space: pre-line;
@@ -183,4 +180,28 @@
 /* Hover effect for the close button */
 .close-button:hover {
   background-color: #f5f5f5;
+}
+
+/* Ensure canvas elements are visible */
+.right-panel canvas {
+  display: flex;
+  width: 300px;
+  height: 300px;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.right-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+  overflow: visible; /* Added */
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  margin-left: 10px;
+  position: relative; /* Added */
 }

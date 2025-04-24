@@ -336,7 +336,7 @@
   {
     "id": 27,
     "type": "circle_challenge",
-    "description": "Viền theo đường nét của hình ngôi sao dưới đây bằng con trỏ của bạn.",
+    "description": "Viền theo đường nét của hình tròn dưới đây bằng con trỏ của bạn.",
     "timeLimit": 20,
     "passThreshold": 80,
     "rewards": "Hên quá! Được nhích lên 4 bước rồi.",
@@ -345,7 +345,7 @@
   {
     "id": 28,
     "type": "star_challenge",
-    "description": "Viền theo đường nét của hình tròn dưới đây bằng con trỏ của bạn.",
+    "description": "Tô theo viền hình ngôi sao dưới đây để vượt qua thử thách.",
     "timeLimit": 20,
     "passThreshold": 80,
     "rewards": "Bạn có thêm 2 mầm non!",
@@ -354,7 +354,7 @@
   {
     "id": 29,
     "type": "heart_challenge",
-    "description": "Tô màu ít nhất 50% ô vuông dưới đây để có thể vượt qua thử thách này.",
+    "description": "Tô theo viền hình trái tim dưới đây để vượt qua thử thách.",
     "timeLimit": 20,
     "passThreshold": 85,
     "rewards": "Bạn làm tốt lắm! Lắc xúc xắc 1 lần nữa nha!",
@@ -363,7 +363,7 @@
   {
     "id": 30,
     "type": "circle_challenge",
-    "description": "Tô màu toàn bộ hình tròn dưới đây nhiều nhất có thể trong thời gian cho phép.",
+    "description": "Tô theo viền hình tròn dưới đây để vượt qua thử thách.",
     "timeLimit": 20,
     "passThreshold": 70,
     "rewards": "Gió thổi căng buồm! Tiến lên 6 bước nào!",

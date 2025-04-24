@@ -29,12 +29,15 @@ function QuestCardModal({
 }) {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [isCorrect, setIsCorrect] = useState(null);
+  const [canvasRendered, setCanvasRendered] = useState(false);
   const hasInitializedCanvas = useRef(false);
+  const finalCanvasRef = useRef(null);
 
   useEffect(() => {
     if (!open || quest) {
       setSelectedAnswer(null);
       setIsCorrect(null);
+      setCanvasRendered(false);
     }
   }, [open, quest]);
 
@@ -79,6 +82,31 @@ function QuestCardModal({
     initializeCircleCanvas,
     initializeStarCanvas,
   ]);
+
+  useEffect(() => {
+    if (
+      showResult &&
+      finalCanvasRef.current &&
+      canvasRef.current &&
+      (quest?.type === "heart_challenge" ||
+        quest?.type === "circle_challenge" ||
+        quest?.type === "star_challenge")
+    ) {
+      // Use setTimeout to delay the copying slightly
+      setTimeout(() => {
+        const ctx = finalCanvasRef.current.getContext("2d");
+        if (ctx) {
+          ctx.clearRect(0, 0, finalCanvasRef.current.width, finalCanvasRef.current.height); // just in case
+          ctx.drawImage(canvasRef.current, 0, 0);
+          console.log("Final drawing copied to final canvas for quest:", quest?.type);
+          setCanvasRendered(true);
+        } else {
+          console.error("Failed to get 2D context for final canvas");
+        }
+      }, 200); 
+    }
+  }, [showResult, quest, canvasRef, finalCanvasRef]);
+  
 
   if (!open) return null;
 
@@ -197,7 +225,7 @@ function QuestCardModal({
                       ref={canvasRef}
                       width={300}
                       height={300}
-                      style={{ border: "1px solid black", marginTop: "10px" }}
+                      style={{ border: "1px solid black", marginTop: "5px", display: "block" }}
                       onMouseDown={onStartDrawing}
                       onMouseMove={onDraw}
                       onMouseUp={onStopDrawing}
@@ -213,9 +241,19 @@ function QuestCardModal({
                     </Typography>
                     <Typography className="quest-description" sx={{ marginTop: 1, whiteSpace: 'pre-line' }}>
                       {fillPercentage >= passThreshold
-                        ? quest.rewards || "Congratulations! You passed!"
-                        : quest.punish || "Sorry, you didn't trace enough. Try again!"}
+                        ? quest.rewards 
+                        : quest.punish }
                     </Typography>
+                    <Typography className="quest-description" sx={{ marginTop: 2 }}>
+                      Your Final Drawing:
+                    </Typography>
+                    <canvas
+                      ref={finalCanvasRef}
+                      width={300}
+                      height={300}
+                      style={{ border: "1px solid black", marginTop: "10px", display: "block" }}
+                      aria-label={`Final drawing of the ${quest?.type.replace("_challenge", "")} outline`}
+                    />
                   </Box>
                 )}
               {quest.type === "photo" && !photoTaken && (
