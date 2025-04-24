@@ -60,6 +60,7 @@ function Game1() {
   const [volume, setVolume] = useState(50);
   const [pieceColor, setPieceColor] = useState([255, 255, 255]); // Default: White
   const [wsConnected, setWsConnected] = useState(false);
+  const [effectDone, setEffectDone] = useState(false); // Track effect completion
   const pendingQuestcardMessageRef = useRef(null);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
@@ -72,8 +73,8 @@ function Game1() {
   const baseReconnectInterval = 3000;
 
   useEffect(() => {
-    console.log("Game state:", { countdown, gameStarted, randomNumbers });
-  }, [countdown, gameStarted, randomNumbers]);
+    console.log("Game state:", { countdown, gameStarted, randomNumbers, effectDone });
+  }, [countdown, gameStarted, randomNumbers, effectDone]);
 
   // WebSocket Connection with Retry
   useEffect(() => {
@@ -104,6 +105,11 @@ function Game1() {
 
       wsRef.current.onmessage = (event) => {
         try {
+          if (event.data === "EFFECT_DONE") {
+            console.log("Received EFFECT_DONE from server");
+            setEffectDone(true);
+            return;
+          }
           const sensorId = parseInt(event.data, 10);
           if (!isNaN(sensorId)) {
             setReceivedInteger(sensorId);
@@ -195,6 +201,38 @@ function Game1() {
     }
   }, [pieceColor]);
 
+  // Send Init Effect Command with Periodic Resend
+  useEffect(() => {
+    if (!gameStarted || effectDone || !wsRef.current) return;
+
+    const sendInitEffect = () => {
+      if (wsRef.current.readyState === WebSocket.OPEN) {
+        const message = JSON.stringify({
+          type: "init_effect",
+        });
+        try {
+          wsRef.current.send(message);
+          console.log("Sent init_effect command to WebSocket server");
+        } catch (error) {
+          console.error("Error sending init_effect message:", error);
+        }
+      }
+    };
+
+    // Send immediately when game starts
+    sendInitEffect();
+
+    // Periodic resend every 2 seconds until effectDone
+    const interval = setInterval(() => {
+      if (!effectDone) {
+        console.log("Resending init_effect command (periodic check)");
+        sendInitEffect();
+      }
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, [gameStarted, effectDone]);
+
   // Periodic check to send pending questcard message
   useEffect(() => {
     if (!wsConnected || !wsRef.current || !pendingQuestcardMessageRef.current) return;
@@ -216,7 +254,7 @@ function Game1() {
 
   const generateRandomNumbers = () => {
     const numbers = new Set();
-    while (numbers.size < 5) {
+    while (numbers.size < 6) {
       numbers.add(Math.floor(Math.random() * 48) + 1);
     }
     return Array.from(numbers);
