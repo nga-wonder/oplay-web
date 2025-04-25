@@ -28,23 +28,24 @@ import "../css/Game1.css";
 const WS_URL = "ws://ngaraspberrypi.local:8765";
 
 const SettingsButton = styled(IconButton)(({ theme }) => ({
-  position: "absolute",
-  right: "1.5vw",
-  top: "12vh",
-  color: "#FFD700",
-  backgroundColor: "rgba(255, 255, 255, 0.1)",
+  position: "fixed",
+  right: "3vh",
+  top: "1.5vw",
+  color: "rgb(86, 97, 104)",
+  backgroundColor: "rgb(241, 228, 179)",
   backdropFilter: "blur(5px)",
+  boxShadow: "2px 2px 5px rgba(0,0,0,0.2)",
   borderRadius: "50%",
   padding: "10px",
   zIndex: 2,
   "&:hover": {
-    backgroundColor: "rgba(255, 215, 0, 0.3)",
+    backgroundColor: "rgb(138, 201, 187)",
     transform: "scale(1.2)",
   },
 }));
 
 function Game1() {
-  const [countdown, setCountdown] = useState(5);
+  const [countdown, setCountdown] = useState(3);
   const [gameStarted, setGameStarted] = useState(false);
   const [randomNumbers, setRandomNumbers] = useState([]);
   const [inputNumber, setInputNumber] = useState("");

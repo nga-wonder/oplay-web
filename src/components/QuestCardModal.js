@@ -1,5 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Button, Typography, Box } from "@mui/material";
+import {
+  Button,
+  Typography,
+  Box,
+  IconButton,
+} from "@mui/material";
+import CancelIcon from "@mui/icons-material/Cancel";
 import "../css/QuestCardModal.css";
 
 function QuestCardModal({
@@ -57,7 +63,6 @@ function QuestCardModal({
       (quest?.type === "heart_challenge" || quest?.type === "circle_challenge" || quest?.type === "star_challenge")
     ) {
       if (!hasInitializedCanvas.current) {
-        console.log("Initializing canvas for quest:", quest);
         let initializeCanvas;
         if (quest?.type === "heart_challenge") {
           initializeCanvas = initializeHeartCanvas;
@@ -92,21 +97,18 @@ function QuestCardModal({
         quest?.type === "circle_challenge" ||
         quest?.type === "star_challenge")
     ) {
-      // Use setTimeout to delay the copying slightly
       setTimeout(() => {
         const ctx = finalCanvasRef.current.getContext("2d");
         if (ctx) {
-          ctx.clearRect(0, 0, finalCanvasRef.current.width, finalCanvasRef.current.height); // just in case
+          ctx.clearRect(0, 0, finalCanvasRef.current.width, finalCanvasRef.current.height);
           ctx.drawImage(canvasRef.current, 0, 0);
-          console.log("Final drawing copied to final canvas for quest:", quest?.type);
           setCanvasRendered(true);
         } else {
           console.error("Failed to get 2D context for final canvas");
         }
-      }, 200); 
+      }, 200);
     }
   }, [showResult, quest, canvasRef, finalCanvasRef]);
-  
 
   if (!open) return null;
 
@@ -120,15 +122,34 @@ function QuestCardModal({
     }
   };
 
-  const passThreshold = (
+  const passThreshold =
     quest?.type === "heart_challenge" ||
     quest?.type === "circle_challenge" ||
     quest?.type === "star_challenge"
-  ) ? 70 : quest?.passThreshold || 70;
+      ? 70
+      : quest?.passThreshold || 70;
 
   return (
     <Box className="quest-card-modal" role="dialog" aria-labelledby="quest-card-title">
       <Box className="modal-content">
+        <IconButton
+          onClick={onClose}
+          sx={{
+            position: "absolute",
+            height: "55px",
+            width: "55px",
+            top: 30,
+            right: 30,
+            backgroundColor: "rgb(252,245,219)",
+            border: "5px solid rgb(241,187,102)",
+            "&:hover": {
+              backgroundColor: "rgb(241,187,102)",
+            },
+          }}
+        >
+          <CancelIcon sx={{ fontSize: "2.5rem" }} />
+        </IconButton>
+
         <Box className="left-panel">
           {quest && (
             <>
@@ -146,7 +167,6 @@ function QuestCardModal({
                       objectFit: "contain",
                       borderRadius: "8px",
                     }}
-                    onError={() => console.error(`Failed to load image: ${quest.image}`)}
                   />
                 </Box>
               )}
@@ -197,18 +217,20 @@ function QuestCardModal({
                   )}
                 </Box>
               )}
-              {(quest.type === "heart_challenge" || quest.type === "circle_challenge" || quest.type === "star_challenge") &&
+
+              {(quest.type === "heart_challenge" ||
+                quest.type === "circle_challenge" ||
+                quest.type === "star_challenge") &&
                 !challengeStarted &&
                 !showResult && (
-                  <Button
-                    variant="contained"
-                    className="action-button"
-                    onClick={onStartChallenge}
-                  >
+                  <Button variant="contained" className="action-button" onClick={onStartChallenge}>
                     Start Challenge
                   </Button>
                 )}
-              {(quest.type === "heart_challenge" || quest.type === "circle_challenge" || quest.type === "star_challenge") &&
+
+              {(quest.type === "heart_challenge" ||
+                quest.type === "circle_challenge" ||
+                quest.type === "star_challenge") &&
                 challengeStarted && (
                   <Box className="drawing-container">
                     <Typography className="quest-description">
@@ -233,7 +255,10 @@ function QuestCardModal({
                     />
                   </Box>
                 )}
-              {(quest.type === "heart_challenge" || quest.type === "circle_challenge" || quest.type === "star_challenge") &&
+
+              {(quest.type === "heart_challenge" ||
+                quest.type === "circle_challenge" ||
+                quest.type === "star_challenge") &&
                 showResult && (
                   <Box>
                     <Typography className="quest-description">
@@ -241,8 +266,8 @@ function QuestCardModal({
                     </Typography>
                     <Typography className="quest-description" sx={{ marginTop: 1, whiteSpace: 'pre-line' }}>
                       {fillPercentage >= passThreshold
-                        ? quest.rewards 
-                        : quest.punish }
+                        ? quest.rewards
+                        : quest.punish}
                     </Typography>
                     <Typography className="quest-description" sx={{ marginTop: 2 }}>
                       Your Final Drawing:
@@ -256,6 +281,7 @@ function QuestCardModal({
                     />
                   </Box>
                 )}
+
               {quest.type === "photo" && !photoTaken && (
                 <Box className="camera-container">
                   <Button
@@ -286,6 +312,7 @@ function QuestCardModal({
                   )}
                 </Box>
               )}
+
               {quest.type === "photo" && photoTaken && photoData && (
                 <Box className="photo-container">
                   <Typography className="quest-description">
@@ -301,11 +328,6 @@ function QuestCardModal({
             </>
           )}
         </Box>
-      </Box>
-      <Box className="modal-footer">
-        <Button onClick={onClose} className="close-button">
-          Close
-        </Button>
       </Box>
     </Box>
   );

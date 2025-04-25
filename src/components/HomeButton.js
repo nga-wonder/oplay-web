@@ -36,10 +36,14 @@ function HomeButton() {
           backgroundColor: "rgb(241, 228, 179)",
           borderRadius: "50%",
           boxShadow: "2px 2px 5px rgba(0,0,0,0.2)",
-          width: { xs: "20px", sm: "25px", md: "40px" },  // responsive width
-          height: { xs: "20px", sm: "25px", md: "40px" }, // same height for circular shape
+          width: { xs: "20px", sm: "25px", md: "55px" },
+          height: { xs: "20px", sm: "25px", md: "55px" },
+          "&:hover": {
+            backgroundColor: "rgb(138, 201, 187)", 
+          },
         }}
       >
+
         <HomeIcon sx={{ fontSize: { xs: 20, sm: 24, md: 30 } }} />
       </IconButton>
 

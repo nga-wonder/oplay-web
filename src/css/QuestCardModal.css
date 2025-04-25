@@ -156,14 +156,6 @@
   background-color: #1565c0;
 }
 
-/* Styles for the modal footer */
-.modal-footer {
-  display: flex;
-  justify-content: center;
-  padding: 10px;
-  background: none;
-}
-
 /* Styles for the close button */
 .close-button {
   background-color: #938c8c;

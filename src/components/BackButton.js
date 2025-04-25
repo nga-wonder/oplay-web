@@ -4,29 +4,19 @@ import { IconButton } from "@mui/material";
 import { styled, keyframes } from "@mui/material/styles";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
-// Keyframe for glow animation
-const glow = keyframes`
-  0% { box-shadow: 0 0 5px rgba(255, 140, 0, 0.5); }
-  50% { box-shadow: 0 0 20px rgba(255, 140, 0, 0.8); }
-  100% { box-shadow: 0 0 5px rgba(255, 140, 0, 0.5); }
-`;
 
 // Styled Back Button
 const StyledBackButton = styled(IconButton)(({ theme, disabled }) => ({
   position: "absolute",
-  right: "1.5vw",
-  top: "3vh",
-  color: disabled ? "rgba(255, 140, 0, 0.3)" : "#FF8C00",
-  backgroundColor: "rgba(255, 255, 255, 0.1)",
-  backdropFilter: "blur(5px)",
+  left: "12vh",
+  top: "1.5vw",
+  backgroundColor: "rgb(241, 228, 179)",
   borderRadius: "50%",
   padding: "10px",
-  animation: disabled ? "none" : `${glow} 2s infinite`,
-  transition: "transform 0.3s ease",
+  boxShadow: "2px 2px 5px rgba(0,0,0,0.2)",
   zIndex: 2,
   "&:hover": {
-    backgroundColor: disabled ? "rgba(255, 255, 255, 0.1)" : "rgba(255, 140, 0, 0.3)",
-    transform: disabled ? "none" : "rotate(360deg) scale(1.2)",
+    backgroundColor: "rgb(138, 201, 187)",
   },
 }));
 
