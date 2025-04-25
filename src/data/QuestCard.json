@@ -131,7 +131,9 @@
       {"id": 3, "text": "vàng / sàng"},
       {"id": 4, "text": "đoàn / vàng"}
     ],
-    "correctAnswerId": 2
+    "correctAnswerId": 2,
+    "rewards": "Bạn làm tốt lắm! Lắc xúc xắc một lần nữa nha!",
+    "punish": "Thôi bạn nghỉ ngơi xíu, lượt sau rồi mình chơi tiếp nha!"
   },
   {
     "id": 11,
