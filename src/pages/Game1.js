@@ -804,7 +804,7 @@ function Game1() {
           {!gameStarted ? (
             <div className="start-screen">
               <img
-                src="/assets/lettering.png"
+                src="/assets/WEB_lettering.png"
                 alt="Lettering"
                 className="lettering-image"
                 onLoad={() => console.log("lettering.png loaded successfully")}
@@ -827,10 +827,10 @@ function Game1() {
               <Typography sx={{ marginTop: 2 }}>
                 Generated numbers: {randomNumbers.join(", ")}
               </Typography>
-              <Typography sx={{ marginTop: 2 }}>
+              {/* <Typography sx={{ marginTop: 2 }}>
                 Latest Received Integer: {receivedInteger !== null ? receivedInteger : "Waiting for data..."}
-              </Typography>
-              <Box sx={{ marginTop: 2 }}>
+              </Typography> */}
+              {/* <Box sx={{ marginTop: 2 }}>
                 <Typography variant="h6">Active Chessboard Sensors</Typography>
                 {sensorIds.length > 0 ? (
                   <List dense>
@@ -850,7 +850,7 @@ function Game1() {
                     No sensors active
                   </Typography>
                 )}
-              </Box>
+              </Box> */}
 
             <TextField
               label="Enter a number (1-48)"
@@ -947,7 +947,7 @@ function Game1() {
             </DialogContent>
             <DialogActions>
               <Button onClick={handleCloseSettings} color="primary">
-                Close
+                ĐÓNG
               </Button>
             </DialogActions>
           </Dialog> */}

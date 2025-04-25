@@ -20,8 +20,13 @@
   .games-background .MuiTypography-root,
   .games-background .MuiIconButton-root,
   .games-background .MuiBox-root {
-    background: rgba(255, 255, 255, 0.8);
+    background: rgb(241, 228, 179);
     padding: 8px;
-    border-radius: 4px;
+    border-radius: 20px;
     z-index: 1;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    color:rgb(113, 20, 20);
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: 5px solid rgb(113, 20, 20);
   }
