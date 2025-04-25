@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap");
+
 .homepage-background {
     background-image: url("/public/assets/WEB_game1_bg.png");
     background-size: cover;
@@ -24,7 +26,13 @@
   .homepage-background .MuiButton-root,
   .homepage-background .home-button {
     background: rgba(255, 255, 255, 0.8);
-    padding: 8px;
-    border-radius: 4px;
+    top: 50px;
+    padding: 16px;
+    border-radius: 15px;
     z-index: 1;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    color:rgb(113, 20, 20);
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: 5px solid rgb(113, 20, 20);
   }

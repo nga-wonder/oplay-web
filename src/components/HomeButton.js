@@ -33,11 +33,11 @@ function HomeButton() {
           position: "fixed",
           top: "1.5vw",
           left: "3vh",
-          backgroundColor: "white",
+          backgroundColor: "rgb(241, 228, 179)",
           borderRadius: "50%",
           boxShadow: "2px 2px 5px rgba(0,0,0,0.2)",
-          width: { xs: "40px", sm: "50px", md: "60px" },  // responsive width
-          height: { xs: "40px", sm: "50px", md: "60px" }, // same height for circular shape
+          width: { xs: "20px", sm: "25px", md: "40px" },  // responsive width
+          height: { xs: "20px", sm: "25px", md: "40px" }, // same height for circular shape
         }}
       >
         <HomeIcon sx={{ fontSize: { xs: 20, sm: 24, md: 30 } }} />

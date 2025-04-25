@@ -45,7 +45,7 @@
 .game1-background .MuiContainer-root .MuiTextField-root {
   position: relative;
   z-index: 1;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(185, 86, 86, 0.8);
   padding: 8px;
   border-radius: 4px;
 }
@@ -62,10 +62,9 @@
 
 .lettering-image {
   display: block;
-  max-width: 600px; /* Adjust as needed */
-  width: auto;
+  max-width: 1000px; /* Adjust as needed */
   height: auto;
-  margin-bottom: 20px; /* Space between image and countdown */
+  margin-bottom: 10px; /* Space between image and countdown */
 }
 
 .countdown {
@@ -78,9 +77,9 @@
 }
 
 .game1-background .home-button {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgb(255, 255, 255) !important;
   padding: 8px;
-  border-radius: 4px;
+  border-radius: px;
   z-index: 1;
 }
 

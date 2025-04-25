@@ -17,7 +17,7 @@ const PlayButton = styled(Button)(({ theme }) => ({
   boxShadow: "0 8px 15px rgba(0, 0, 0, 0.2)",
   transition: "all 0.3s ease",
   "&:hover": {
-    background: "linear-gradient(135deg, #FFA000, #E65100)",
+    background: "linear-gradient(135deg,rgb(7, 136, 30),rgb(71, 227, 82))",
     transform: "translateY(-5px)",
     boxShadow: "0 12px 20px rgba(0, 0, 0, 0.3)",
   },

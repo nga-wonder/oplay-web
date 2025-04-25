@@ -16,7 +16,7 @@ function HomePage() {
           onClick={() => navigate("/games")}
           sx={{ marginTop: 2 }}
         >
-          Choose Game
+          Bắt đầu thôi!
         </Button>
       </Container>
     </div>
