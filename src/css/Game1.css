@@ -45,9 +45,9 @@
 .game1-background .MuiContainer-root .MuiTextField-root {
   position: relative;
   z-index: 1;
-  background: rgba(185, 86, 86, 0.8);
-  padding: 8px;
-  border-radius: 4px;
+  background: transparent; /* rgb(241, 228, 179)*/
+  padding: 10px;
+  border-radius: 20px;
 }
 
 .start-screen {

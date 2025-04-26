@@ -180,39 +180,27 @@ function QuestCardModal({
               {quest.type === "questionnaire" && (
                 <Box className="choices-container">
                   <Box className="answer-grid">
-                    {quest.answers.map((answer, index) => (
-                      <Button
-                        key={index}
-                        variant="contained"
-                        className="action-button"
-                        onClick={() => handleAnswerClick(answer)}
-                        sx={{
-                          backgroundColor:
-                            selectedAnswer === answer.text
-                              ? isCorrect
-                                ? "#4caf50"
-                                : "#f44336"
-                              : "#1976d2",
-                          color:
-                            selectedAnswer === answer.text && isCorrect ? "#000000" : "#ffffff",
-                          "&:hover": {
-                            backgroundColor:
-                              selectedAnswer === answer.text
-                                ? isCorrect
-                                  ? "#45a049"
-                                  : "#d32f2f"
-                                : "#1565c0",
-                          },
-                        }}
-                        disabled={selectedAnswer !== null}
-                      >
-                        {answer.text}
-                      </Button>
-                    ))}
+                  {quest.answers.map((answer, index) => (
+                    <Button
+                      key={answer.id || index}
+                      className={`answer-button color-${index % 4} ${
+                        selectedAnswer === answer.text
+                          ? isCorrect
+                            ? quest.rewards
+                            : quest.punish
+                          : "default"
+                      }`}
+                      onClick={() => handleAnswerClick(answer)}
+                      disabled={selectedAnswer !== null}
+                    >
+                      {answer.text}
+                    </Button>
+                  ))}
+
                   </Box>
                   {selectedAnswer && (
                     <Typography className="quest-description" sx={{ marginTop: 2, whiteSpace: 'pre-line' }}>
-                      {isCorrect ? (quest.rewards || "Correct!") : (quest.punish || "Incorrect, try another quest!")}
+                      {isCorrect ? (quest.rewards) : (quest.punish)}
                     </Typography>
                   )}
                 </Box>
@@ -223,8 +211,16 @@ function QuestCardModal({
                 quest.type === "star_challenge") &&
                 !challengeStarted &&
                 !showResult && (
-                  <Button variant="contained" className="action-button" onClick={onStartChallenge}>
-                    Start Challenge
+                  <Button 
+                    variant="contained" 
+                    className="action-button" 
+                    onClick={onStartChallenge}
+                    // sx={{ 
+                    //   backgroundColor: 'rgb(125,133,193)', 
+                    //   '&:hover': { backgroundColor: 'rgb(158, 167, 240)' }
+                    // }}
+                  >
+                    Bấm để vẽ 
                   </Button>
                 )}
 
@@ -234,14 +230,14 @@ function QuestCardModal({
                 challengeStarted && (
                   <Box className="drawing-container">
                     <Typography className="quest-description">
-                      Time Left: {timeLeft} seconds
+                      Thời gian còn lại: {timeLeft} giây
                     </Typography>
                     <Typography className="quest-description">
                       {quest.type === "heart_challenge"
-                        ? "Trace the heart outline with your cursor!"
+                        ? "Viền theo đường màu đen của trái tim nhé!"
                         : quest.type === "circle_challenge"
-                        ? "Trace the circle outline with your cursor!"
-                        : "Trace the star outline with your cursor!"}
+                        ? "Viền theo đường màu đen của hình tròn nhé!"
+                        : "Viền theo đường màu đen của ngôi sao nhé!"}
                     </Typography>
                     <canvas
                       ref={canvasRef}
@@ -261,23 +257,17 @@ function QuestCardModal({
                 quest.type === "star_challenge") &&
                 showResult && (
                   <Box>
-                    <Typography className="quest-description">
+                    {/* <Typography className="quest-description">
                       Outline Accuracy: {fillPercentage ? fillPercentage.toFixed(2) : 0}%
-                    </Typography>
+                    </Typography> */}
                     <Typography className="quest-description" sx={{ marginTop: 1, whiteSpace: 'pre-line' }}>
                       {fillPercentage >= passThreshold
                         ? quest.rewards
                         : quest.punish}
                     </Typography>
-                    <Typography className="quest-description" sx={{ marginTop: 2 }}>
-                      Your Final Drawing:
-                    </Typography>
                     <canvas
+                      className="drawing-container"
                       ref={finalCanvasRef}
-                      width={300}
-                      height={300}
-                      style={{ border: "1px solid black", marginTop: "10px", display: "block" }}
-                      aria-label={`Final drawing of the ${quest?.type.replace("_challenge", "")} outline`}
                     />
                   </Box>
                 )}
@@ -297,7 +287,7 @@ function QuestCardModal({
                       <video
                         ref={videoRef}
                         autoPlay
-                        style={{ width: "100%", maxHeight: "300px" }}
+                        style={{ width: "100%", maxHeight: "400px" }}
                       />
                       <Button
                         variant="contained"
@@ -305,8 +295,9 @@ function QuestCardModal({
                         onClick={onTakePhoto}
                         sx={{ marginTop: 2 }}
                       >
-                        Take Photo
+                        Bấm để chụp
                       </Button>
+                    
                       <canvas ref={photoCanvasRef} style={{ display: "none" }} />
                     </>
                   )}
@@ -315,13 +306,13 @@ function QuestCardModal({
 
               {quest.type === "photo" && photoTaken && photoData && (
                 <Box className="photo-container">
-                  <Typography className="quest-description">
-                    Photo Captured!
+                  <Typography className="quest-description" sx={{ whiteSpace: 'pre-line' }}>
+                    Kỷ niệm đã được lưu trữ!{'\n'}{'\n'}{quest.rewards}
                   </Typography>
                   <img
                     src={photoData}
                     alt="Captured"
-                    style={{ width: "100%", maxHeight: "300px", marginTop: "10px" }}
+                    style={{ width: "100%", maxHeight: "400px", marginTop: "10px" }}
                   />
                 </Box>
               )}
